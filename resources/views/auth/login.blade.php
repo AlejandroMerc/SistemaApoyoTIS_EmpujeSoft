@@ -53,21 +53,25 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Iniciar Sesion') }}
-                                </button>
-
-
-                                @if (Route::has('password.request'))
+                                <div>
+                                    @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Iniciar Sesion') }}
+                                </button>
                                 @if (Route::has('register'))
                                     <a class="btn btn-primary" href="{{ route('register') }}" >
                                         {{ __('Registrarse') }}
                                     </a>
                                 @endif
+
+
+
+
                             </div>
                         </div>
                     </form>
