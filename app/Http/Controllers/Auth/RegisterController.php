@@ -38,7 +38,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
 
     /**
@@ -58,7 +58,7 @@ class RegisterController extends Controller
             'code'=>[],
         ]);
     }
-
+  
     /**
      * Create a new user instance after a valid registration.
      *
@@ -73,4 +73,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
 }
