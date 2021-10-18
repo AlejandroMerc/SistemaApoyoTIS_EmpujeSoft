@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegisterAdviserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('registroasesor', [RegisterAdviserController::class, 'index'])->name('register-adviser-view');
+
+Route::post('registroasesor', [RegisterAdviserController::class, 'registerData'])->name('register-adviser-data');
 
 Auth::routes();
 
