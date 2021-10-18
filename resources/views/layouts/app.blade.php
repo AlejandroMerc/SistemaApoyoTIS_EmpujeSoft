@@ -46,9 +46,23 @@
                                 </li>
                             @endif
 
-                            @if (Route::has('register-adviser-view'))
+                            {{-- @if (Route::has('register-student-view'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register-adviser-view') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif --}}
+
+                            @if (Route::currentRouteName() == 'register-adviser-view')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register-student-view') }}">{{ __('Registrar Estudiante') }}</a>
+                                </li>
+                            @elseif (Route::currentRouteName() == 'register-student-view')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register-adviser-view') }}">{{ __('Registrar Asesor') }}</a>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register-student-view') }}">{{ __('Registrarse') }}</a>
                                 </li>
                             @endif
                         @else

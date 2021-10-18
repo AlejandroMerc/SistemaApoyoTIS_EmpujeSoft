@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegisterAdviserController;
+use App\Http\Controllers\RegisterStudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,16 @@ Route::get('registroasesor', [RegisterAdviserController::class, 'index'])->name(
 
 Route::post('registroasesor', [RegisterAdviserController::class, 'registerData'])->name('register-adviser-data');
 
+Route::get('registroestudiante', [RegisterStudentController::class, 'index'])->name('register-student-view');
+
+Route::post('registroestudiante', [RegisterStudentController::class, 'registerData'])->name('register-student-data');
+
+
+// Route::get('/registerGE', function () {
+//     return view('registerGE');
+// });
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/registerGE', [App\Http\Controllers\RegisterGEController::class, 'registerGE'])->name('registerGE');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
