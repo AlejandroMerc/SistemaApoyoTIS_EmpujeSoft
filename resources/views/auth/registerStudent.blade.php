@@ -78,6 +78,23 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="grupo" class="col-md-4 col-form-label text-md-right">{{ __('Grupo') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="grupo"  class="form-control @error('email') is-invalid @enderror" name="grupo" value="{{ old('grupo') }}" required autocomplete="grupo">
+                                    <option value="volvo">Grupo 1</option>
+                                    <option value="volvo">Grupo 2</option>
+                                    <option value="volvo">Grupo 3</option>
+                                    <option value="volvo">Grupo 4</option>
+                                </select>
+                                @error('required')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Correo') }}</label>
 
                             <div class="col-md-6">
