@@ -22,9 +22,9 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Largo') }}</label>
+                        <label for="nameLarge" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Largo') }}</label>
                             <div class="col-md-6">                               
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="name" autofocus>
+                                    <input id="nameLarge" type="text" class="form-control @error('name') is-invalid @enderror" name="nameLarge" value="{{ old('nameLarge') }}" required autocomplete="nameLarge" autofocus>
                                         @error('lastname')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -34,9 +34,9 @@
                         </div>
 
                         <div class="form-group row">    
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                        <label for="telf" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
                             <div class="col-md-6">                               
-                                    <input id="name" type="number" class="form-control @error('email') is-invalid @enderror" min="190000000" max="999999999" name = "name" value="{{ old('email') }}" required autocomplete="email">
+                                    <input id="telf" type="number" class="form-control @error('email') is-invalid @enderror" min="190000000" max="999999999" name = "telf" value="{{ old('telf') }}" required autocomplete="telf">
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -46,9 +46,9 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Sociedad') }}</label> 
+                        <label for="sociedad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Sociedad') }}</label> 
                             <div class="col-md-6 ">                                       
-                                <select id="name"  class="form-control @error('email') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
+                                <select id="sociedad"  class="form-control @error('email') is-invalid @enderror" name="sociedad" value="{{ old('sociedad') }}" required autocomplete="sociedad">
                                     <option value="volvo">S.A</option>
                                     <option value="volvo">ASL</option>
                                 </select>
@@ -72,10 +72,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Direccion') }}</label>
+                            <label for="direc" class="col-md-4 col-form-label text-md-right">{{ __('Direccion') }}</label>
                             <div class="col-md-6">            
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="name" autofocus>
-                                        @error('lastname')
+                                    <input id="direc" type="text" class="form-control @error('name') is-invalid @enderror" name="direc" value="{{ old('direc') }}" required autocomplete="direc" autofocus>
+                                        @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -84,11 +84,11 @@
                         </div>
                         
                         <div class="form-group row">   
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Añadir Miembros') }}</label>
+                            <label for="aniadirMiembros" class="col-md-4 col-form-label text-md-right">{{ __('Añadir Miembros') }}</label>
                             <div class="col-md-6">                    
                                     <div class="row" >
                                         <div class="col-auto">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                            <input id="aniadirMiembros" type="email" class="form-control @error('email') is-invalid @enderror" name="aniadirMiembros" value="{{ old('aniadirMiembros') }}" required autocomplete="aniadirMiembros">
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -106,7 +106,7 @@
 
                        
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tabla') }}</label>
+                            <label for="table" class="col-md-4 col-form-label text-md-right">{{ __('Tabla') }}</label>
                             <div class="col-md-6">                               
                                 <table class="table table-striped">
                                     <thead>
@@ -131,9 +131,7 @@
                                 </table>
                             </div>
                         </div>
-                        
-                        
-                       
+  
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -23,10 +23,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
+                            <label for="lastname" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="name" autofocus>
+                                <input id="lastname" type="text" class="form-control @error('name') is-invalid @enderror" name="lastname" value="{{ old('lastname') }}" required autocomplete="name" autofocus>
 
                                 @error('lastname')
                                     <span class="invalid-feedback" role="alert">
@@ -37,10 +37,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Sis') }}</label>
+                            <label for="codSis" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Sis') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="number" class="form-control @error('code') is-invalid @enderror" min="190000000" max="999999999" name = "name" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="codSis" type="number" class="form-control @error('code') is-invalid @enderror" min="190000000" max="999999999" name = "codSis" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('code')
                                     <span class="invalid-feedback" role="alert">
@@ -50,10 +50,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Carrera') }}</label>
+                            <label for="carrera" class="col-md-4 col-form-label text-md-right">{{ __('Carrera') }}</label>
 
                             <div class="col-md-6">
-                                <select id="name"  class="form-control @error('email') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name">
+                                <select id="carrera"  class="form-control @error('email') is-invalid @enderror" name="name" value="{{ old('carrera') }}" required autocomplete="name">
                                     <option value="volvo">Ingenieria Informatica</option>
                                     <option value="volvo">Ingenieria Sistemas</option>
                                 </select>
@@ -65,10 +65,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Código') }}</label>
+                            <label for="code" class="col-md-4 col-form-label text-md-right">{{ __('Código') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="number" class="form-control @error('code') is-invalid @enderror" min="1000" max="9999" name="code" value="{{ old('code') }}" required autocomplete="code" autofocus>
+                                <input id="code" type="number" class="form-control @error('code') is-invalid @enderror" min="1000" max="9999" name="code" value="{{ old('code') }}" required autocomplete="code" autofocus>
 
                                 @error('code')
                                     <span class="invalid-feedback" role="alert">
