@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\grupoempresa;
 use Illuminate\Http\Request;
 
 class ListGEController extends Controller
@@ -9,6 +10,8 @@ class ListGEController extends Controller
     //
     public function showListGE()
     {
-        return view('listGE');
+        $grupoEmpresas=grupoempresa::all();
+        
+        return view('listGE', compact('grupoEmpresas'));
     }
 }

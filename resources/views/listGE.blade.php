@@ -30,34 +30,24 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>A&D</td>
-            <td>A&D</td>
-            <td>1-2020</td>
-           
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>ActionSoft</td>
-            <td>ActionSoft  S.R.L.</td>
-            <td>1-2020</td>
-          
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>AGAAK</td>
-            <td>AGAAK development SRL</td>
-            <td>1-2020</td>
-          
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>ADSysCorp</td>
-            <td>ADSystem Corporation</td>
-            <td>2-2020</td>
        
-        </tr>
+        @foreach ($grupoEmpresas as $grupoempresa)
+            <tr>
+                <td>
+                    {{$grupoempresa->id}}
+                </td>
+                <td>
+                    {{$grupoempresa->nombre_corto}}
+                </td>
+                <td>
+                    {{$grupoempresa->nombre_largo}}
+                </td>
+                <td>
+                    {{$grupoempresa->tipo_sociedad}}
+                </td>
+            </tr>
+            
+        @endforeach
         
     </tbody>
     

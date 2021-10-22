@@ -22,7 +22,7 @@ class CreateEstudiantesTable extends Migration
             $table->integer('cod_sis')->unsigned();
             $table->string('carrera');
             $table->integer('grupo_id')->unsigned();
-            $table->integer('grupoempresa_id')->unsigned();
+            $table->integer('grupoempresa_id')->unsigned()->nullable();
         });
     }
 
