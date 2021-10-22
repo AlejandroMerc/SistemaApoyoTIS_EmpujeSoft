@@ -43,7 +43,7 @@
                     {{$grupoempresa->nombre_largo}}
                 </td>
                 <td>
-                    {{$grupoempresa->tipo_sociedad}}
+                    {{$grupoempresa->periodo}}/{{$grupoempresa->anio}}
                 </td>
             </tr>
             
