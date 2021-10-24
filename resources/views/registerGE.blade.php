@@ -7,13 +7,13 @@
             <div class="card">
                 <div class="card-header">{{ __('Registrar Grupo Empresa') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('registerGE') }}">
+                    <form method="POST" action="{{ route('register-ge-data') }}">
                         @csrf
                         <div class="form-group row ">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Corto') }}</label>
+                        <label for="nombre_corto" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Corto') }}</label>
                             <div class="col-md-6">                                 
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                    @error('name')
+                                    <input id="nombre_corto" type="text" class="form-control @error('nombre_corto') is-invalid @enderror" name="nombre_corto" value="{{ old('nombre_corto') }}" required autocomplete="nombre_corto" autofocus>
+                                    @error('nombre_corto')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -22,10 +22,10 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="nameLarge" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Largo') }}</label>
+                        <label for="nombre_largo" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Largo') }}</label>
                             <div class="col-md-6">                               
-                                    <input id="nameLarge" type="text" class="form-control @error('name') is-invalid @enderror" name="nameLarge" value="{{ old('nameLarge') }}" required autocomplete="nameLarge" autofocus>
-                                        @error('lastname')
+                                    <input id="nombre_largo" type="text" class="form-control @error('nombre_largo') is-invalid @enderror" name="nombre_largo" value="{{ old('nombre_largo') }}" required autocomplete="nombre_largo" autofocus>
+                                        @error('nombre_largo')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -34,10 +34,10 @@
                         </div>
 
                         <div class="form-group row">    
-                        <label for="telf" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                        <label for="telefono_ge" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
                             <div class="col-md-6">                               
-                                    <input id="telf" type="number" class="form-control @error('email') is-invalid @enderror" min="190000000" max="999999999" name = "telf" value="{{ old('telf') }}" required autocomplete="telf">
-                                    @error('email')
+                                    <input id="telefono_ge" type="number" class="form-control @error('telefono_ge') is-invalid @enderror" min="19000000" max="99999999" name = "telefono_ge" value="{{ old('telefono_ge') }}" required autocomplete="telefono_ge">
+                                    @error('telefono_ge')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -46,13 +46,13 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="sociedad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Sociedad') }}</label> 
+                        <label for="tipo_sociedad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Sociedad') }}</label> 
                             <div class="col-md-6 ">                                       
-                                <select id="sociedad"  class="form-control @error('email') is-invalid @enderror" name="sociedad" value="{{ old('sociedad') }}" required autocomplete="sociedad">
-                                    <option value="volvo">S.A</option>
-                                    <option value="volvo">ASL</option>
+                                <select id="tipo_sociedad"  class="form-control @error('tipo_sociedad') is-invalid @enderror" name="tipo_sociedad" value="{{ old('tipo_sociedad') }}" required autocomplete="tipo_sociedad">
+                                    <option value="S.A.">S.A</option>
+                                    <option value="S.R.L.">S.R.L.</option>
                                 </select>
-                                @error('required')
+                                @error('tipo_sociedad')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -72,65 +72,36 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="direc" class="col-md-4 col-form-label text-md-right">{{ __('Direccion') }}</label>
+                            <label for="direccion_ge" class="col-md-4 col-form-label text-md-right">{{ __('Direccion') }}</label>
                             <div class="col-md-6">            
-                                    <input id="direc" type="text" class="form-control @error('name') is-invalid @enderror" name="direc" value="{{ old('direc') }}" required autocomplete="direc" autofocus>
-                                        @error('name')
+                                    <input id="direccion_ge" type="text" class="form-control @error('name') is-invalid @enderror" name="direccion_ge" value="{{ old('direccion_ge') }}" required autocomplete="direccion_ge" autofocus>
+                                        @error('direccion_ge')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
                             </div>
                         </div>
-                        
-                        <div class="form-group row">   
-                            <label for="aniadirMiembros" class="col-md-4 col-form-label text-md-right">{{ __('Añadir Miembros') }}</label>
-                            <div class="col-md-6">                    
-                                    <div class="row" >
-                                        <div class="col-auto">
-                                            <input id="aniadirMiembros" type="email" class="form-control @error('email') is-invalid @enderror" name="aniadirMiembros" value="{{ old('aniadirMiembros') }}" required autocomplete="aniadirMiembros">
-                                                @error('email')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
-                                        </div> 
-                                        <div class="col-auto"> 
-                                            <button type="submit" class="btn btn-primary ">
-                                                    {{ __('Añadir') }}
-                                            </button> 
-                                        </div>
-                                   </div>           
-                            </div>
-                        </div>
 
-                       
-                        <div class="form-group row">
-                            <label for="table" class="col-md-4 col-form-label text-md-right">{{ __('Tabla') }}</label>
-                            <div class="col-md-6">                               
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Correo</th>
-                                            <th>Rol</th>
-                                        </tr>    
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>1a</th>
-                                            <th>asd</th>
-                                            <th>sadasd</th>
-                                        </tr>
-                                        <tr>
-                                            <th>sd</th>
-                                            <th>ds</th>
-                                            <th>as</th>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <table class="table table-bordered" id="dynamicAddRemove">
+                            <tr>
+                                <th>Miembros</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div>                   
+                                        <input id="miembros[0]" type="email" class="form-control @error('miembros[0]') is-invalid @enderror" name="miembros[0]" placeholder="Correo Representante Legal" value="{{ old('miembros[0]') }}" required autocomplete="miembros[0]">
+                                            @error('miembros[0]')
+                                             <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                    </div>
+                                </td>
+                                <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Agregar Miembro</button></td>
+                            </tr>
+                        </table>
   
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
@@ -145,4 +116,25 @@
         </div>
     </div>
 </div>
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    var i = 0;
+    $("#dynamic-ar").click(function () {
+        ++i;
+        $("#dynamicAddRemove").append(
+            '<tr><td><div><input id="miembros[' + i +
+            ']" type="email" class="form-control @error("miembros[' + i +
+            ']") is-invalid @enderror" name="miembros[' + i +
+            ']" placeholder="Correo Miembro" value="{{ old("miembros[' + i +
+            ']") }}" required autocomplete="miembros[' + i +
+            ']">@error("miembros[' + i +
+            ']")<span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>@enderror</div></td><td><button type="button" class="btn btn-outline-danger remove-input-field">Eliminar Miembro</button></td></tr></tr>'
+        );
+    });
+    $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('tr').remove();
+    });
+</script>
 @endsection

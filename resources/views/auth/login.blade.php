@@ -8,10 +8,20 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    {{-- <form method="POST" action="{{ route('login') }}"> --}}
-                    <form method="GET" action="{{ route('home') }}">
+                    <form method="POST" action="{{ route('login') }}">                        
                         @csrf
-
+                        <div class="results">
+                            @if (Session::get('success'))
+                                <div class="alert alert-sucess">
+                                    {{ Session::get('success') }}
+                                </div>
+                            @endif
+                            @if (Session::get('failure'))
+                                <div class="alert alert-failure">
+                                    {{ Session::get('failure') }}
+                                </div>
+                            @endif
+                        </div>
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 

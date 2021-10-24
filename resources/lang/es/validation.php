@@ -132,5 +132,8 @@ return [
         'password' => [
             'min' => 'La contraseña debe contener más de :min caracteres',
         ],
+        'cod_sis' => [
+            'unique' => 'El codigo SIS ya ha sido registrado',
+        ],
     ],
 ];

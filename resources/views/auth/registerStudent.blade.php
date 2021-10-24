@@ -37,12 +37,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="codSis" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Sis') }}</label>
+                            <label for="cod_sis" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Sis') }}</label>
 
                             <div class="col-md-6">
-                                <input id="codSis" type="number" class="form-control @error('code') is-invalid @enderror" min="190000000" max="999999999" name = "codSis" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="cod_sis" type="cod_sis" class="form-control @error('cod_sis') is-invalid @enderror" name="cod_sis" value="{{ old('cod_sis') }}" required autocomplete="cod_sis">
 
-                                @error('code')
+                                @error('cod_sis')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -53,9 +53,9 @@
                             <label for="carrera" class="col-md-4 col-form-label text-md-right">{{ __('Carrera') }}</label>
 
                             <div class="col-md-6">
-                                <select id="carrera"  class="form-control @error('email') is-invalid @enderror" name="name" value="{{ old('carrera') }}" required autocomplete="name">
-                                    <option value="volvo">Ingenieria Informatica</option>
-                                    <option value="volvo">Ingenieria Sistemas</option>
+                                <select id="carrera"  class="form-control @error('carrera') is-invalid @enderror" name="carrera" value="{{ old('carrera') }}" required autocomplete="carrera">
+                                    <option value="informatica">Ingenieria Informatica</option>
+                                    <option value="sistemas">Ingenieria Sistemas</option>
                                 </select>
                                 @error('required')
                                     <span class="invalid-feedback" role="alert">
@@ -81,11 +81,10 @@
                             <label for="grupo" class="col-md-4 col-form-label text-md-right">{{ __('Grupo') }}</label>
 
                             <div class="col-md-6">
-                                <select id="grupo"  class="form-control @error('email') is-invalid @enderror" name="grupo" value="{{ old('grupo') }}" required autocomplete="grupo">
-                                    <option value="volvo">Grupo 1</option>
-                                    <option value="volvo">Grupo 2</option>
-                                    <option value="volvo">Grupo 3</option>
-                                    <option value="volvo">Grupo 4</option>
+                                <select id="grupo"  class="form-control @error('grupo') is-invalid @enderror" name="grupo" value="{{ old('grupo') }}" required autocomplete="grupo">
+                                    @foreach ($grupos as $grupo)
+                                        <option value={{$grupo->id}}>{{$grupo->sigla_grupo}}</option>
+                                    @endforeach
                                 </select>
                                 @error('required')
                                     <span class="invalid-feedback" role="alert">

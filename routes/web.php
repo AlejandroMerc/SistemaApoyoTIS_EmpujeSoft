@@ -28,7 +28,7 @@ Route::get('registroestudiante', [RegisterStudentController::class, 'index'])->n
 
 Route::post('registroestudiante', [RegisterStudentController::class, 'registerData'])->name('register-student-data');
 
-
+Route::post('registroge', [App\Http\Controllers\RegisterGEController::class, 'registrarGE'])->name('register-ge-data');
 
 // Route::get('/registerGE', function () {
 //     return view('registerGE');

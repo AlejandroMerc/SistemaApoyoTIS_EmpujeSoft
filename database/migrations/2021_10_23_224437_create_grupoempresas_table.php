@@ -14,14 +14,21 @@ class CreateGrupoempresasTable extends Migration
     public function up()
     {
         Schema::create('grupoempresas', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre_largo');
-            $table->string('nombre_corto');
+            $table->id();
+            $table->foreignId('asesor_id')
+                  ->references('id')->on('asesors')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->foreignId('rep_legal_id')
+                  ->references('id')->on('estudiantes')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->string('nombre_largo')->unique();
+            $table->string('nombre_corto')->unique();
+            $table->string('email')->unique();
             $table->string('tipo_sociedad');
             $table->string('direccion_ge');
             $table->integer('telefono_ge');
-            $table->integer('asesor_tis_id')->unsigned();
-            $table->integer('rep_legal_id')->unsigned();
         });
     }
 

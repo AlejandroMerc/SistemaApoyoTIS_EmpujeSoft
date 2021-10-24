@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Asesor;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -39,28 +40,27 @@ class RegisterAdviserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:50','regex:/^[\pL\s\-]+$/u'],
             'lastname'=>['required','string','max:50','regex:/^[\pL\s\-]+$/u'],
-            'email' => ['required', 'string', 'email', 'max:255', /* 'unique:users' */],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'code'=>['required','numeric'],
         ]);
+        
+        $user = new User;
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $query1 = $user->save();
 
-        return redirect('login')->withSuccess("You have signed in");
-    }
-
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'lastname'=>$data['lastname'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'code'=> $data['code'],
-        ]);
+        $asesor = new Asesor;
+        $asesor->user_id = $user->id;
+        $query2 = $asesor->save();
+        
+        if($query1 && $query2){
+            return redirect('login')->withSuccess('Usuario Registrado');
+        }
+        else{
+            return redirect('login')->withFailure('Usuario no registrado');
+        }
     }
 }

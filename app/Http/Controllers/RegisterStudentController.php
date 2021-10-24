@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Estudiante;
+use App\Models\Grupo;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -13,31 +16,48 @@ class RegisterStudentController extends Controller
 {
     public function index ()
     {
-        return view('auth.registerStudent');
+        $grupos = DB::table('grupos')
+        ->select('id','sigla_grupo')
+        ->get();
+        return view('auth.registerStudent', compact('grupos'));
     }
 
     public function registerData(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            // 'name' => ['required', 'string', 'max:2','alpha' ],
-            'lastname'=>[],
-            'email' => ['required', 'string', 'email', 'max:255', /* 'unique:users' */],
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:50','regex:/^[\pL\s\-]+$/u'],
+            'lastname'=>['required','string','max:50','regex:/^[\pL\s\-]+$/u'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'code'=>[],
+            'code'=>['required','numeric'],
+            'cod_sis'=>['required','numeric','unique:estudiantes']
         ]);
 
-        return redirect('login')->withSuccess("You have signed in");
-    }
+        if($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        
+        $user = new User;
+        $user->name = $request->name;
+        $user->lastname = $request->lastname;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $query1 = $user->save();
 
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'lastname'=>$data['lastname'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'code'=> $data['code'],
-        ]);
+        $estudiante = new Estudiante;
+        $estudiante->user_id = $user->id;
+        $estudiante->cod_sis = $request->cod_sis;
+        $estudiante->carrera = $request->carrera;
+        $estudiante->grupo_id = $request->grupo;
+        $query2 = $estudiante->save();
+        
+        if($query1 && $query2){
+            return redirect('login')->withSuccess('Usuario Registrado');
+        }
+        else{
+            return redirect('login')->withFailure('Usuario no registrado');
+        }
+        
     }
 }
