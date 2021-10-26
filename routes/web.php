@@ -3,6 +3,7 @@
 use App\Http\Controllers\ListGEController;
 use App\Http\Controllers\RegisterAdviserController;
 use App\Http\Controllers\RegisterStudentController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[HomeController::class, 'index']);
 
 Route::get('registroasesor', [RegisterAdviserController::class, 'index'])->name('register-adviser-view');
 
@@ -30,9 +29,6 @@ Route::post('registroestudiante', [RegisterStudentController::class, 'registerDa
 
 Route::post('registroge', [App\Http\Controllers\RegisterGEController::class, 'registrarGE'])->name('register-ge-data');
 
-// Route::get('/registerGE', function () {
-//     return view('registerGE');
-// });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/registerGE', [App\Http\Controllers\RegisterGEController::class, 'registerGE'])->name('registerGE');
 Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name('listGE');
