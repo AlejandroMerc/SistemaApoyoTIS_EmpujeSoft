@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user_type = Session::get('type');
+        $id = Session::get('id');
+
+        $title = 'Asesor';
+        if($user_type == 'estudiante') 
+        {
+            $row = DB::table('estudiantes')->where('user_id',$id)->first();
+            $ge_id = $row->grupoempresa_id;
+            if($ge_id == null)
+            {
+                $title = '[Sin grupo empresa]';
+            }
+            else 
+            {
+                $row = DB::table('grupoempresas')->where('id',$ge_id)->first();
+                $title = $row->nombre_largo;
+            }
+        }
+        return view('home',['user_type' => $user_type, 'title' => $title]);
     }
 
 }

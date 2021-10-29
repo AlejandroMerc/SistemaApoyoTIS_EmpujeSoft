@@ -4,6 +4,7 @@ use App\Http\Controllers\ListGEController;
 use App\Http\Controllers\RegisterAdviserController;
 use App\Http\Controllers\RegisterStudentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CustomLoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class, 'index']);
 
-Route::get('registroasesor', [RegisterAdviserController::class, 'index'])->name('register-adviser-view');
+Route::get('login', [CustomLoginController::class, 'index'])->name('login');
+Route::post('login', [CustomLoginController::class, 'login'])->name('login');
 
+Route::get('registroasesor', [RegisterAdviserController::class, 'index'])->name('register-adviser-view');
 Route::post('registroasesor', [RegisterAdviserController::class, 'registerData'])->name('register-adviser-data');
 
 Route::get('registroestudiante', [RegisterStudentController::class, 'index'])->name('register-student-view');
-
 Route::post('registroestudiante', [RegisterStudentController::class, 'registerData'])->name('register-student-data');
 
 Route::post('registroge', [App\Http\Controllers\RegisterGEController::class, 'registrarGE'])->name('register-ge-data');
@@ -32,7 +34,7 @@ Route::post('registroge', [App\Http\Controllers\RegisterGEController::class, 're
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/registerGE', [App\Http\Controllers\RegisterGEController::class, 'registerGE'])->name('registerGE');
 Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name('listGE');
-Auth::routes();
-Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+// Auth::routes();
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 

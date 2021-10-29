@@ -54,6 +54,8 @@
                 <span class="nav-link-text">Listar GE</span>
               </a>
             </li>
+            
+            @if($user_type == 'estudiante')
             <li class="nav-item">
               <a class="nav-link" href={{ route('registerGE') }}>
 
@@ -61,12 +63,16 @@
                 <span class="nav-link-text">Registrar GE</span>
               </a>
             </li>
+            @endif
+
+            @if($user_type == 'asesor')
             <li class="nav-item">
               <a class="nav-link" href="tables.html">
                 <i class="far fa-file text-yellow"></i>
                 <span class="nav-link-text">Plantillas</span>
               </a>
             </li>
+            @endif
           </ul>
           <!-- Divider -->
           <hr class="my-3">
@@ -78,7 +84,12 @@
 
   <div class="main-content" id="panel">
     <!-- Topnav -->
+
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+
+
+
+  
       <div class="container-fluid">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
@@ -90,6 +101,21 @@
               <span aria-hidden="true">×</span>
             </button>
           </form>
+
+{{-- *********************************************************************************** --}}
+{{-- *****************         Titulo de la pestaña principal   ************************ --}}
+{{-- *********************************************************************************** --}}
+
+<div class='container-fluid'>
+  <div class='mx-auto'>
+      <h6 class='h2 text-white d-inline-block'>{{$title}}</h6>
+  </div>
+</div>
+
+{{-- *********************************************************************************** --}}
+{{-- *********************************************************************************** --}}
+{{-- *********************************************************************************** --}}
+
           <!-- Navbar links -->
           <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
@@ -308,8 +334,8 @@
       </div>
     </nav>
     <!-- Header -->
-
-    <div class="header bg-primary pb-6">
+{{-- 
+    <div class="header bg-primary pb-2">
       <div class="container-fluid">
         <div class="header-body">
           <div class="row align-items-center py-4">
@@ -331,7 +357,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
 
 
 

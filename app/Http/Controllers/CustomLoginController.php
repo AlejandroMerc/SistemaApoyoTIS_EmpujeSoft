@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+
+class CustomLoginController extends Controller
+{
+
+    public function index() 
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request) 
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) 
+        {
+            self::savesession($request);
+            return redirect()->intended('dashboard')
+                        ->withSuccess('Signed in');
+        }
+  
+        return redirect("home")->withSuccess('Login details are not valid');
+    }
+
+    protected function savesession(Request $request) 
+    {
+        $email = $request->input('email');
+        $user = DB::table('users')->where('email',$email)->first();
+        $id = $user->id;
+
+
+        // aqui se puede asumir que si o si el id existe en asesor o estudiante
+        // entonces si no esta en asesor, por defecto estaria en estudiante
+        $user_type = 'estudiante';
+        $asesor_data = DB::table('asesors')->where('user_id',$id)->first();
+        if ($asesor_data != null) 
+        {
+            $user_type = 'asesor';
+        }
+
+        Session::put('id',$id);
+        Session::put('type',$user_type);
+    }
+}
