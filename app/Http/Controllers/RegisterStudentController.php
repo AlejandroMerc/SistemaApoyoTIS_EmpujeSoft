@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Estudiante;
 use App\Models\Grupo;
+use App\Models\Semestre;
 use App\Rules\CodigoInscripcionGrupo;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterStudentController extends Controller
 {
     public function index ()
     {
-        $grupos = DB::table('grupos')
+        $currentDate = date('Y-m-d');
+        $grupos = Semestre::where('fecha_inicio','<=',$currentDate)
+        ->where('fecha_fin','>=',$currentDate)
+        ->first()->grupos()
         ->select('id','sigla_grupo')
         ->get();
         return view('auth.registerStudent', compact('grupos'));
@@ -25,8 +29,7 @@ class RegisterStudentController extends Controller
 
     public function registerData(Request $request)
     {
-        $codigo = DB::table('grupos')
-        ->where('id',$request->grupo)
+        $codigo = Grupo::find('id')
         ->value('codigo_inscripcion');                            
 
         $validator = Validator::make($request->all(), [

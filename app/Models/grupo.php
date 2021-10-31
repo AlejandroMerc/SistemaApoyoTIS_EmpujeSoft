@@ -14,13 +14,37 @@ class Grupo extends Model
     *
     * @var string[]
     */
-   protected $fillable = [
-       'sigla_grupo',
-       'codigo_inscripcion',
-       'semestre_id',
-       'asesor_id'
-   ];
+    protected $fillable = [
+        'sigla_grupo',
+        'codigo_inscripcion',
+        'semestre_id',
+        'asesor_id'
+    ];
 
-   public $timestamps = false;
+    public $timestamps = false;
+
+    /**
+     * Obtener el semestre al que pertenece el grupo.
+     */
+    public function semestre()
+    {
+        return $this->belongsTo(Semestre::class);
+    }
+
+    /**
+     * Obtener el asesor a cargo del grupo.
+     */
+    public function asesor()
+    {
+        return $this->belongsTo(Asesor::class);
+    }
+
+    /**
+     * Obtener los estudiantes inscritos en el grupo.
+     */
+    public function estudiantes()
+    {
+        return $this->hasMany(Estudiante::class);
+    }
    
 }

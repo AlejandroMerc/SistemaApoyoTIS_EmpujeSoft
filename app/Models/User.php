@@ -45,4 +45,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Obtener el asesor asociado al usuario.
+     */
+    public function asesor()
+    {
+        return $this->hasOne(Asesor::class);
+    }
+
+    /**
+     * Obtener el estudiante asociado al usuario.
+     */
+    public function estudiante()
+    {
+        return $this->hasOne(Estudiante::class);
+    }
 }

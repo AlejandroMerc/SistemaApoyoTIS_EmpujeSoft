@@ -14,14 +14,38 @@ class Estudiante extends Model
     *
     * @var string[]
     */
-   protected $fillable = [
-       'cod_sis',
-       'carrera',
-       'user_id',
-       'grupo_id',
-       'grupoempresa_id'
-   ];
+    protected $fillable = [
+        'cod_sis',
+        'carrera',
+        'user_id',
+        'grupo_id',
+        'grupoempresa_id'
+    ];
 
-   public $timestamps = false;
+    public $timestamps = false;
    
+    /**
+     * Obtener el usuario asociado al estudiante.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Obtener el grupo en el que esta inscrito el estudiante.
+     */
+    public function grupo()
+    {
+        return $this->belongsTo(Grupo::class);
+    }
+
+    /**
+     * Obtener la grupoempresa a la que pertenece el estudiante.
+     */
+    public function grupoempresa()
+    {
+        return $this->belongsTo(Grupoempresa::class);
+    }
+
 }

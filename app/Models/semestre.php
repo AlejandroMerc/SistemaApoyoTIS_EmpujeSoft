@@ -22,5 +22,13 @@ class Semestre extends Model
     ];
 
     public $timestamps = false;
-    
+   
+    /**
+     * Obtener los grupos registrados en el semestre.
+     */
+    public function grupos()
+    {
+        return $this->hasMany(Grupo::class);
+    }
+
 }

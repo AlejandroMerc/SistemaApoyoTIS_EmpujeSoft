@@ -14,7 +14,7 @@ class Grupoempresa extends Model
     *
     * @var string[]
     */
-   protected $fillable = [
+    protected $fillable = [
        'asesor_id',
        'rep_legal_id',
        'nombre_largo',
@@ -22,8 +22,31 @@ class Grupoempresa extends Model
        'tipo_sociedad',
        'direccion_ge',
        'telefono_ge'
-   ];
+    ];
 
-   public $timestamps = false;
+    public $timestamps = false;
    
+    /**
+     * Obtener el asesor a cargo de la grupoempresa.
+     */
+    public function asesor()
+    {
+        return $this->belongsTo(Asesor::class);
+    }
+
+    /**
+     * Obtener el representante legal de la grupoempresa.
+     */
+    public function rep_legal()
+    {
+        return $this->belongsTo(Estudiante::class, 'rep_legal_id');
+    }
+
+    /**
+     * Obtener los estudiantes miembros de la grupoempresa.
+     */
+    public function miembros()
+    {
+        return $this->hasMany(Estudiante::class);
+    }
 }

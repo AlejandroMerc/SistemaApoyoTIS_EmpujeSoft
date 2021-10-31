@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -36,18 +37,10 @@ class CustomLoginController extends Controller
     protected function savesession(Request $request) 
     {
         $email = $request->input('email');
-        $user = DB::table('users')->where('email',$email)->first();
+        $user = User::where('email',$email)->first();
         $id = $user->id;
 
-
-        // aqui se puede asumir que si o si el id existe en asesor o estudiante
-        // entonces si no esta en asesor, por defecto estaria en estudiante
-        $user_type = 'estudiante';
-        $asesor_data = DB::table('asesors')->where('user_id',$id)->first();
-        if ($asesor_data != null) 
-        {
-            $user_type = 'asesor';
-        }
+        $user_type = $user->rol;
 
         Session::put('id',$id);
         Session::put('type',$user_type);
