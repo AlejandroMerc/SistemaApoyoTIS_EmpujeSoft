@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Estudiante;
 use App\Models\Grupo;
+use App\Rules\CodigoInscripcionGrupo;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
@@ -24,12 +25,16 @@ class RegisterStudentController extends Controller
 
     public function registerData(Request $request)
     {
+        $codigo = DB::table('grupos')
+        ->where('id',$request->grupo)
+        ->value('codigo_inscripcion');                            
+
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:50','regex:/^[\pL\s\-]+$/u'],
             'lastname'=>['required','string','max:50','regex:/^[\pL\s\-]+$/u'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'code'=>['required','numeric'],
+            'codigo_inscripcion'=>['required','string', new CodigoInscripcionGrupo($codigo)],
             'cod_sis'=>['required','numeric','unique:estudiantes']
         ]);
 
@@ -43,6 +48,7 @@ class RegisterStudentController extends Controller
         $user->lastname = $request->lastname;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->rol = 'estudiante';
         $query1 = $user->save();
 
         $estudiante = new Estudiante;

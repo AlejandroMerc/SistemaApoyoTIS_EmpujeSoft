@@ -16,6 +16,7 @@ class Grupo extends Model
     */
    protected $fillable = [
        'sigla_grupo',
+       'codigo_inscripcion',
        'semestre_id',
        'asesor_id'
    ];

@@ -65,12 +65,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="code" class="col-md-4 col-form-label text-md-right">{{ __('Código de Curso') }}</label>
+                            <label for="codigo_inscripcion" class="col-md-4 col-form-label text-md-right">{{ __('Código de Inscripcion') }}</label>
 
                             <div class="col-md-6">
-                                <input id="code" type="number" class="form-control @error('code') is-invalid @enderror" min="1000" max="9999" name="code" value="{{ old('code') }}" required autocomplete="code" autofocus>
+                                <input id="codigo_inscripcion" type="text" class="form-control @error('codigo_inscripcion') is-invalid @enderror" name="codigo_inscripcion" value="{{ old('codigo_inscripcion') }}" required autocomplete="codigo_inscripcion" autofocus>
 
-                                @error('code')
+                                @error('codigo_inscripcion')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

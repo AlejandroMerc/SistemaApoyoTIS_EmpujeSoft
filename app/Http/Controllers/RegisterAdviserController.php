@@ -50,6 +50,7 @@ class RegisterAdviserController extends Controller
         $user->lastname = $request->lastname;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->rol = 'asesor_tis';
         $query1 = $user->save();
 
         $asesor = new Asesor;

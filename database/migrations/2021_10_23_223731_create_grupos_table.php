@@ -16,6 +16,7 @@ class CreateGruposTable extends Migration
         Schema::create('grupos', function (Blueprint $table) {
             $table->id();
             $table->string('sigla_grupo')->unique();
+            $table->string('codigo_inscripcion');
             $table->foreignId('semestre_id')
                   ->references('id')->on('semestres')
                   ->onDelete('cascade')
