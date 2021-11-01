@@ -135,5 +135,11 @@ return [
         'cod_sis' => [
             'unique' => 'El codigo SIS ya ha sido registrado',
         ],
+        'name'=>[
+            'regex'=> 'El nombre solo debe contener letras y/o espacios'
+        ],
+        'lastname'=>[
+            'regex'=> 'Los apellidos solo deben contener letras y/o espacios'
+        ]
     ],
 ];

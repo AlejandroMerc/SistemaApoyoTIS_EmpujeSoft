@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\DB;
 class CustomLoginController extends Controller
 {
 
-    public function index() 
+    public function index()
     {
         return view('auth.login');
     }
 
-    public function login(Request $request) 
+    public function login(Request $request)
     {
         $request->validate([
             'email' => 'required',
@@ -24,17 +24,17 @@ class CustomLoginController extends Controller
         ]);
 
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) 
+        if (Auth::attempt($credentials))
         {
             self::savesession($request);
-            return redirect()->intended('dashboard')
+            return redirect()->intended('home')
                         ->withSuccess('Signed in');
         }
-  
-        return redirect("home")->withSuccess('Login details are not valid');
+
+        return redirect("login")->withSuccess('Login details are not valid');
     }
 
-    protected function savesession(Request $request) 
+    protected function savesession(Request $request)
     {
         $email = $request->input('email');
         $user = User::where('email',$email)->first();
