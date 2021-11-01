@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Asesor;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
+use App\Models\User;
+use App\Rules\CheckMiembrosGE;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -23,9 +25,10 @@ class RegisterGEController extends Controller
             'nombre_largo' => ['required','unique:grupoempresas'],
             'telefono_ge' => ['required'],
             'tipo_sociedad' => ['required'],
-            'email' => ['required','unique:grupoempresas'],
+            'email' => ['required','unique:grupoempresas','unique:users'],
             'direccion_ge' => ['required'],
-            'miembros.*' => ['required','distinct'],
+            'miembros.*' => ['required','distinct', 'exists:users,email'],
+            'miembros' => [new CheckMiembrosGE()]
         );
         
         $validator = Validator::make($request->all(), $rules);
@@ -34,17 +37,8 @@ class RegisterGEController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $rep_legal_id = DB::table('users')
-                        ->where('email','=',$request->miembros[0])
-                        ->value('id');
-        
-        $grupo_id = DB::table('estudiantes')
-                    ->where('user_id','=',$rep_legal_id)
-                    ->value('grupo_id');
-
-        $asesor_id = DB::table('grupos')
-                     ->where('id','=',$grupo_id)
-                     ->value('asesor_id');
+        $user_rep_legal = User::where('email','=',$request->miembros[0])->first();
+        $user_asesor = $user_rep_legal->estudiante->grupo->asesor->user;
 
         $grupoempresa = new Grupoempresa;
         $grupoempresa->nombre_corto = $request->nombre_corto;
@@ -53,18 +47,14 @@ class RegisterGEController extends Controller
         $grupoempresa->telefono_ge = $request->telefono_ge;
         $grupoempresa->tipo_sociedad = $request->tipo_sociedad;
         $grupoempresa->email = $request->email;
-        $grupoempresa->rep_legal_id = $rep_legal_id;
-        $grupoempresa->asesor_id = $asesor_id;
+        $grupoempresa->rep_legal_id = $user_rep_legal->id;
+        $grupoempresa->asesor_id = $user_asesor->id;
         $query = $grupoempresa->save();
 
         foreach($request->miembros as $miembro)
         {
-          $user_id = DB::table('users')
-                     ->where('email','=',$miembro)
-                     ->value('id');
-          $estudiante = DB::table('estudiantes')
-                      ->where('user_id','=',$user_id)
-                      ->update(['grupoempresa_id' => $grupoempresa->id]);
+          $user = User::where('email','=',$miembro)->first();
+          $estudiante = $user->estudiante()->update(['grupoempresa_id' => $grupoempresa->id]);
         }
 
         if($query)

@@ -19,17 +19,21 @@ class RegisterStudentController extends Controller
     public function index ()
     {
         $currentDate = date('Y-m-d');
-        $grupos = Semestre::where('fecha_inicio','<=',$currentDate)
-        ->where('fecha_fin','>=',$currentDate)
-        ->first()->grupos()
-        ->select('id','sigla_grupo')
-        ->get();
+        $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
+        ->where('fecha_fin','>=',$currentDate)->first();
+
+        $grupos = [];
+        if(!empty($semestre))
+        {
+            $grupos = $semestre->grupos()
+            ->select('id','sigla_grupo')->get();
+        }
         return view('auth.registerStudent', compact('grupos'));
     }
 
     public function registerData(Request $request)
     {
-        $codigo = Grupo::find('id')
+        $codigo = Grupo::find($request->grupo)
         ->value('codigo_inscripcion');                            
 
         $validator = Validator::make($request->all(), [

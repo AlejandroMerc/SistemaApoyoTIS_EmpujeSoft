@@ -323,7 +323,7 @@
                   <span>Support</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ url('/logout') }}" method="post" class="dropdown-item">
+                <a href="{{ url('/logout') }}" method="get" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Logout</span>
                 </a>

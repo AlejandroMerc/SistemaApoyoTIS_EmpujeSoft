@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estudiante;
+use App\Models\Grupoempresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -33,7 +35,7 @@ class HomeController extends Controller
         $title = 'Asesor';
         if($user_type == 'estudiante') 
         {
-            $row = DB::table('estudiantes')->where('user_id',$id)->first();
+            $row = Estudiante::where('user_id',$id)->first();
             $ge_id = $row->grupoempresa_id;
             if($ge_id == null)
             {
@@ -41,7 +43,7 @@ class HomeController extends Controller
             }
             else 
             {
-                $row = DB::table('grupoempresas')->where('id',$ge_id)->first();
+                $row = Grupoempresa::where('id',$ge_id)->first();
                 $title = $row->nombre_largo;
             }
         }

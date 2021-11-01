@@ -37,4 +37,3 @@ Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name(
 // Auth::routes();
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
-

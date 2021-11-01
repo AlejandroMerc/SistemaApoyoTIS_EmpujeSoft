@@ -82,7 +82,6 @@
                                         @enderror
                             </div>
                         </div>
-
                         <table class="table table-bordered" id="dynamicAddRemove">
                             <tr>
                                 <th>Miembros</th>
@@ -102,7 +101,9 @@
                                 <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Agregar Miembro</button></td>
                             </tr>
                         </table>
-  
+                        @foreach ($errors->get('miembros') as $error)
+                        <li>{{$error}}</li>
+                        @endforeach
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
