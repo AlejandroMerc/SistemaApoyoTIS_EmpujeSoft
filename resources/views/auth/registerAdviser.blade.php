@@ -73,10 +73,10 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Código') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Código de inscripción') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="number" class="form-control @error('code') is-invalid @enderror" min="1000" max="9999" name="code" value="{{ old('code') }}" required autocomplete="code" autofocus>
+                                <input id="name" type="text" class="form-control @error('code') is-invalid @enderror" name="code" value="{{ old('code') }}" required autocomplete="code" autofocus>
 
                                 @error('code')
                                     <span class="invalid-feedback" role="alert">
