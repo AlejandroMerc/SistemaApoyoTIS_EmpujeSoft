@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Asesor;
+use App\Rules\checkCodigoAsesor;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -42,7 +43,7 @@ class RegisterAdviserController extends Controller
             'lastname'=>['required','string','max:50','regex:/^[\pL\s\-]+$/u'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'code'=>['required','numeric'],
+            'code'=>['required','string', new checkCodigoAsesor()],
         ]);
         
         $user = new User;
