@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 class ListGEController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function showListGE()
     {
         $grupoEmpresas= Grupoempresa::join('estudiantes','estudiantes.id','grupoempresas.rep_legal_id')
@@ -19,7 +24,7 @@ class ListGEController extends Controller
         ->join('semestres','semestres.id','grupos.semestre_id')
         ->select('grupoempresas.id','grupoempresas.nombre_corto','grupoempresas.nombre_largo','semestres.year','semestres.periodo')
         ->get();
-        
+
         return view('listGE', compact('grupoEmpresas'));
     }
 }
