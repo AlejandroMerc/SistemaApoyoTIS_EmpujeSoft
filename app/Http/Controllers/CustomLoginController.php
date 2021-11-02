@@ -31,7 +31,7 @@ class CustomLoginController extends Controller
                         ->withSuccess('Signed in');
         }
 
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect("login")->withSuccess('Correo y/o contraseña no válidos');
     }
 
     protected function savesession(Request $request)
