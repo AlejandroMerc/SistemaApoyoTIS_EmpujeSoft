@@ -37,12 +37,6 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="welcome.blade.php">
-                <i class="ni ni-tv-2 text-primary"></i>
-                <span class="nav-link-text">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" href="icons.html">
                 <i class="fas fa-thumbtack text-orange"></i>
                 <span class="nav-link-text">Actividades</span>
@@ -133,19 +127,7 @@
                 <i class="ni ni-zoom-split-in"></i>
               </a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="ni ni-bell-55"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
-                <!-- Dropdown header -->
 
-                <!-- List group -->
-
-                <!-- View all -->
-
-              </div>
-            </li>
 
           </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
