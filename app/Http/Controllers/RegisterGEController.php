@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class RegisterGEController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function registerGE()
     {
         return view('registerGE');
@@ -30,7 +34,7 @@ class RegisterGEController extends Controller
             'miembros.*' => ['required','distinct', 'exists:users,email'],
             'miembros' => [new CheckMiembrosGE()]
         );
-        
+
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails())
         {
@@ -67,6 +71,6 @@ class RegisterGEController extends Controller
           session()->flash('failure','GrupoEmpresa no registrada');
           return redirect('listarGrupoEmpresa')->withFailure('Grupoempresa no Registrada');
         }
-        
+
     }
 }
