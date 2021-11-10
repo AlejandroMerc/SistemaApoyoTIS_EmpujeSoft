@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterAdviserController;
 use App\Http\Controllers\RegisterStudentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomLoginController;
+use App\Http\Controllers\PostPublicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,6 +35,9 @@ Route::post('registroge', [App\Http\Controllers\RegisterGEController::class, 're
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/registerGE', [App\Http\Controllers\RegisterGEController::class, 'registerGE'])->name('registerGE');
 Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name('listGE');
+
+Route::get('/postPublication', [PostPublicationController::class, 'showPostPublication'])->name('postPublication');
+
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
