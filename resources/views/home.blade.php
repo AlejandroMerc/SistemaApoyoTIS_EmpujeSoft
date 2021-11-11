@@ -36,6 +36,15 @@
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
           <!-- Nav items -->
           <ul class="navbar-nav">
+            @if ($user_type == 'asesor_tis')
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('postPublication') }}">
+                <i class="fas fa-bullhorn text-blue"></i>
+                
+                <span class="nav-link-text">Nueva Publicación</span>
+              </a>
+            </li>
+            @endif
             <li class="nav-item">
               <a class="nav-link" href="icons.html">
                 <i class="fas fa-thumbtack text-orange"></i>
