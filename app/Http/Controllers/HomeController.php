@@ -33,7 +33,7 @@ class HomeController extends Controller
         $id = Session::get('id');
 
         $title = 'Asesor';
-        if($user_type == 'estudiante') 
+        if($user_type == 'estudiante')
         {
             $row = Estudiante::where('user_id',$id)->first();
             $ge_id = $row->grupoempresa_id;
@@ -41,11 +41,14 @@ class HomeController extends Controller
             {
                 $title = '[Sin grupo empresa]';
             }
-            else 
+            else
             {
                 $row = Grupoempresa::where('id',$ge_id)->first();
                 $title = $row->nombre_largo;
             }
+        }
+        if($user_type == 'admin'){
+            $title = 'administrador';
         }
         return view('home',['user_type' => $user_type, 'title' => $title]);
     }
