@@ -16,15 +16,15 @@ class CreateGrupoempresasTable extends Migration
         Schema::create('grupoempresas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('asesor_id')
+                  ->nullable()
                   ->references('id')->on('asesors')
                   ->onDelete('cascade')
-                  ->onUpdate('cascade')
-                  ->nullable();
+                  ->onUpdate('cascade');
             $table->foreignId('rep_legal_id')
+                  ->nullable()
                   ->references('id')->on('estudiantes')
                   ->onDelete('cascade')
-                  ->onUpdate('cascade')
-                  ->nullable();
+                  ->onUpdate('cascade');
             $table->string('nombre_largo')->unique()->nullable();
             $table->string('nombre_corto')->unique();
             $table->string('email')->unique()->nullable();
