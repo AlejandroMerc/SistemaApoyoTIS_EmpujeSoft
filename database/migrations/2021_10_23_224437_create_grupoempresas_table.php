@@ -18,17 +18,19 @@ class CreateGrupoempresasTable extends Migration
             $table->foreignId('asesor_id')
                   ->references('id')->on('asesors')
                   ->onDelete('cascade')
-                  ->onUpdate('cascade');
+                  ->onUpdate('cascade')
+                  ->nullable();
             $table->foreignId('rep_legal_id')
                   ->references('id')->on('estudiantes')
                   ->onDelete('cascade')
-                  ->onUpdate('cascade');
-            $table->string('nombre_largo')->unique();
+                  ->onUpdate('cascade')
+                  ->nullable();
+            $table->string('nombre_largo')->unique()->nullable();
             $table->string('nombre_corto')->unique();
-            $table->string('email')->unique();
-            $table->string('tipo_sociedad');
-            $table->string('direccion_ge');
-            $table->integer('telefono_ge');
+            $table->string('email')->unique()->nullable();
+            $table->string('tipo_sociedad')->nullable();
+            $table->string('direccion_ge')->nullable();
+            $table->integer('telefono_ge')->nullable();
         });
     }
 
