@@ -40,6 +40,8 @@ Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name(
 
 Route::get('/postPublication', [PostPublicationController::class, 'showPostPublication'])->name('postPublication');
 
+Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
+
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
