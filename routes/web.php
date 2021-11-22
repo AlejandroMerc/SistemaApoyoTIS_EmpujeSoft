@@ -39,6 +39,7 @@ Route::get('/registerGE', [App\Http\Controllers\RegisterGEController::class, 're
 Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name('listGE');
 
 Route::get('/postPublication', [PostPublicationController::class, 'showPostPublication'])->name('postPublication');
+Route::post('/postPublication',[PostPublicationController::class,'registerPublicationData'])->name('register-publication');
 
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');

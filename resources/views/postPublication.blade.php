@@ -9,13 +9,13 @@
                 <div class="card-header bg-primary text-white"><strong><h5>{{ __('Nueva Publicación') }}</h5></div>
 
                 <div class="card-body ">
-                    <form method="POST" action="{{ route('register-adviser-data') }}">
+                    <form method="POST" action="{{ route('register-publication') }}">
                         @csrf
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('*Título') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('Título') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -58,7 +58,7 @@
                             <label for="uploadFiles" class="col-md-4 col-form-label text-md-right">{{ __('Adjuntar Archivos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="uploadFiles" type="file" class="form-control @error('uploadFiles') is-invalid @enderror" name="uploadFiles" multiple>
+                                <input id="uploadFiles" type="file" class="form-control @error('uploadFiles') is-invalid @enderror" name="uploadFiles" >
 
                                 @error('uploadFiles')
                                     <span class="invalid-feedback" role="alert">
