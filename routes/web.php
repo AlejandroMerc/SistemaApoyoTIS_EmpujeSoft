@@ -8,6 +8,8 @@ use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\PostPublicationController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CreateActivityController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,3 +47,4 @@ Route::get('password/reset/{token}', '\App\Http\Controllers\Auth\ResetPasswordCo
 Route::post('password/reset', '\App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
+Route::get('createActivity', [CreateActivityController::class, 'showCreateActivity'])->name('createActivity');
