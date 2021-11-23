@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -29,6 +30,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
@@ -106,77 +108,83 @@
 
         </div>
         <div class="row mx-auto">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4 border">
-                <form action="/action_page.php" class="was-validated">
-                    <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 border">
+                <form  method="POST" >
+                    @csrf
+                    <div class="row g-3 needs-validation" novalidate  >
                       <div class="col-sm-4">
-                        <label for="uname" class="form-label">Nombre de grupo:</label>
+                        <label for="sigla" class="form-label">Sigla del grupo:</label>
                       </div>
                       <div class="col-sm-8">
-                        <input type="text" class="form-control" id="uname" placeholder="Nombre de grupo " name="uname" required>
-                        <div class="valid-feedback">Valido.</div>
-                        <div class="invalid-feedback">Por favor rellene este campo.</div>
+                        <input type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" required>
+                        <p>{{ $errors->first('sigla') }}</p>
                       </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <label for="uname" class="form-label">Docente:</label>
+                            <label for="docente" class="form-label">Docente:</label>
                         </div>
                         <div class="col-sm-8">
                             <div class="input-group mt-3 mb-3">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                Docente
-                                </button>
-                                <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Leticia</a></li>
-                                <li><a class="dropdown-item" href="#">Corina</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="uname" class="form-label">Codigo inscripcion:</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="uname" placeholder="Codigo de inscripcion" name="uname" required>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Por favor rellene este campo.</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="uname" class="form-label">Semestre:</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="input-group mt-3 mb-3">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-                                  Semestre
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Link 1</a></li>
-                                  <li><a class="dropdown-item" href="#">Link 2</a></li>
-                                  <li><a class="dropdown-item" href="#">Link 3</a></li>
-                                </ul>
-                            </div>
+                                <select id="docente" name="docente" class="form-select" value="{{ old('docente') }}" required>
+                                    <option selected disabled value="">Docente...</option>
+                                    @foreach($docentesArray as $docente)
+                                        <option value="{{ $docente->id }}">
+                                            {{ $docente->name }} {{ $docente->lastname }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <br>
+                                <p>{{ $errors->first('docente') }}</p>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="codInscricion" class="form-label">Codigo inscripcion:</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="codigoInscripcion" placeholder="Codigo de inscripcion" name="codInscripcion" value="{{ old('codInscripcion') }}" required>
+
+                            <p>{{ $errors->first('codInscripcion') }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="semestre" class="col-md-4 col-form-label text-md-right">Semestre</label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="input-group mt-3 mb-3">
+                                <select id="semestre" name="semestre" class="form-select" value="{{ old('semestre') }}" required>
+                                    <option selected disabled value="">Semestre...</option>
+                                    @foreach($semestreArray as $semestre)
+                                        <option value="{{ $semestre ->id }}">
+                                            {{ $semestre->periodo }}-{{ $semestre->year }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <br>
+                                <p>{{ $errors->first('docente') }}</p>
+
+                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-3"></div>
                         <div class="col-sm-3"></div>
                         <div class="col-sm-6">
-                            <button type="submit" id="crear" class="btn btn-primary">crear grupo</button>
+                            <button type="submit" id="crear" class="btn btn-primary">{{ __('crearGrupo') }}</button>
                         </div>
                     </div>
 
                 </form>
             </div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-3"></div>
         </div>
     </div>
 
-
+    @include('sweetalert::alert')
 </body>
 </html>

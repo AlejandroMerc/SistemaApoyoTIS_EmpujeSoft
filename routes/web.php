@@ -43,4 +43,5 @@ Route::post('password/reset', '\App\Http\Controllers\Auth\ResetPasswordControlle
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 
-Route::get('user', [crearGrupoController::class, 'index'])->name('crearGrupo');
+Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGrupo');
+Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');
