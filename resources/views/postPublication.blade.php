@@ -9,7 +9,7 @@
                 <div class="card-header bg-primary text-white"><strong><h5>{{ __('Nueva Publicación') }}</h5></div>
 
                 <div class="card-body ">
-                    <form method="POST" action="{{ route('register-publication') }}">
+                    <form method="POST" action="{{ route('register-publication') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('*Título') }}</label>
@@ -58,7 +58,7 @@
                             <label for="uploadFiles" class="col-md-4 col-form-label text-md-right">{{ __('Adjuntar Archivos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="uploadFiles" type="file" class="form-control @error('uploadFiles') is-invalid @enderror" name="uploadFiles" >
+                                <input id="uploadFiles" type="file" class="form-control @error('uploadFiles') is-invalid @enderror" multiple name="uploadFiles"  >
 
                                 @error('uploadFiles')
                                     <span class="invalid-feedback" role="alert">
