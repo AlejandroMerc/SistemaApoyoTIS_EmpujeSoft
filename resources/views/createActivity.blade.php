@@ -85,7 +85,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="cantFilesMax" class="col-md-4 col-form-label text-md-right">{{ __('Cant. de archivos permitidos') }}</label>
+                            <label for="cantFilesMax" class="col-md-4 col-form-label text-md-right">{{ __('*Cant. de archivos permitidos') }}</label>
 
                             <div class="col-md-6">
                                 <input type="number" id="cantFilesMax" class="form-control @error('cantFilesMax') is-invalid @enderror" name="cantFilesMax" min="1" max="10"> 
