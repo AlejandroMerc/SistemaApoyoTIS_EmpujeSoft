@@ -9,13 +9,13 @@
                 <div class="card-header bg-primary text-white"><strong><h5>{{ __('Nueva Actividad') }}</h5></div>
 
                 <div class="card-body ">
-                    <form method="POST" action="{{ route('register-adviser-data') }}">
+                    <form method="POST" action="{{ route('registir-activity-data') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('*Título') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('Título') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -70,21 +70,31 @@
                         </div> 
                         
                         <div class="form-group row">
-                            <label for="deathline" class="col-md-4 col-form-label text-md-right">{{ __('Fecha de Entrega') }}</label>
+                            <label for="deathline" class="col-md-4 col-form-label text-md-right">{{ __('*Fecha de Entrega') }}</label>
 
                             <div class="col-md-6">
-                                <input type="datetime-local" id="deathline" name="deathline">
-                               
+                                <input type="datetime-local" id="deathline" class="form-control @error('deathline') is-invalid @enderror" name="deathline" required>
+                                 
+                                @error('deathline')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="toWhom" class="col-md-4 col-form-label text-md-right">{{ __('Cant. de archivos permitidos') }}</label>
+                            <label for="cantFilesMax" class="col-md-4 col-form-label text-md-right">{{ __('Cant. de archivos permitidos') }}</label>
 
                             <div class="col-md-6">
-                                <input type="number" id="cantFilesMax" name="cantFilesMax" min="1" max="10"> 
+                                <input type="number" id="cantFilesMax" class="form-control @error('cantFilesMax') is-invalid @enderror" name="cantFilesMax" min="1" max="10"> 
                                 
+                                @error('cantFilesMax')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             
                             </div>
                         </div>

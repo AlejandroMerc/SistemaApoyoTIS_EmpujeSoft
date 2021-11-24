@@ -48,3 +48,4 @@ Route::post('password/reset', '\App\Http\Controllers\Auth\ResetPasswordControlle
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 Route::get('createActivity', [CreateActivityController::class, 'showCreateActivity'])->name('createActivity');
+Route::post('createActivity', [CreateActivityController::class, 'registerActivityData'])->name('registir-activity-data');

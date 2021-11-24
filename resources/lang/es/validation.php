@@ -141,5 +141,12 @@ return [
         'lastname'=>[
             'regex'=> 'Los apellidos solo deben contener letras y/o espacios'
         ]
+        ,
+        'title'=>[
+            'regex'=> 'El título solo debe contener caracteres alfanumericos'
+        ],
+        'uploadFiles'=>[
+            'mimetypes'=>'Los archivos adjuntos deben de ser de formato: jpg, jpge, gif, png, xls, xlsx, doc, docx, pdf'
+        ],
     ],
 ];
