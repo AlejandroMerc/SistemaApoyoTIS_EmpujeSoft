@@ -130,9 +130,12 @@
                                 <select id="docente" name="docente" class="form-select" value="{{ old('docente') }}" required>
                                     <option selected disabled value="">Docente...</option>
                                     @foreach($docentesArray as $docente)
-                                        <option value="{{ $docente->id }}">
-                                            {{ $docente->name }} {{ $docente->lastname }}
-                                        </option>
+                                    @if (old('docente') == $docente->id)
+                                        <option value="{{ $docente->id }}" selected>{{ $docente->name }} {{ $docente->lastname }}</option>
+                                    @else
+                                        <option value="{{ $docente->id }}">{{ $docente->name }} {{ $docente->lastname }}</option>
+                                    @endif
+
                                     @endforeach
                                 </select>
                                 <br>
@@ -160,9 +163,12 @@
                                 <select id="semestre" name="semestre" class="form-select" value="{{ old('semestre') }}" required>
                                     <option selected disabled value="">Semestre...</option>
                                     @foreach($semestreArray as $semestre)
-                                        <option value="{{ $semestre ->id }}">
-                                            {{ $semestre->periodo }}-{{ $semestre->year }}
-                                        </option>
+                                    @if (old('semestre') == $semestre ->id)
+                                        <option value="{{ $semestre ->id }}" selected>{{ $semestre->periodo }}-{{ $semestre->year }}</option>
+                                    @else
+                                        <option value="{{ $semestre ->id }}">{{ $semestre->periodo }}-{{ $semestre->year }}</option>
+                                    @endif
+
                                     @endforeach
                                 </select>
                                 <br>
