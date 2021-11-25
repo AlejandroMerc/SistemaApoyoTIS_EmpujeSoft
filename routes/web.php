@@ -6,6 +6,8 @@ use App\Http\Controllers\RegisterStudentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomLoginController;
 use App\Http\Controllers\PostPublicationController;
+use App\Http\Controllers\TemplateListController;
+use App\Http\Controllers\TemplateEditorController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CreateActivityController;
@@ -31,6 +33,13 @@ Route::post('registroasesor', [RegisterAdviserController::class, 'registerData']
 
 Route::get('registroestudiante', [RegisterStudentController::class, 'index'])->name('register-student-view');
 Route::post('registroestudiante', [RegisterStudentController::class, 'registerData'])->name('register-student-data');
+
+Route::get('plantillas', [TemplateListController::class, 'index'])->name('template');
+Route::post('plantillas', [TemplateListController::class, 'uploadFile'])->name('template-upload');
+
+Route::get('plantillas/subir', [TemplateListController::class, 'upload'])->name('template-file');
+
+Route::get('plantillas/editor', [TemplateEditorController::class, 'index'])->name('template-editor');
 
 Route::post('registroge', [App\Http\Controllers\RegisterGEController::class, 'registrarGE'])->name('register-ge-data');
 
