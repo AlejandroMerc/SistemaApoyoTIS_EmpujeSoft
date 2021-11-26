@@ -57,6 +57,12 @@
                 <span class="nav-link-text">Listar GE</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('verRespuestas') }}>
+                <i class="fas fa-thumbtack text-orange"></i>
+                <span class="nav-link-text">Ver Respuestas</span>
+              </a>
+            </li>
 
             @if($user_type == 'estudiante')
             <li class="nav-item">

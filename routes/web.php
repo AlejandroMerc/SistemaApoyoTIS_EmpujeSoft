@@ -42,6 +42,9 @@ Route::get('/postPublication', [PostPublicationController::class, 'showPostPubli
 
 Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
 
+Route::get('/verRespuestas', [App\Http\Controllers\VerRespuestasController::class, 'verRespuestas'])->name('verRespuestas');
+
+
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
