@@ -44,6 +44,8 @@ Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::cl
 
 Route::get('/verRespuestas', [App\Http\Controllers\VerRespuestasController::class, 'verRespuestas'])->name('verRespuestas');
 
+Route::get('/verRespuestasDos', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
+
 
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');

@@ -14,35 +14,45 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-sm-4">
             <div class="card">
-                <div class="card-header">{{ __('Lista de Actividades') }}</div>
-                    <div class="card w-100">
+                <div class="card-header">{{ __('Lista de Asignados') }}</div>
+                    <div class="card w-20">
                         <div class="card-body">
-                            <h5 class="card-title">Actividad 1</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title">Nombre Est 1</h5>
                                 <a href="#" class="btn btn-primary">Ver Respuestas</a>
                         </div>
                     </div>
-                    <div class="card w-100">
+                    <div class="card w-20">
                         <div class="card-body">
-                            <h5 class="card-title">Actividad 2</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title">Nombre Est 2</h5>
                                 <a href="#" class="btn btn-primary">Ver Respuestas</a>
                         </div>
                     </div>
-                    <div class="card w-100">
+                    <div class="card w-20">
                         <div class="card-body">
-                            <h5 class="card-title">Actividad 3</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title">Nombre Est 3</h5>
                                 <a href="#" class="btn btn-primary">Ver Respuestas</a>
                         </div>
                     </div>
-                    <div class="card w-100">
+                    <div class="card w-20">
                         <div class="card-body">
-                            <h5 class="card-title">Actividad 4</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title">Nombre Est 4</h5>
                                 <a href="#" class="btn btn-primary">Ver Respuestas</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Archivos') }}</div>
+                        <div class="card w-20">
+                            <div class="card-body">
+                                <h5 class="card-title">Entregado</h5>
+                                
+                                    <a href="#" class="btn btn-primary">Orden de Cambio</a>
+                                    <a href="#" class="btn btn-primary">Aceptar Respuesta</a>  
+                            </div>
                         </div>
                     </div>
                 </div>
