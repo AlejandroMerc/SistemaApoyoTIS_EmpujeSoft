@@ -18,4 +18,6 @@ class Publicacion_asignada_grupo extends Model
        'publicacion_id',
        'grupo_id'
     ];
+
+    public $timestamps = false;
 }
