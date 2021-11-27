@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asesor;
+use App\Models\Grupo;
 use App\Models\Publicacion;
 use App\Models\Publicacion_asignada_grupo;
+use App\Models\Semestre;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Log;
@@ -43,11 +45,17 @@ class PostPublicationController extends Controller
 
         $added=$publication->save();
         
-        if($request->toWhom=="onlyGroup"){
-            $publiGroup=new Publicacion_asignada_grupo;
-            $publiGroup->publicacion_id=$publication->id;
-            $publiGroup->grupo_id=1;
-            $added2=$publiGroup->save();
+        if($request->toWhom=="everybody"){
+            
+            $gruposTodos=Grupo::select('id')->get();
+            
+            foreach($gruposTodos as $grupo){
+                $publiGroup=new Publicacion_asignada_grupo;
+                $publiGroup->publicacion_id=$publication->id;
+                $publiGroup->grupo_id=$grupo->id;
+                $added2=$publiGroup->save();
+            }
+            
         }
 
         if($added){

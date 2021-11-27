@@ -45,12 +45,13 @@
                                 
                                 <select id="toWhom"  class="form-control @error('toWhom') is-invalid @enderror" name="toWhom">
                                     <option value="everybody">Todos</option>
+                                    
                                     @foreach ($grupos as $grupo)
-                                    <option value={{$grupo->id}}>Grupo:  {{$grupo->sigla_grupo}}</option>
+                                    <option value='{"tipo": "grupo","id": {{$grupo->id}}}'>Grupo:  {{$grupo->sigla_grupo}}</option>
                                     @endforeach
                                     
                                     @foreach ($grupoEmpresas as $grupoEmpresa)
-                                    <option value={{$grupoEmpresa->id}}>GrupoEmpresa:  {{$grupoEmpresa->nombre_corto}}</option>
+                                    <option value='{"tipo": "grupoEmpresa","id": {{$grupoEmpresa->id}}}'>GrupoEmpresa:  {{$grupoEmpresa->nombre_corto}}</option>
                                     @endforeach
                                     
                                 </select>
