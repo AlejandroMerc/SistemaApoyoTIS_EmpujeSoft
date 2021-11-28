@@ -9,6 +9,7 @@ use App\Http\Controllers\PostPublicationController;
 use App\Http\Controllers\TemplateListController;
 use App\Http\Controllers\TemplateEditorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\crearGrupoController;
 
 use App\Http\Controllers\CreateActivityController;
 
@@ -57,3 +58,6 @@ Route::post('password/reset', '\App\Http\Controllers\Auth\ResetPasswordControlle
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
 Route::get('createActivity', [CreateActivityController::class, 'showCreateActivity'])->name('createActivity');
+
+Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGrupo');
+Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');

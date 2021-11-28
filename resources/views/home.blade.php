@@ -40,23 +40,35 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
                 <i class="fas fa-bullhorn text-blue"></i>
-                
+
                 <span class="nav-link-text">Nueva Publicación</span>
               </a>
             </li>
             @endif
+            @if(!($user_type == "admin"))
             <li class="nav-item">
-              <a class="nav-link" href="icons.html">
-                <i class="fas fa-thumbtack text-orange"></i>
-                <span class="nav-link-text">Actividades</span>
-              </a>
-            </li>
+                <a class="nav-link" href="icons.html">
+                  <i class="fas fa-thumbtack text-orange"></i>
+                  <span class="nav-link-text">Actividades</span>
+                </a>
+              </li>
+            @endif
+
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
                 <i class="ni ni-bullet-list-67 text-green"></i>
                 <span class="nav-link-text">Listar GE</span>
               </a>
             </li>
+            @if($user_type == 'admin')
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('crearGrupo') }}>
+
+                <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                <span class="nav-link-text">crearGrupo</span>
+              </a>
+            </li>
+            @endif
 
             @if($user_type == 'estudiante')
             <li class="nav-item">
