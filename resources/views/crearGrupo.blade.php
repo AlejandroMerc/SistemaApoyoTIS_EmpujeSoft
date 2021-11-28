@@ -110,15 +110,18 @@
         <div class="row mx-auto">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 border">
-                <form  method="POST" >
+                <form  method="POST" class="needs-validation" novalidate >
                     @csrf
-                    <div class="row g-3 needs-validation" novalidate  >
+                    <div class="form-row">
                       <div class="col-sm-4">
                         <label for="sigla" class="form-label">Sigla del grupo:</label>
                       </div>
                       <div class="col-sm-8">
-                        <input type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" required>
-                        <p>{{ $errors->first('sigla') }}</p>
+                        <input id="sigla" type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" required>
+                        <div class="valid-feedback">
+
+                        </div>
+                        <p style="color:#ff0000">{{ $errors->first('sigla') }}</p>
                       </div>
                     </div>
                     <div class="row">
@@ -139,19 +142,19 @@
                                     @endforeach
                                 </select>
                                 <br>
-                                <p>{{ $errors->first('docente') }}</p>
+                                <p style="color:#ff0000">{{ $errors->first('docente') }}</p>
 
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <label for="codInscricion" class="form-label">Codigo inscripcion:</label>
+                            <label for="codigoInscricion" class="form-label">Codigo inscripcion:</label>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="codigoInscripcion" placeholder="Codigo de inscripcion" name="codInscripcion" value="{{ old('codInscripcion') }}" required>
+                            <input type="text" class="form-control" id="codigoInscripcion" placeholder="Codigo de inscripcion" name="codigoInscripcion" value="{{ old('codInscripcion') }}" required>
 
-                            <p>{{ $errors->first('codInscripcion') }}</p>
+                            <p style="color:#ff0000">{{ $errors->first('codigoInscripcion') }}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -171,8 +174,8 @@
 
                                     @endforeach
                                 </select>
-                                <br>
-                                <p>{{ $errors->first('docente') }}</p>
+
+                                <p style="color:#ff0000">{{ $errors->first('semestre') }}</p>
 
                             </div>
                         </div>

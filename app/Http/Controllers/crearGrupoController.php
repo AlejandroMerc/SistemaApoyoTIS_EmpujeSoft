@@ -55,7 +55,7 @@ class crearGrupoController extends Controller
             }],
 
             'docente'=>'bail|required',
-            'codInscripcion'=>'bail|required|min:5|max:191',
+            'codigoInscripcion'=>'bail|required|min:5|max:191',
             'semestre'=>'bail|required'
         ]);
         $grupo=new grupo;
