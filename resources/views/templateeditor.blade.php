@@ -1,13 +1,13 @@
 @extends('layouts.home_layout')
 
 @section('content')
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="post" action="{{ route('template-editor-id', ['id' => $id]) }}" enctype="multipart/form-data">
 
         {{-- Nombre --}}
         <div class="d-flex form-group-row px-2">
             <label for="name" class="col-form-label">Nombre</label>
             <div class="col-sm-11">
-                <input type="text" id="name" name="name" class="form-control">
+                <input type="text" id="name" name="name" class="form-control" value="{{ $name }}" required>
             </div>
         </div>
 
@@ -18,7 +18,7 @@
             <div class="card-body">
                     @csrf
                     <div class="form-group">
-                        <textarea class="ckeditor form-control" name="wysiwyg-editor">{{$dochtml}}</textarea>
+                        <textarea class="ckeditor form-control" name="editor">{{$dochtml}}</textarea>
                     </div>
 
             </div>

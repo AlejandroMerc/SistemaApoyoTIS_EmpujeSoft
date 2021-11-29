@@ -6,7 +6,7 @@
         <div class="my-auto">
             <div>Plantillas</div>
         </div>
-        <div class="btn ml-auto">
+        <div class="btn ml-auto" style="z-index: 10">
             <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
                 <li class="nav-item dropdown">
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -15,13 +15,13 @@
                     </div>
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right ">
-                    <a href="{{ url('/plantillas/editor') }}" method="get" class="dropdown-item">
+                    <a href="{{ route('template-editor-id',['id'=>-1]) }}" method="get" class="dropdown-item">
                         <i class="fas fa-file-medical"></i>
                         <span>Nuevo</span>
                     </a>
                     {{-- <a href="{{ url('/plantillas/subir') }}" method="get" class="dropdown-item"> --}}
                     <button class="dropdown-item" onclick="loaddocfile()">
-                        <form id="formfile" action="{{ route("template-upload") }}" method="POST" enctype="multipart/form-data">
+                        <form id="formfile" action="{{ route("template") }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <i class="fas fa-file-export"></i>
                             <label for="docfile">Subir</label>
@@ -36,8 +36,21 @@
     </div>
     <hr class="my-2">
     {{-- Lista --}}
+    @if ( empty($template_list) )
+        <div class="d-flex align-items-center" style="min-height: 50vh">
+        <div class="container-fluid">
+            <p class="text-gray text-center">No hay plantillas</p>
+        </div>
+        </div>
+    @else
+        <div class="container-fluid list-group">
+        @foreach ($template_list as $template)
+            <a href="{{ route('template-editor-id', ['id' => $template->id]) }}" role="button" class="list-group-item list-group-item-action">{{ $template->nombre }}</a>
+        @endforeach
+        </div>
+    @endif
 
-
+    {{-- fin lista --}}
     <script>
         function uploadingFile(oInput) {
             if (oInput.type == "file") {

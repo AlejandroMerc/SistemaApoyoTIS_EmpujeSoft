@@ -14,7 +14,10 @@ class Plantilla extends Model
     *
     * @var string[]
     */
-    protected $fillable = ['html_code'];
+    protected $fillable = [
+        'nombre',
+        'html_code'
+    ];
 
     public $timestamps = false;
 }

@@ -15,7 +15,8 @@ class CreatePlantillas extends Migration
     {
         Schema::create('plantillas', function (Blueprint $table) {
             $table->id();
-            $table->string('html_code');
+            $table->string('nombre');
+            $table->longText('html_code');
         });
     }
 

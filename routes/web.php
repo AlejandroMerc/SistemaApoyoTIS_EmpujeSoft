@@ -35,11 +35,10 @@ Route::get('registroestudiante', [RegisterStudentController::class, 'index'])->n
 Route::post('registroestudiante', [RegisterStudentController::class, 'registerData'])->name('register-student-data');
 
 Route::get('plantillas', [TemplateListController::class, 'index'])->name('template');
-Route::post('plantillas', [TemplateListController::class, 'uploadFile'])->name('template-upload');
+Route::post('plantillas', [TemplateListController::class, 'uploadFile'])->name('template');
 
-Route::get('plantillas/subir', [TemplateListController::class, 'upload'])->name('template-file');
-
-Route::get('plantillas/editor', [TemplateEditorController::class, 'index'])->name('template-editor');
+Route::get('plantillas/editor/{id}', [TemplateEditorController::class, 'index'])->name('template-editor-id');
+Route::post('plantillas/editor/{id}', [TemplateEditorController::class, 'save'])->name('template-editor-id');
 
 Route::post('registroge', [App\Http\Controllers\RegisterGEController::class, 'registrarGE'])->name('register-ge-data');
 

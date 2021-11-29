@@ -40,7 +40,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
                 <i class="fas fa-bullhorn text-blue"></i>
-                
+
                 <span class="nav-link-text">Nueva Publicación</span>
               </a>
             </li>
@@ -68,10 +68,10 @@
             </li>
             @endif
 
-            @if($user_type == 'asesor')
+            @if($user_type == 'asesor_tis')
             <li class="nav-item">
-              <a class="nav-link" href="tables.html">
-                <i class="far fa-file text-yellow"></i>
+              <a class="nav-link" href={{ route('template') }}>
+                <i class="far fa-file-text text-yellow"></i>
                 <span class="nav-link-text">Plantillas</span>
               </a>
             </li>
