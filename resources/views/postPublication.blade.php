@@ -9,13 +9,13 @@
                 <div class="card-header bg-primary text-white"><strong><h5>{{ __('Nueva Publicación') }}</h5></div>
 
                 <div class="card-body ">
-                    <form method="POST" action="{{ route('register-adviser-data') }}">
+                    <form method="POST" action="{{ route('register-publication') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('*Título') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('Título') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -45,9 +45,14 @@
                                 
                                 <select id="toWhom"  class="form-control @error('toWhom') is-invalid @enderror" name="toWhom">
                                     <option value="everybody">Todos</option>
-                                    <option value="onlyGroup">Solo Grupo</option>
-                                    <option value="registeredStudents">Estudiantes Registrados</option>
-                                    <option value="legalAvisor">Asesores Legales</option>
+                                    
+                                    @foreach ($grupos as $grupo)
+                                    <option value='{"tipo": "grupo","id": {{$grupo->id}}}'>Grupo:  {{$grupo->sigla_grupo}}</option>
+                                    @endforeach
+                                    
+                                    @foreach ($grupoEmpresas as $grupoEmpresa)
+                                    <option value='{"tipo": "grupoEmpresa","id": {{$grupoEmpresa->id}}}'>GrupoEmpresa:  {{$grupoEmpresa->nombre_corto}}</option>
+                                    @endforeach
                                     
                                 </select>
                             
@@ -58,7 +63,7 @@
                             <label for="uploadFiles" class="col-md-4 col-form-label text-md-right">{{ __('Adjuntar Archivos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="uploadFiles" type="file" class="form-control @error('uploadFiles') is-invalid @enderror" name="uploadFiles" multiple>
+                                <input id="uploadFiles" type="file" class="form-control @error('uploadFiles') is-invalid @enderror" multiple name="uploadFiles"  >
 
                                 @error('uploadFiles')
                                     <span class="invalid-feedback" role="alert">
