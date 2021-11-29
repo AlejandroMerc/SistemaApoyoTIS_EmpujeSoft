@@ -200,7 +200,46 @@
 
 
 
+<div class="containter-fluid">
+  
+  @foreach ($publications as $publication)
+      <div class="card border rounded-lg" value={{$publication->id}}>
+        @if ($publication->tipo=="Publicación")
+            <div class="card-header text-white bg-info"> 
+              <i class="fas fa-bullhorn text-white"></i>
+              {{$publication->titulo_publicacion}}
+            </div>
+        @else
+        <div class="card-header text-white bg-danger"> 
+          <i class="fas fa-tasks text-white"></i>
+          {{$publication->titulo_publicacion}}
+        </div>
+        @endif
+        
+        <div class="card-body">
+          
+          <p class="card-text">{{$publication->descripcion_publicacion}}</p>
+          <a href="#" class="card-link">Ver Archivos Adjuntos</a>
+          @if ($publication->tipo=="Actividad")
+          @if ($user_type == 'asesor_tis')
+          <a href="#" class="btn btn-primary">Ver Respuestas</a>
+          @else
+          <a href="#" class="btn btn-primary">Responder</a>
+          @endif
+          <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
+          @endif
+          
+          
+        </div>
+        <div class="card-footer text-muted">
 
+         {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}  
+        </div>
+      </div>
+      
+  @endforeach
+  
+</div>
 
 
 
