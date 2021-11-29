@@ -17,6 +17,8 @@ class Actividad extends Model
     protected $fillable = [
         'fecha_inicio_actividad',
         'fecha_fin_actividad',
+        'cantidad_archivos_perm',
+        'tipo_archivos_perm',
         'publicacion_id'
     ];
 

@@ -39,9 +39,17 @@
             @if ($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
-                <i class="fas fa-bullhorn text-blue"></i>
+                <i class="fas fa-bullhorn text-dark"></i>
                 
                 <span class="nav-link-text">Nueva Publicación</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('createActivity') }}">
+                <i class="fas fa-tasks text-primary"></i>
+                
+                <span class="nav-link-text">Crear Actividad</span>
               </a>
             </li>
             @endif
