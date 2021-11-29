@@ -42,7 +42,6 @@ Route::get('/postPublication', [PostPublicationController::class, 'showPostPubli
 
 Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
 
-Route::get('/verRespuestas', [App\Http\Controllers\VerRespuestasController::class, 'verRespuestas'])->name('verRespuestas');
 
 Route::get('/verRespuestasDos', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 
