@@ -41,6 +41,12 @@ Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name(
 Route::get('/postPublication', [PostPublicationController::class, 'showPostPublication'])->name('postPublication');
 Route::post('/postPublication',[PostPublicationController::class,'registerPublicationData'])->name('register-publication');
 
+Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
+
+
+Route::get('/verRespuestasDos', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
+
+
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
