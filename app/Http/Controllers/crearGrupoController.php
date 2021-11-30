@@ -9,8 +9,11 @@ use App\Models\semestre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-
+use Illuminate\Support\Facades\Session;
+use App\Models\Estudiante;
+use App\Models\Grupoempresa;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Redirect;
 
 
 
@@ -25,7 +28,28 @@ class crearGrupoController extends Controller
         $currentDate = date('Y');
         $semestreArray = semestre::where('year','>=',date('Y')-1)->select('id','periodo','year')->get();
 
-        return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
+        //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
+
+        $user_type = Session::get('type');
+        $id = Session::get('id');
+        //$templates = Plantilla::all();
+
+        $title = 'Asesor';
+        if($user_type == 'estudiante')
+        {
+            $row = Estudiante::where('user_id',$id)->first();
+            $ge_id = $row->grupoempresa_id;
+            if($ge_id == null)
+            {
+                $title = '[Sin grupo empresa]';
+            }
+            else
+            {
+                $row = Grupoempresa::where('id',$ge_id)->first();
+                $title = $row->nombre_largo;
+            }
+        }
+        return view('crearGrupo',['user_type' => $user_type, 'title' => $title,'semestreArray'=>$semestreArray, 'docentesArray'=>$docentesArray]);
     }
 
     public function validar(Request $request)
@@ -60,7 +84,7 @@ class crearGrupoController extends Controller
         ]);
         $grupo=new grupo;
         $grupo->sigla_grupo=$request->sigla;
-        $grupo->codigo_inscripcion=request('codInscripcion');
+        $grupo->codigo_inscripcion=request('codigoInscripcion');
         $grupo->semestre_id=request('semestre');
         $grupo->asesor_id=request('docente');
 
@@ -68,12 +92,13 @@ class crearGrupoController extends Controller
         if ($grupo->save()) {
             # code...
             Alert::success('Grupo Creado', 'Completado');
-
-            return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
+            return Redirect::back()->with('message','Operation Successful !');
+            //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
 
         }else{
             Alert::warning("no se creo grupo");
-
+            //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
+            return Redirect::back()->with('message','Operation Successful !');
         }
 
     }
