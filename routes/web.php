@@ -53,7 +53,7 @@ Route::post('/postPublication',[PostPublicationController::class,'registerPublic
 Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
 
 
-Route::get('/verRespuestasDos', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
+Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 
 
 // Auth::routes();

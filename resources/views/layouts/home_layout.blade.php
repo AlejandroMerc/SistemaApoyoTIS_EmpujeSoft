@@ -51,14 +51,7 @@
               </a>
             </li>
             @endif
-            @if(!($user_type == "admin"))
-            <li class="nav-item">
-              <a class="nav-link" href="icons.html">
-                <i class="fas fa-thumbtack text-orange"></i>
-                <span class="nav-link-text">Actividades</span>
-              </a>
-            </li>
-            @endif
+            
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
                 <i class="ni ni-bullet-list-67 text-green"></i>
@@ -229,7 +222,6 @@
   <!-- Argon JS -->
   <script src="/assets/js/argon.js?v=1.2.0"></script>
   @yield('scripts')
-  @include('sweetalert::alert')
 </body>
 
 </html>
