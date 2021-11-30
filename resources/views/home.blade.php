@@ -66,7 +66,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href={{ route('verRespuestas') }}>
+              <a class="nav-link" href={{ route('verRespuestasDos') }}>
                 <i class="fas fa-thumbtack text-orange"></i>
                 <span class="nav-link-text">Ver Respuestas</span>
               </a>
@@ -170,7 +170,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="{{ url('/logout') }}" method="get" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
+                  <span>Cerrar Sesión</span>
                 </a>
               </div>
             </li>
@@ -207,7 +207,6 @@
 
 
 <div class="containter-fluid">
-  
   @foreach ($publications as $publication)
       <div class="card border rounded-lg" value={{$publication->id}}>
         @if ($publication->tipo=="Publicación")
