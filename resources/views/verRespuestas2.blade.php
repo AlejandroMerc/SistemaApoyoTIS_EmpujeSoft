@@ -19,25 +19,25 @@
                 <div class="card-header">{{ __('Lista de Asignados') }}</div>
                     <div class="card w-20">
                         <div class="card-body">
-                            <h5 class="card-title">Nombre Est 1</h5>
+                            <h5 class="card-title">Grupoempresa 1</h5>
                                 <a href="#" class="btn btn-primary">Ver Respuestas</a>
                         </div>
                     </div>
                     <div class="card w-20">
                         <div class="card-body">
-                            <h5 class="card-title">Nombre Est 2</h5>
+                            <h5 class="card-title">Grupoempresa 2</h5>
                                 <a href="#" class="btn btn-primary">Ver Respuestas</a>
                         </div>
                     </div>
                     <div class="card w-20">
                         <div class="card-body">
-                            <h5 class="card-title">Nombre Est 3</h5>
+                            <h5 class="card-title">Grupoempresa 3</h5>
                                 <a href="#" class="btn btn-primary">Ver Respuestas</a>
                         </div>
                     </div>
                     <div class="card w-20">
                         <div class="card-body">
-                            <h5 class="card-title">Nombre Est 4</h5>
+                            <h5 class="card-title">Grupoempresa 4</h5>
                                 <a href="#" class="btn btn-primary">Ver Respuestas</a>
                         </div>
                     </div>

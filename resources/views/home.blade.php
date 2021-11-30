@@ -233,7 +233,7 @@
           <a href="#" class="card-link">Ver Archivos Adjuntos</a>
           @if ($publication->tipo=="Actividad")
           @if ($user_type == 'asesor_tis')
-          <a href="#" class="btn btn-primary">Ver Respuestas</a>
+          <a href="{{ url("/verRespuestasDos")}}" class="btn btn-primary">Ver Respuestas</a>
           @else
           <a href="#" class="btn btn-primary">Responder</a>
           @endif
