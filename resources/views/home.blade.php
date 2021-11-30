@@ -39,9 +39,17 @@
             @if ($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
-                <i class="fas fa-bullhorn text-blue"></i>
-
+                <i class="fas fa-bullhorn text-dark"></i>
+                
                 <span class="nav-link-text">Nueva Publicación</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('createActivity') }}">
+                <i class="fas fa-tasks text-primary"></i>
+                
+                <span class="nav-link-text">Crear Actividad</span>
               </a>
             </li>
             @endif
@@ -168,7 +176,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="{{ url('/logout') }}" method="get" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
+                  <span>Cerrar Sesión</span>
                 </a>
               </div>
             </li>
@@ -204,7 +212,45 @@
 
 
 
+<div class="containter-fluid">
+  @foreach ($publications as $publication)
+      <div class="card border rounded-lg" value={{$publication->id}}>
+        @if ($publication->tipo=="Publicación")
+            <div class="card-header text-white bg-info"> 
+              <i class="fas fa-bullhorn text-white"></i>
+              {{$publication->titulo_publicacion}}
+            </div>
+        @else
+        <div class="card-header text-white bg-danger"> 
+          <i class="fas fa-tasks text-white"></i>
+          {{$publication->titulo_publicacion}}
+        </div>
+        @endif
+        
+        <div class="card-body">
+          
+          <p class="card-text">{{$publication->descripcion_publicacion}}</p>
+          <a href="#" class="card-link">Ver Archivos Adjuntos</a>
+          @if ($publication->tipo=="Actividad")
+          @if ($user_type == 'asesor_tis')
+          <a href="#" class="btn btn-primary">Ver Respuestas</a>
+          @else
+          <a href="#" class="btn btn-primary">Responder</a>
+          @endif
+          <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
+          @endif
+          
+          
+        </div>
+        <div class="card-footer text-muted">
 
+         {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}  
+        </div>
+      </div>
+      
+  @endforeach
+  
+</div>
 
 
 

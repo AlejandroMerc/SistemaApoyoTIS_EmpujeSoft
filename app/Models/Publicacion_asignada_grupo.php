@@ -18,4 +18,16 @@ class Publicacion_asignada_grupo extends Model
        'publicacion_id',
        'grupo_id'
     ];
+
+    public $timestamps = false;
+
+    public function publicacion()
+    {
+        return $this->belongsTo(Publicacion::class);
+    }
+
+    public function grupo()
+    {
+        return $this->belongsTo(Grupo::class);
+    }
 }

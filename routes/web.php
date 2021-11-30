@@ -48,6 +48,13 @@ Route::get('/registerGE', [App\Http\Controllers\RegisterGEController::class, 're
 Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name('listGE');
 
 Route::get('/postPublication', [PostPublicationController::class, 'showPostPublication'])->name('postPublication');
+Route::post('/postPublication',[PostPublicationController::class,'registerPublicationData'])->name('register-publication');
+
+Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
+
+
+Route::get('/verRespuestasDos', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
+
 
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -60,3 +67,4 @@ Route::get('createActivity', [CreateActivityController::class, 'showCreateActivi
 
 Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGrupo');
 Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');
+Route::post('createActivity', [CreateActivityController::class, 'registerActivityData'])->name('registir-activity-data');

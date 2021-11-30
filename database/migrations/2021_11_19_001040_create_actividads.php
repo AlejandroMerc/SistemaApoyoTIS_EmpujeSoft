@@ -17,6 +17,8 @@ class CreateActividads extends Migration
             $table->id();
             $table->dateTime('fecha_inicio_actividad', $precision = 0);
             $table->dateTime('fecha_fin_actividad', $precision = 0);
+            $table->integer('cantidad_archivos_perm');
+            $table->string('tipo_archivos_perm');
             $table->foreignId('publicacion_id')
                   ->references('id')->on('publicacions')
                   ->onDelete('cascade')
