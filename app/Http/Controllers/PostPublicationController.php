@@ -7,6 +7,7 @@ use App\Models\Grupo;
 use App\Models\Publicacion;
 use App\Models\Publicacion_asignada_grupo;
 use App\Models\Semestre;
+use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Log;
@@ -23,24 +24,26 @@ class PostPublicationController extends Controller
     }
     
     public function showPostPublication (){
-        $idAdviser = Session::get('id');
-        $asesor=Asesor::find($idAdviser);
+        $asesor = $this->getAsesor();
         $grupos=$asesor->grupos()->select('id','sigla_grupo')->get();
         $grupoEmpresas=$asesor->grupoempresas()->select('id','nombre_corto')->get();
         return view ('postPublication',compact('grupos'),compact('grupoEmpresas'));
     }
+
     public function registerPublicationData(Request $request){
         $request->validate([
             'title' => ['required', 'string', 'max:50','regex:/^[a-zA-Z0-9_ ]*$/'],
             'description'=>['required','string','max:350'],    
             'uploadFiles'=>'mimetypes:image/jpeg,image/png,image/gif,image/bmp,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,pplication/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation',
         ]);
+
+        $asesor = $this->getAsesor();
         $publication = new Publicacion;
         $publication->titulo_publicacion=$request->title;
         $currentTime=Carbon::now();
         $publication->fecha_publicacion=$currentTime->toDateTimeString();
         $publication->descripcion_publicacion=$request->description;
-        $idAdviser = Session::get('id');
+        $idAdviser = $asesor->id;
         $publication->asesor_id=$idAdviser;
 
         $added=$publication->save();
@@ -55,11 +58,17 @@ class PostPublicationController extends Controller
                 $publiGroup->grupo_id=$grupo->id;
                 $added2=$publiGroup->save();
             }
-            
         }
 
         if($added){
             return redirect('home');
         }
+    }
+
+    public function getAsesor(){
+        $idAdviser = Session::get('id');
+        $user = User::find($idAdviser);
+        $asesor=$user->asesor()->first();
+        return $asesor;
     }
 }

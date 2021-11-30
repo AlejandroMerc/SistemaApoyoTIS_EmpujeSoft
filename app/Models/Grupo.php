@@ -46,5 +46,9 @@ class Grupo extends Model
     {
         return $this->hasMany(Estudiante::class);
     }
+
+    public function pubs_asignada_grupo(){
+        return $this->hasMany(Publicacion_asignada_grupo::class);
+    }
    
 }

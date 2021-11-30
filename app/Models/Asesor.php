@@ -43,4 +43,8 @@ class Asesor extends Model
     {
         return $this->hasMany(Grupoempresa::class);
     }
+
+    public function publicaciones(){
+        return $this->hasMany(Publicacion::class);
+    }
 }

@@ -19,4 +19,8 @@ class Anuncio extends Model
     ];
 
     public $timestamps = false;
+
+    public function publicacion(){
+        return $this->belongsTo(Publicacion::Class);
+    }
 }

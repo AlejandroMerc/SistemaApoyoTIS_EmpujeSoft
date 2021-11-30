@@ -22,4 +22,12 @@ class Publicacion extends Model
     ];
 
     public $timestamps = false;
+
+    public function actividad(){
+        return $this->hasOne(Actividad::Class);
+    }
+
+    public function asesor(){
+        return $this->belongsTo(Asesor::Class);
+    }
 }
