@@ -97,9 +97,7 @@ class HomeController extends Controller
         }
         else if($rol == 'asesor_tis')
         {
-            $asesor = $user->asesor()->first();
-            $grupo = $asesor->grupos()->first();
-            return $this->getPublicacionesGrupo($grupo->id);
+            return $this->getPublicacionesAsesor($user)->get();
         }
         else if($rol == 'estudiante')
         {
@@ -108,11 +106,11 @@ class HomeController extends Controller
             $ge = $estudiante->grupoempresa()->first();
             if($ge == null)
             {
-                return $this->getPublicacionesGrupo($grupo->id);
+                return $this->getPublicacionesGrupo($grupo->id)->get();
             }
             else 
             {
-                return $this->getPublicacionesGrupoGE($grupo->id, $ge->id);
+                return $this->getPublicacionesGrupoGE($grupo->id, $ge->id)->get();
             }
         }
         else
@@ -134,8 +132,7 @@ class HomeController extends Controller
         ->join('users','asesors.user_id','=','users.id')
         ->join('publicacion_asignada_grupos','publicacion_asignada_grupos.publicacion_id','=','publicacions.id')
         ->where('publicacion_asignada_grupos.grupo_id','=',$grupo_id)
-        ->select('publicacions.*','users.name','users.lastname')
-        ->get();
+        ->select('publicacions.*','users.name','users.lastname');
         return $publications;
     }
 
@@ -144,8 +141,7 @@ class HomeController extends Controller
         ->join('users','asesors.user_id','=','users.id')
         ->join('publicacion_asignada_grupoempresas','publicacion_asignada_grupoempresas.publicacion_id','=','publicacions.id')
         ->where('publicacion_asignada_grupoempresas.grupoempresa_id','=',$ge_id)
-        ->select('publicacions.*','users.name','users.lastname')
-        ->get();
+        ->select('publicacions.*','users.name','users.lastname');
         return $publications;
     }
 
@@ -163,7 +159,23 @@ class HomeController extends Controller
         ->where('publicacion_asignada_grupoempresas.grupoempresa_id','=',$ge_id)
         ->select('publicacions.*','users.name','users.lastname');
 
-        $publications = $publications_grupo->union($publications_ge)->get();
+        $publications = $publications_grupo->union($publications_ge);
+        return $publications;
+    }
+
+    public function getPublicacionesAsesor($user)
+    {
+        $asesor = $user->asesor()->first();
+        $grupo = $asesor->grupos()->first();
+        $publications = $this->getPublicacionesGrupo($grupo->id);
+        
+        $grupoempresas = Asesor::find($asesor->id)->grupoempresas()->get();
+        foreach($grupoempresas as $ge)
+        {
+            $publications_ge = $this->getPublicacionesGE($ge->id);
+            $publications = $publications->union($publications_ge);
+        }
+
         return $publications;
     }
 

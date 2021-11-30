@@ -74,7 +74,7 @@ class CreateActivityController extends Controller
             {
                 $publiGroup=new Publicacion_asignada_grupoempresa;
                 $publiGroup->publicacion_id=$publication->id;
-                $publiGroup->grupo_id=$id;
+                $publiGroup->grupoempresa_id=$id;
                 $added2=$publiGroup->save();
             }
         }
