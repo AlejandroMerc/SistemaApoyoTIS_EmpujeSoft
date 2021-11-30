@@ -19,6 +19,12 @@
   <link rel="stylesheet" href="/assets/css/argon.css?v=1.2.0" type="text/css">
   <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
+    <!-- Latest cosmpiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -45,18 +51,30 @@
               </a>
             </li>
             @endif
+            @if(!($user_type == "admin"))
             <li class="nav-item">
               <a class="nav-link" href="icons.html">
                 <i class="fas fa-thumbtack text-orange"></i>
                 <span class="nav-link-text">Actividades</span>
               </a>
             </li>
+            @endif
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
                 <i class="ni ni-bullet-list-67 text-green"></i>
                 <span class="nav-link-text">Listar GE</span>
               </a>
             </li>
+
+            @if($user_type == 'admin')
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('crearGrupo') }}>
+
+                <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                <span class="nav-link-text">crearGrupo</span>
+              </a>
+            </li>
+            @endif
 
             @if($user_type == 'estudiante')
             <li class="nav-item">
@@ -211,6 +229,7 @@
   <!-- Argon JS -->
   <script src="/assets/js/argon.js?v=1.2.0"></script>
   @yield('scripts')
+  @include('sweetalert::alert')
 </body>
 
 </html>
