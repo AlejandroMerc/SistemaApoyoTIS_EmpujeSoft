@@ -60,8 +60,11 @@ class PostPublicationController extends Controller
         }
         else
         {
-            $tipo = $request->toWhom[0];
-            $id = $request->toWhom[1];
+            
+            $toWhoms=explode(", ",$request->toWhom );
+            $tipo = $toWhoms[0];
+            $id = $toWhoms[1];
+            
             if($tipo == 'grupo')
             {
                 $publiGroup=new Publicacion_asignada_grupo;
