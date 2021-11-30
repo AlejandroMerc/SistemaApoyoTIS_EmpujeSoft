@@ -18,4 +18,6 @@ class Publicacion_asignada_grupoempresa extends Model
        'publicacion_id',
        'grupoempresa_id'
     ];
+
+    public $timestamps = false;
 }

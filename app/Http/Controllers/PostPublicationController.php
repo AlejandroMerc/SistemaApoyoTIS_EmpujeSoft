@@ -6,6 +6,7 @@ use App\Models\Asesor;
 use App\Models\Grupo;
 use App\Models\Publicacion;
 use App\Models\Publicacion_asignada_grupo;
+use App\Models\Publicacion_asignada_grupoempresa;
 use App\Models\Semestre;
 use App\Models\User;
 use Carbon\Carbon;
@@ -49,13 +50,30 @@ class PostPublicationController extends Controller
         $added=$publication->save();
         
         if($request->toWhom=="everybody"){
-            
             $gruposTodos=Grupo::select('id')->get();
-            
             foreach($gruposTodos as $grupo){
                 $publiGroup=new Publicacion_asignada_grupo;
                 $publiGroup->publicacion_id=$publication->id;
                 $publiGroup->grupo_id=$grupo->id;
+                $added2=$publiGroup->save();
+            }
+        }
+        else
+        {
+            $tipo = $request->toWhom[0];
+            $id = $request->toWhom[1];
+            if($tipo == 'grupo')
+            {
+                $publiGroup=new Publicacion_asignada_grupo;
+                $publiGroup->publicacion_id=$publication->id;
+                $publiGroup->grupo_id=$id;
+                $added2=$publiGroup->save();
+            }
+            else
+            {
+                $publiGroup=new Publicacion_asignada_grupoempresa;
+                $publiGroup->publicacion_id=$publication->id;
+                $publiGroup->grupo_id=$id;
                 $added2=$publiGroup->save();
             }
         }
