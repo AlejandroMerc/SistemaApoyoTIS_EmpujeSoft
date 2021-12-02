@@ -30,4 +30,12 @@ class Publicacion extends Model
     public function asesor(){
         return $this->belongsTo(Asesor::Class);
     }
+
+    public function grupos_asignados(){
+        return $this->hasMany(Publicacion_asignada_grupo::Class);
+    }
+
+    public function ge_asignados(){
+        return $this->hasMany(Publicacion_asignada_grupoempresa::Class);
+    }
 }
