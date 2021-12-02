@@ -10,7 +10,7 @@ use App\Http\Controllers\TemplateListController;
 use App\Http\Controllers\TemplateEditorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\crearGrupoController;
-
+use App\Http\Controllers\CreateSemesterController;
 use App\Http\Controllers\CreateActivityController;
 
 /*
@@ -51,9 +51,9 @@ Route::get('/postPublication', [PostPublicationController::class, 'showPostPubli
 Route::post('/postPublication',[PostPublicationController::class,'registerPublicationData'])->name('register-publication');
 
 Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
+Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::class, 'store'])->name('store-data');
 
-
-Route::get('/verRespuestasDos', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
+Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 
 
 // Auth::routes();

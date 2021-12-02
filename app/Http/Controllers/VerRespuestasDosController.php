@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 class VerRespuestasDosController extends Controller
 {
-    public function verRespuestasDos(){
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    public function verRespuestasDos($publicacion_id){
         return view('verRespuestas2');
     }
 

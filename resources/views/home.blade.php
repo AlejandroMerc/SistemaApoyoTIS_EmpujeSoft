@@ -53,15 +53,7 @@
               </a>
             </li>
             @endif
-            @if(!($user_type == "admin"))
-            <li class="nav-item">
-                <a class="nav-link" href="icons.html">
-                  <i class="fas fa-thumbtack text-orange"></i>
-                  <span class="nav-link-text">Actividades</span>
-                </a>
-              </li>
-            @endif
-
+            
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
                 <i class="ni ni-bullet-list-67 text-green"></i>
@@ -74,6 +66,13 @@
 
                 <i class="fa fa-users text-blue" aria-hidden="true"></i>
                 <span class="nav-link-text">crearGrupo</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('createSemester') }}>
+
+                <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                <span class="nav-link-text">Crear Semestre</span>
               </a>
             </li>
             @endif
@@ -233,7 +232,7 @@
           <a href="#" class="card-link">Ver Archivos Adjuntos</a>
           @if ($publication->tipo=="Actividad")
           @if ($user_type == 'asesor_tis')
-          <a href="{{ url("/verRespuestasDos")}}" class="btn btn-primary">Ver Respuestas</a>
+          <a href="{{route('verRespuestasDos',['publicacion_id' => $publication->id])}}" class="btn btn-primary">Ver Respuestas</a>
           @else
           <a href="#" class="btn btn-primary">Responder</a>
           @endif

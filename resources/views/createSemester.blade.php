@@ -17,13 +17,13 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Crear Semestre') }}</div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register-ge-data') }}">
+                   <div class="card-body">
+                    <form method="POST" action="{{ route('store-data') }}">
                         @csrf
-                        <div class="form-group row">    
-                        <label for="telefono_ge" class="col-md-4 col-form-label text-md-right">{{ __('Año ') }}</label>
-                            <div class="col-md-6">                               
-                                    <input id="anio" type="number" class="form-control @error('anio') is-invalid @enderror" min="19000000" max="99999999" name = "anio" value="{{ old('anio') }}" required autocomplete="anio">
+                        <div class="form-group row">
+                         <label for="telefono_ge" class="col-md-4 col-form-label text-md-right">{{ __('Año ') }}</label>
+                            <div class="col-md-6">
+                                    <input id="anio" type="number" class="form-control @error('anio') is-invalid @enderror" min="1900" max="3000" name = "anio" value="{{ old('anio') }}" required autocomplete="anio">
                                     @error('anio')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -32,10 +32,10 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">    
-                        <label for="periodo" class="col-md-4 col-form-label text-md-right">{{ __('Periodo') }}</label>
-                            <div class="col-md-6">                               
-                                    <input id="periodo" type="number" class="form-control @error('periodo') is-invalid @enderror" min="19000000" max="99999999" name = "periodo" value="{{ old('periodo') }}" required autocomplete="periodo">
+                        <div class="form-group row">
+                         <label for="periodo" class="col-md-4 col-form-label text-md-right">{{ __('Periodo') }}</label>
+                             <div class="col-md-6">
+                                    <input id="periodo" type="number" class="form-control @error('periodo') is-invalid @enderror" min="1" max="3" name = "periodo" value="{{ old('periodo') }}" required autocomplete="periodo">
                                     @error('periodo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -45,16 +45,27 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="published_at" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Inicial') }}</label> 
-                            <div class="col-md-6">    
-                                <input type="text" class="form-control" id="published_at" name = "published_at" value="{{ old('published_at') }}" required autocomplete="published_at">
+                          <label for="deathline" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Inicial') }}</label>
+                            <div class="col-md-6">
+                                <input type="datetime-local" id="deathline" class="form-control @error('deathline') is-invalid @enderror" name="deathline" required>
+                                @error('deathline')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                        <label for="published_at2" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Final') }}</label> 
-                            <div class="col-md-6">    
-                                <input type="text" class="form-control" id="published_at2" name = "published_at2" value="{{ old('published_at2') }}" required autocomplete="published_at2">
+                          <label for="deathline2" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Final') }}</label>
+                            <div class="col-md-6">
+
+                                <input type="datetime-local" id="deathline2" class="form-control @error('deathline2') is-invalid @enderror" name="deathline2" required>
+                                @error('deathline2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -66,6 +77,7 @@
                             </div>
                         </div>
                     </form>
+                   </div>
                 </div>
             </div>
         </div>
