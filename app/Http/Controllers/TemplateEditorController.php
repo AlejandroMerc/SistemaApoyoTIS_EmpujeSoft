@@ -15,31 +15,6 @@ class TemplateEditorController extends Controller
         $this->middleware('auth');
     }
 
-    // public function index()
-    // {
-    //     $user_type = Session::get('type');
-    //     $id = Session::get('id');
-
-    //     $title = 'Asesor';
-    //     if($user_type == 'estudiante')
-    //     {
-    //         $row = Estudiante::where('user_id',$id)->first();
-    //         $ge_id = $row->grupoempresa_id;
-    //         if($ge_id == null)
-    //         {
-    //             $title = '[Sin grupo empresa]';
-    //         }
-    //         else
-    //         {
-    //             $row = Grupoempresa::where('id',$ge_id)->first();
-    //             $title = $row->nombre_largo;
-    //         }
-    //     }
-    //     $doc = '';
-    //     $name = '';
-    //     return view('templateeditor',['user_type' => $user_type, 'title' => $title, 'name' => $name, 'dochtml' => $doc]);
-    // }
-
     public function index($id)
     {
         $user_type = Session::get('type');
@@ -79,22 +54,22 @@ class TemplateEditorController extends Controller
         if ($request->editor === null) {
             $request->editor = "";
         }
-        if ($request->name === null) {
-            return 'nombre vacio';
-        }
 
         if ($id === '-1')
         {
+            $rules = ['name' => 'required|unique:plantillas,nombre'];
+            $errormsg = [
+                'unique' => 'Nombre ya existente',
+                'required' => 'Nombre vacio'
+            ];
+            $this->validate($request, $rules, $errormsg);
+
             $template = new Plantilla();
-            if ($this->namerepeated($request->name))
-            {
-                return 'nombre repetido';
-            }
-            else
-            {
-                $template->nombre = $request->name;
-                $template->html_code = $request->editor;
-                $template->save();
+            $template->nombre = $request->name;
+            $template->html_code = $request->editor;
+            $saved = $template->save();
+            if ( !$saved ) {
+                return redirect()->back()->with('alert', 'No se pudo guardar la plantilla\nVuelva a intentarlo en un momento.');
             }
         }
         else
@@ -104,18 +79,25 @@ class TemplateEditorController extends Controller
             if ( $request->name === $oldname)
             {
                 $template->html_code = $request->editor;
-                $template->save();
+                $saved = $template->save();
+                if ( !$saved ) {
+                    return redirect()->back()->with('alert', 'No se pudo guardar la plantilla\nVuelva a intentarlo en un momento.');
+                }
             }
             else{
-                if ($this->namerepeated($request->name))
-                {
-                    return 'nombre repetido';
-                }
-                else
-                {
-                    $template->nombre = $request->name;
-                    $template->html_code = $request->editor;
-                    $template->save();
+                $rules = ['name' => 'required|unique:plantillas,nombre'];
+                $errormsg = [
+                    'unique' => 'Nombre ya existente',
+                    'required' => 'Nombre vacio'
+                ];
+                $this->validate($request, $rules, $errormsg);
+
+                $template = new Plantilla();
+                $template->nombre = $request->name;
+                $template->html_code = $request->editor;
+                $saved = $template->save();
+                if ( !$saved ) {
+                    return redirect()->back()->with('alert', 'No se pudo guardar la plantilla\nVuelva a intentarlo en un momento.');
                 }
             }
         }

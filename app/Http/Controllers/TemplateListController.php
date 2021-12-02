@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
 use App\Models\Plantilla;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use ZipArchive;
 use DOMDocument;
@@ -75,6 +74,7 @@ class TemplateListController extends Controller
 
     public function uploadFile()
     {
+        $errorMessage = 'Hubo un error al cargar el archivo';
         if (isset($_FILES['docfile']))
         {
             if ( $_FILES['docfile']['error'] === UPLOAD_ERR_OK )
@@ -91,11 +91,11 @@ class TemplateListController extends Controller
                 }
                 else
                 {
-                    return 'archivo corrupto';
+                    $errorMessage = 'El archivo subido esta dañado';
                 }
             }
         }
-        return 'hubo un error';
+        return redirect()->back()->with('alert', $errorMessage);
     }
 
     private function uniqueName($name)

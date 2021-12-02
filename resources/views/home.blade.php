@@ -68,6 +68,13 @@
                 <span class="nav-link-text">crearGrupo</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('createSemester') }}>
+
+                <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                <span class="nav-link-text">Crear Semestre</span>
+              </a>
+            </li>
             @endif
 
             @if($user_type == 'estudiante')

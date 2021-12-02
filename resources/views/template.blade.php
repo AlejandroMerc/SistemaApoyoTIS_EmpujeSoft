@@ -19,7 +19,6 @@
                         <i class="fas fa-file-medical"></i>
                         <span>Nuevo</span>
                     </a>
-                    {{-- <a href="{{ url('/plantillas/subir') }}" method="get" class="dropdown-item"> --}}
                     <button class="dropdown-item" onclick="loaddocfile()">
                         <form id="formfile" action="{{ route("template") }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -28,7 +27,6 @@
                             <input type="file" id="docfile" name="docfile" style="display:none;" accept=".docx" onchange="uploadingFile(this)">
                         </form>
                     </button>
-                    {{-- </a> --}}
                 </div>
                 </li>
             </ul>
@@ -52,6 +50,12 @@
 
     {{-- fin lista --}}
     <script>
+        var msg = '{{Session::get('alert')}}';
+        var exist = '{{Session::has('alert')}}';
+        if(exist){
+            alert(msg);
+        }
+
         function uploadingFile(oInput) {
             if (oInput.type == "file") {
                 var fileName = oInput.value;
