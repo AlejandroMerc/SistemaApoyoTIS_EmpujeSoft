@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actividad;
+use App\Models\Adjunto;
+use App\Models\Adjunto_publicacion;
 use App\Models\Asesor;
 use App\Models\Publicacion;
 use App\Models\Grupo;
