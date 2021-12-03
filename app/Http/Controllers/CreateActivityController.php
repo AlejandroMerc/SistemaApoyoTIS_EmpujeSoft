@@ -52,7 +52,9 @@ class CreateActivityController extends Controller
         $added=$publication->save();
         
         if($request->toWhom=="everybody"){
-            $semestre = Semestre::semestreActual();
+            $currentDate = date('Y-m-d');
+            $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
+                        ->where('fecha_fin','>=',$currentDate)->first();
             $publiSemestre = new Publicacion_semestre;
             $publiSemestre->publicacion_id = $publication->id;
             $publiSemestre->semestre_id = $semestre->id;
