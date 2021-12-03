@@ -13,13 +13,13 @@ class CreatePublicacions extends Migration
      */
     public function up()
     {
-        Schema::create('publicacions', function (Blueprint $table) {
+        Schema::create('publicaciones', function (Blueprint $table) {
             $table->id();
             $table->string('titulo_publicacion');
             $table->dateTime('fecha_publicacion', $precision = 0);
             $table->string('descripcion_publicacion');
             $table->foreignId('asesor_id')
-                  ->references('id')->on('asesors')
+                  ->references('id')->on('asesores')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
@@ -32,6 +32,6 @@ class CreatePublicacions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publicacions');
+        Schema::dropIfExists('publicaciones');
     }
 }

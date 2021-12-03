@@ -31,4 +31,17 @@ class Semestre extends Model
         return $this->hasMany(Grupo::class);
     }
 
+    public function semestreActual()
+    {
+        $currentDate = date('Y-m-d');
+        $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
+                    ->where('fecha_fin','>=',$currentDate)->first();
+        return $semestre;
+    }
+
+    public function pubs_asignada_semestre()
+    {
+        return $this->hasMany(Publicacion_semestres::class);
+    }
+
 }

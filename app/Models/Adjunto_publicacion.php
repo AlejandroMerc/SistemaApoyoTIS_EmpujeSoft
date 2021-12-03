@@ -9,6 +9,8 @@ class Adjunto_publicacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'adjunto_publicaciones';
+
     /**
     * The attributes that are mass assignable.
     *
@@ -20,4 +22,5 @@ class Adjunto_publicacion extends Model
     ];
 
     public $timestamps = false;
+
 }

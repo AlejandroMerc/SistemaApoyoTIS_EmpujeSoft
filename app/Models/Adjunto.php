@@ -15,7 +15,8 @@ class Adjunto extends Model
     * @var string[]
     */
     protected $fillable = [
-        'filepath'
+        'name',
+        'path'
     ];
 
     public $timestamps = false;

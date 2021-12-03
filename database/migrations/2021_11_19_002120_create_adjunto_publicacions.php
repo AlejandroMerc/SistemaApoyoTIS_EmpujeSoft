@@ -13,10 +13,10 @@ class CreateAdjuntoPublicacions extends Migration
      */
     public function up()
     {
-        Schema::create('adjunto_publicacions', function (Blueprint $table) {
+        Schema::create('adjunto_publicaciones', function (Blueprint $table) {
             $table->id();
             $table->foreignId('publicacion_id')
-                  ->references('id')->on('publicacions')
+                  ->references('id')->on('publicaciones')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             $table->foreignId('adjunto_id')
@@ -33,6 +33,6 @@ class CreateAdjuntoPublicacions extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adjunto_publicacions');
+        Schema::dropIfExists('adjunto_publicaciones');
     }
 }

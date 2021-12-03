@@ -13,7 +13,7 @@ class CreateAsesorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('asesors', function (Blueprint $table) {
+        Schema::create('asesores', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
                   ->references('id')->on('users')
@@ -29,6 +29,6 @@ class CreateAsesorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asesors');
+        Schema::dropIfExists('asesores');
     }
 }

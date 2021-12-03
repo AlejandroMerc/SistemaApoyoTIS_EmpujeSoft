@@ -9,6 +9,8 @@ class Actividad extends Model
 {
     use HasFactory;
 
+    protected $table = 'actividades';
+
     /**
     * The attributes that are mass assignable.
     *
