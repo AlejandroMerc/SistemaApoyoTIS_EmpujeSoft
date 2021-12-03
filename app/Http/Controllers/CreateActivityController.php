@@ -83,6 +83,17 @@ class CreateActivityController extends Controller
             }
         }
 
+        if($request->uploadFiles != null)
+        { 
+            $adjunto = $this->saveFiles($request->uploadFiles);
+            $added3 = $adjunto->save();
+
+            $adjunto_publicacion = new Adjunto_publicacion;
+            $adjunto_publicacion->publicacion_id = $publication->id;
+            $adjunto_publicacion->adjunto_id = $adjunto->id;
+            $added4 = $adjunto_publicacion->save();
+        }
+
         $activity=new Actividad;
         $activity->fecha_inicio_actividad=$currentTime->toDateTimeString();
         $activity->fecha_fin_actividad=$request->deathline;
@@ -95,10 +106,19 @@ class CreateActivityController extends Controller
             return redirect('home');
         }
     }
+
     public function getAsesor(){
         $idAdviser = Session::get('id');
         $user = User::find($idAdviser);
         $asesor=$user->asesor()->first();
         return $asesor;
+    }
+
+    public function saveFiles($uploadFiles)
+    {
+        $adjunto = new Adjunto;
+        $adjunto->name = $uploadFiles->getClientOriginalName();
+        $adjunto->path = $uploadFiles->storePublicly('public');
+        return $adjunto;
     }
 }
