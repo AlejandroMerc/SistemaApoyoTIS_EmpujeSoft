@@ -42,7 +42,8 @@ class RegisterGEController extends Controller
         }
 
         $user_rep_legal = User::where('email','=',$request->miembros[0])->first();
-        $user_asesor = $user_rep_legal->estudiante->grupo->asesor->user;
+        $rep_legal = $user_rep_legal->estudiante->first();
+        $grupo = $rep_legal->grupo;
 
         $grupoempresa = new Grupoempresa;
         $grupoempresa->nombre_corto = $request->nombre_corto;
@@ -51,8 +52,8 @@ class RegisterGEController extends Controller
         $grupoempresa->telefono_ge = $request->telefono_ge;
         $grupoempresa->tipo_sociedad = $request->tipo_sociedad;
         $grupoempresa->email = $request->email;
-        $grupoempresa->rep_legal_id = $user_rep_legal->id;
-        $grupoempresa->asesor_id = $user_asesor->id;
+        $grupoempresa->rep_legal_id = $rep_legal->id;
+        $grupoempresa->grupo_id = $grupo->id;
         $query = $grupoempresa->save();
 
         foreach($request->miembros as $miembro)

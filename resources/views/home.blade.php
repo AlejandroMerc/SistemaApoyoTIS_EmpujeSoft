@@ -229,7 +229,9 @@
         <div class="card-body">
           
           <p class="card-text">{{$publication->descripcion_publicacion}}</p>
-          <a href="#" class="card-link">Ver Archivos Adjuntos</a>
+          @foreach($publication->adjuntos as $adjunto)
+            <a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a>
+          @endforeach
           @if ($publication->tipo=="Actividad")
           @if ($user_type == 'asesor_tis')
           <a href="{{route('verRespuestasDos',['publicacion_id' => Crypt::encryptString($publication->id)])}}" class="btn btn-primary">Ver Respuestas</a>
