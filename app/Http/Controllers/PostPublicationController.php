@@ -40,6 +40,7 @@ class PostPublicationController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:50','regex:/^[a-zA-Z0-9_ ]*$/'],
             'description'=>['required','string','max:350'],    
+            'filenames.*' => 'mimes:jpeg,gif,bmp,doc,pdf,docx,zip',
             'uploadFiles'=>'mimetypes:image/jpeg,image/png,image/gif,image/bmp,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,pplication/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation',
         ]);
 
@@ -85,9 +86,22 @@ class PostPublicationController extends Controller
                 $added2=$publiGroup->save();
             }
         }
+        $files = [];
+        if($request->hasfile('filenames'))
+         {
+            foreach($request->file('filenames') as $file)
+            {
+                $name = time().rand(1,100).'.'.$file->extension();
+                Log::info($name);
+                $files[] = $name;  
+                $adjunto = $this->saveFiles($file);
+                $added3 = $adjunto->save();
+            }
+         }
 
         if($request->uploadFiles != null)
         { 
+        
             $adjunto = $this->saveFiles($request->uploadFiles);
             $added3 = $adjunto->save();
 

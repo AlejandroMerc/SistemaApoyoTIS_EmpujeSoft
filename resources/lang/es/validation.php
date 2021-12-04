@@ -145,8 +145,8 @@ return [
         'title'=>[
             'regex'=> 'El título solo debe contener caracteres alfanumericos'
         ],
-        'uploadFiles'=>[
-            'mimetypes'=>'Los archivos adjuntos deben de ser de formato: jpg, jpge, gif, png, xls, xlsx, doc, docx, pdf'
+        'filenames.*'=>[
+            'mimes'=>'Los archivos adjuntos deben de ser de formato: jpg, jpge, gif, png, xls, xlsx, doc, docx, pdf'
         ],
     ],
 ];
