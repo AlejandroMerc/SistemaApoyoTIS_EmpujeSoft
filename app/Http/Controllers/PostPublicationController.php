@@ -127,7 +127,7 @@ class PostPublicationController extends Controller
     {
         $adjunto = new Adjunto;
         $adjunto->name = $uploadFiles->getClientOriginalName();
-        $adjunto->path = $uploadFiles->storePublicly('public');
+        $adjunto->path = $uploadFiles->store('files');
         return $adjunto;
     }
 }
