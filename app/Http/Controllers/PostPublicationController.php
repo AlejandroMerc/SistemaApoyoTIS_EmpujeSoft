@@ -92,7 +92,6 @@ class PostPublicationController extends Controller
             foreach($request->file('filenames') as $file)
             {
                 $name = time().rand(1,100).'.'.$file->extension();
-                Log::info($name);
                 $files[] = $name;  
                 $adjunto = $this->saveFiles($file);
                 $added3 = $adjunto->save();
