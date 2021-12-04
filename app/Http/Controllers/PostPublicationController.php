@@ -96,9 +96,14 @@ class PostPublicationController extends Controller
                 $files[] = $name;  
                 $adjunto = $this->saveFiles($file);
                 $added3 = $adjunto->save();
+
+                $adjunto_publicacion = new Adjunto_publicacion;
+                $adjunto_publicacion->publicacion_id = $publication->id;
+                $adjunto_publicacion->adjunto_id = $adjunto->id;
+                $added4 = $adjunto_publicacion->save();
             }
          }
-
+/*
         if($request->uploadFiles != null)
         { 
         
@@ -110,6 +115,7 @@ class PostPublicationController extends Controller
             $adjunto_publicacion->adjunto_id = $adjunto->id;
             $added4 = $adjunto_publicacion->save();
         }
+        */
 
         if($added){
             return redirect('home');
