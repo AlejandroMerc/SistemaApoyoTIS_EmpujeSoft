@@ -9,6 +9,8 @@ class Publicacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'publicaciones';
+
     /**
     * The attributes that are mass assignable.
     *
@@ -29,5 +31,21 @@ class Publicacion extends Model
 
     public function asesor(){
         return $this->belongsTo(Asesor::Class);
+    }
+
+    public function grupos_asignados(){
+        return $this->hasMany(Publicacion_grupo::Class);
+    }
+
+    public function ge_asignados(){
+        return $this->hasMany(Publicacion_grupoempresa::Class);
+    }
+
+    public function semestre_asignados(){
+        return $this->hasMany(Publicacion_semestre::Class);
+    }
+
+    public function adjuntos(){
+        return $this->hasMany(Adjunto_publicacion::Class);
     }
 }

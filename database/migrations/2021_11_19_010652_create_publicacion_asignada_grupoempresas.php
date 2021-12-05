@@ -13,10 +13,10 @@ class CreatePublicacionAsignadaGrupoempresas extends Migration
      */
     public function up()
     {
-        Schema::create('publicacion_asignada_grupoempresas', function (Blueprint $table) {
+        Schema::create('publicacion_grupoempresas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('publicacion_id')
-                  ->references('id')->on('publicacions')
+                  ->references('id')->on('publicaciones')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             $table->foreignId('grupoempresa_id')
@@ -33,6 +33,6 @@ class CreatePublicacionAsignadaGrupoempresas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('publicacion_asignada_grupoempresas');
+        Schema::dropIfExists('publicacion_grupoempresas');
     }
 }

@@ -63,7 +63,7 @@ class crearGrupoController extends Controller
 
         request()->validate([
 
-            'sigla'=>['bail','required','max:191','min:2',function ($siglaIn, $value, $fail) {
+            'sigla'=>['bail','required','max:191','min:1',function ($siglaIn, $value, $fail) {
                 $grupoArray = grupo::where('semestre_id','=',request('semestre'))->select('sigla_grupo')->get();
                 $existe=false;
                 foreach ($grupoArray as $grup) {
@@ -86,17 +86,18 @@ class crearGrupoController extends Controller
         $grupo->sigla_grupo=$request->sigla;
         $grupo->codigo_inscripcion=request('codigoInscripcion');
         $grupo->semestre_id=request('semestre');
-        $grupo->asesor_id=request('docente');
+        $asesor = User::find(request('docente'))->asesor()->first();
+        $grupo->asesor_id=$asesor->id;
 
 
         if ($grupo->save()) {
             # code...
-            Alert::success('Grupo Creado', 'Completado');
+            //Alert::success('Grupo Creado', 'Completado');
             return Redirect::back()->with('message','Operation Successful !');
             //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
 
         }else{
-            Alert::warning("no se creo grupo");
+            //Alert::warning("no se creo grupo");
             //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
             return Redirect::back()->with('message','Operation Successful !');
         }

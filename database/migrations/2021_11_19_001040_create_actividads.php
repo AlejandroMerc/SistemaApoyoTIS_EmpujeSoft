@@ -13,14 +13,14 @@ class CreateActividads extends Migration
      */
     public function up()
     {
-        Schema::create('actividads', function (Blueprint $table) {
+        Schema::create('actividades', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha_inicio_actividad', $precision = 0);
             $table->dateTime('fecha_fin_actividad', $precision = 0);
             $table->integer('cantidad_archivos_perm');
             $table->string('tipo_archivos_perm');
             $table->foreignId('publicacion_id')
-                  ->references('id')->on('publicacions')
+                  ->references('id')->on('publicaciones')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
@@ -33,6 +33,6 @@ class CreateActividads extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('actividads');
+        Schema::dropIfExists('actividades');
     }
 }

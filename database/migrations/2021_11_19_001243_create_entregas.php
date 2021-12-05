@@ -16,6 +16,10 @@ class CreateEntregas extends Migration
         Schema::create('entregas', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha_entrega', $precision = 0);
+            $table->foreignId('actividad_id')
+                  ->references('id')->on('actividades')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
             $table->foreignId('grupoempresa_id')
                   ->references('id')->on('grupoempresas')
                   ->onDelete('cascade')

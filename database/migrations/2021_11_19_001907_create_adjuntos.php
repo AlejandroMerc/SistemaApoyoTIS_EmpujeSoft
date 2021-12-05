@@ -15,7 +15,8 @@ class CreateAdjuntos extends Migration
     {
         Schema::create('adjuntos', function (Blueprint $table) {
             $table->id();
-            $table->string('filepath');
+            $table->string('name');
+            $table->string('path');
         });
     }
 

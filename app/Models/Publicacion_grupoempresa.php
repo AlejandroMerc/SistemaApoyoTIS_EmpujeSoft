@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Publicacion_asignada_grupo extends Model
+class Publicacion_grupoempresa extends Model
 {
     use HasFactory;
 
@@ -16,18 +16,8 @@ class Publicacion_asignada_grupo extends Model
     */
     protected $fillable = [
        'publicacion_id',
-       'grupo_id'
+       'grupoempresa_id'
     ];
 
     public $timestamps = false;
-
-    public function publicacion()
-    {
-        return $this->belongsTo(Publicacion::class);
-    }
-
-    public function grupo()
-    {
-        return $this->belongsTo(Grupo::class);
-    }
 }

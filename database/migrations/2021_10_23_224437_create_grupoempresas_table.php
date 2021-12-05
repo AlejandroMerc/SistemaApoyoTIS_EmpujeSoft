@@ -15,9 +15,9 @@ class CreateGrupoempresasTable extends Migration
     {
         Schema::create('grupoempresas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('asesor_id')
+            $table->foreignId('grupo_id')
                   ->nullable()
-                  ->references('id')->on('asesors')
+                  ->references('id')->on('grupos')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             $table->foreignId('rep_legal_id')

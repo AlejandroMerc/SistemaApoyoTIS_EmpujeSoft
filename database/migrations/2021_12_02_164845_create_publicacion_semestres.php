@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnuncios extends Migration
+class CreatePublicacionSemestres extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateAnuncios extends Migration
      */
     public function up()
     {
-        Schema::create('anuncios', function (Blueprint $table) {
+        Schema::create('publicacion_semestres', function (Blueprint $table) {
             $table->id();
             $table->foreignId('publicacion_id')
-                  ->references('id')->on('publicacions')
+                  ->references('id')->on('publicaciones')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
+            $table->foreignId('semestre_id')
+                  ->references('id')->on('semestres')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
@@ -29,6 +33,6 @@ class CreateAnuncios extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anuncios');
+        Schema::dropIfExists('publicacion_semestres');
     }
 }
