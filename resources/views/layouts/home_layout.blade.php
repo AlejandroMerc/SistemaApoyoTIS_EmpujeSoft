@@ -19,12 +19,6 @@
   <link rel="stylesheet" href="/assets/css/argon.css?v=1.2.0" type="text/css">
   <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- Latest cosmpiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </head>
 
 <body>
@@ -33,7 +27,7 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
-        <a class="navbar-brand" href="javascript:void(0)">
+        <a class="navbar-brand" href=" {{ route('home') }} ">
           <h1>EmpujeSoft</h1>
         </a>
       </div>
@@ -45,26 +39,40 @@
             @if ($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
-                <i class="fas fa-bullhorn text-blue"></i>
+                <i class="fas fa-bullhorn text-dark"></i>
 
                 <span class="nav-link-text">Nueva Publicación</span>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('createActivity') }}">
+                <i class="fas fa-tasks text-primary"></i>
+
+                <span class="nav-link-text">Crear Actividad</span>
+              </a>
+            </li>
             @endif
-            
+
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
                 <i class="ni ni-bullet-list-67 text-green"></i>
                 <span class="nav-link-text">Listar GE</span>
               </a>
             </li>
-
             @if($user_type == 'admin')
             <li class="nav-item">
               <a class="nav-link" href={{ route('crearGrupo') }}>
 
                 <i class="fa fa-users text-blue" aria-hidden="true"></i>
                 <span class="nav-link-text">crearGrupo</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('createSemester') }}>
+
+                <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                <span class="nav-link-text">Crear Semestre</span>
               </a>
             </li>
             @endif
@@ -129,26 +137,27 @@
 {{-- *********************************************************************************** --}}
 {{-- *********************************************************************************** --}}
 {{-- *********************************************************************************** --}}
-        <!-- Navbar links -->
-        <ul class="navbar-nav align-items-center  ml-md-auto ">
+
+          <!-- Navbar links -->
+          <ul class="navbar-nav align-items-center  ml-md-auto ">
             <li class="nav-item d-xl-none">
-            <!-- Sidenav toggler -->
-            <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+              <!-- Sidenav toggler -->
+              <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
                 <div class="sidenav-toggler-inner">
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
-                <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
+                  <i class="sidenav-toggler-line"></i>
                 </div>
-            </div>
+              </div>
             </li>
             <li class="nav-item d-sm-none">
-            <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+              <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
                 <i class="ni ni-zoom-split-in"></i>
-            </a>
+              </a>
             </li>
 
 
-        </ul>
+          </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -166,7 +175,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="{{ url('/logout') }}" method="get" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
-                  <span>Logout</span>
+                  <span>Cerrar Sesión</span>
                 </a>
               </div>
             </li>
@@ -200,13 +209,9 @@
       </div>
     </div> --}}
 
-
-    <main class="py-2">
-        @yield('content')
-    </main>
-
-
-
+<main class="py-2">
+    @yield('content')
+</main>
 
   </div>
   <!-- Argon Scripts -->
