@@ -58,14 +58,16 @@
                                     </div>
                                   </div>
                                   @if (count($errors) > 0)
-                                <div class="alert alert-danger">
-                                    Tipos de Archivos no admitidos<br><br>
-                                    <ul>
-                                   
-                                        <li>{{ $errors->first() }}</li>
-                                   
-                                    </ul>
-                                </div>
+                                    @foreach ($errors->all() as $error)
+                                        @if ($error=="Los archivos adjuntos deben de ser de formato: jpg, jpge, gif, png, xls, xlsx, doc, docx, pdf, zip, rar")
+                                            <br>
+                                            <div class="alert alert-danger">     
+                                                {{ $error }}
+                                            </div>
+                                            
+                                        @endif
+                                    
+                                @endforeach
                                 @endif
                             </div>
                         </div>
