@@ -22,7 +22,7 @@
                         <label for="sigla" class="form-label">Sigla del grupo:</label>
                       </div>
                       <div class="col-sm-8">
-                        <input id="sigla" type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" required>
+                        <input id="sigla" type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" placeholder="Sigla de grupo" required>
                         <div class="valid-feedback">
 
                         </div>
