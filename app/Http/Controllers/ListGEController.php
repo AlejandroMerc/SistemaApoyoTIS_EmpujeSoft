@@ -25,6 +25,8 @@ class ListGEController extends Controller
         ->select('grupoempresas.id','grupoempresas.nombre_corto','grupoempresas.nombre_largo','semestres.year','semestres.periodo')
         ->get();
 
-        return view('listGE', compact('grupoEmpresas'));
+        $historico_ge = Grupoempresa::whereNull('grupo_id')->get();
+
+        return view('listGE', compact('grupoEmpresas'), compact('historico_ge'));
     }
 }
