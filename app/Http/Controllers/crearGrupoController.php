@@ -93,13 +93,15 @@ class crearGrupoController extends Controller
         if ($grupo->save()) {
             # code...
             //Alert::success('Grupo Creado', 'Completado');
-            return Redirect::back()->with('message','Operation Successful !');
+            return Redirect::back()->with('message','operacion completada !');
+
             //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
 
         }else{
             //Alert::warning("no se creo grupo");
             //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
-            return Redirect::back()->with('message','Operation Successful !');
+            return Redirect::back()->with('message','operacion fallida !');
+
         }
 
     }

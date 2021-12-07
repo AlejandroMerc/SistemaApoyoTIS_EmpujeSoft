@@ -65,7 +65,7 @@
               <a class="nav-link" href={{ route('crearGrupo') }}>
 
                 <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">crearGrupo</span>
+                <span class="nav-link-text">Crear Grupo</span>
               </a>
             </li>
             <li class="nav-item">
