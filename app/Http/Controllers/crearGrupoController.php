@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Grupo;
 use App\Models\User;
-use App\Models\semestre;
+use App\Models\Semestre;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -30,7 +30,7 @@ class crearGrupoController extends Controller
     {
         $docentesArray = User::where('rol','=','asesor_tis')->select('id','name','lastname')->get();
         $currentDate = date('Y');
-        $semestreArray = semestre::where('year','>=',date('Y')-1)->select('id','periodo','year')->get();
+        $semestreArray = Semestre::where('year','>=',date('Y')-1)->select('id','periodo','year')->get();
 
         //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
 
