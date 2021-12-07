@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Redirect;
 class crearGrupoController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
