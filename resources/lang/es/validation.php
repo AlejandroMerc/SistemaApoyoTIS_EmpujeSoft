@@ -153,5 +153,9 @@ return [
         'filenames.*'=>[
             'mimes'=>'Los archivos adjuntos deben de ser de formato: jpg, jpge, gif, png, xls, xlsx, doc, docx, pdf, zip, rar'
         ],
+        'anio'=>[
+            'max'=>'El Año debe ser menor a 3000',
+            'min'=>'El Año debe ser mayor a 1900'
+        ],
     ],
 ];

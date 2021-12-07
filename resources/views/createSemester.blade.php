@@ -23,7 +23,7 @@
                         <div class="form-group row">
                          <label for="telefono_ge" class="col-md-4 col-form-label text-md-right">{{ __('Año ') }}</label>
                             <div class="col-md-6">
-                                    <input id="anio" type="number" class="form-control @error('anio') is-invalid @enderror" min="1900" max="3000" name = "anio" value="{{ old('anio') }}" required autocomplete="anio">
+                                    <input id="anio" type="number" class="form-control @error('anio') is-invalid @enderror" max='3000' min='1900' name = "anio" value="{{ old('anio') }}" required autocomplete="anio">
                                     @error('anio')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
