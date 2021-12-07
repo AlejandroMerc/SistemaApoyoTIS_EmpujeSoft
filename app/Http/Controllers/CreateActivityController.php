@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Actividad;
 use App\Models\Adjunto;
 use App\Models\Adjunto_publicacion;
+use App\Models\Adjunto_entrega;
 use App\Models\Asesor;
 use App\Models\Publicacion;
 use App\Models\Grupo;
@@ -36,9 +37,9 @@ class CreateActivityController extends Controller
 
     public function registerActivityData(Request $request){
         $request->validate([
-            'title' => ['required', 'string', 'max:50','regex:/^[a-zA-Z0-9_ ]*$/'],
+            'title' => ['required', 'string', 'max:50','regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/'],
             'description'=>['required','string','max:350'],    
-            'uploadFiles'=>'mimetypes:image/jpeg,image/png,image/gif,image/bmp,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,pplication/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'filenames.*' => 'mimes:jpeg,gif,bmp,doc,pdf,docx,xls,xlsx,ppt,pptx,zip,rar',
             'deathline'=>['required','date'],
             'cantFilesMax'=>['required','numeric','min:1','max:10']
         ]);
@@ -84,7 +85,23 @@ class CreateActivityController extends Controller
                 $added2=$publiGroup->save();
             }
         }
+        $files = [];
+        if($request->hasfile('filenames'))
+         {
+            foreach($request->file('filenames') as $file)
+            {
+                $name = time().rand(1,100).'.'.$file->extension();
+                $files[] = $name;  
+                $adjunto = $this->saveFiles($file);
+                $added3 = $adjunto->save();
 
+                $adjunto_publicacion = new Adjunto_publicacion;
+                $adjunto_publicacion->publicacion_id = $publication->id;
+                $adjunto_publicacion->adjunto_id = $adjunto->id;
+                $added4 = $adjunto_publicacion->save();
+            }
+         }
+/*
         if($request->uploadFiles != null)
         { 
             $adjunto = $this->saveFiles($request->uploadFiles);
@@ -95,7 +112,7 @@ class CreateActivityController extends Controller
             $adjunto_publicacion->adjunto_id = $adjunto->id;
             $added4 = $adjunto_publicacion->save();
         }
-
+*/
         $activity=new Actividad;
         $activity->fecha_inicio_actividad=$currentTime->toDateTimeString();
         $activity->fecha_fin_actividad=$request->deathline;

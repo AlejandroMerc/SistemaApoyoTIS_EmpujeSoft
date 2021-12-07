@@ -38,9 +38,10 @@ class PostPublicationController extends Controller
 
     public function registerPublicationData(Request $request){
         $request->validate([
-            'title' => ['required', 'string', 'max:50','regex:/^[a-zA-Z0-9_ ]*$/'],
+            'title' => ['required', 'string', 'max:50','regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/'],
             'description'=>['required','string','max:350'],    
-            'uploadFiles'=>'mimetypes:image/jpeg,image/png,image/gif,image/bmp,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,pplication/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'filenames.*' => 'mimes:jpeg,gif,bmp,doc,pdf,docx,xls,xlsx,ppt,pptx,zip,rar',
+       
         ]);
 
         $asesor = $this->getAsesor();
@@ -85,9 +86,26 @@ class PostPublicationController extends Controller
                 $added2=$publiGroup->save();
             }
         }
+        $files = [];
+        if($request->hasfile('filenames'))
+         {
+            foreach($request->file('filenames') as $file)
+            {
+                $name = time().rand(1,100).'.'.$file->extension();
+                $files[] = $name;  
+                $adjunto = $this->saveFiles($file);
+                $added3 = $adjunto->save();
 
+                $adjunto_publicacion = new Adjunto_publicacion;
+                $adjunto_publicacion->publicacion_id = $publication->id;
+                $adjunto_publicacion->adjunto_id = $adjunto->id;
+                $added4 = $adjunto_publicacion->save();
+            }
+         }
+/*
         if($request->uploadFiles != null)
         { 
+        
             $adjunto = $this->saveFiles($request->uploadFiles);
             $added3 = $adjunto->save();
 
@@ -96,6 +114,7 @@ class PostPublicationController extends Controller
             $adjunto_publicacion->adjunto_id = $adjunto->id;
             $added4 = $adjunto_publicacion->save();
         }
+        */
 
         if($added){
             return redirect('home');

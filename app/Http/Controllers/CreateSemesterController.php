@@ -13,8 +13,8 @@ class CreateSemesterController extends Controller
     }
     public function store(Request $request){
         $request->validate([
-            'anio' => ['required', 'numeric'],
-            'periodo'=>['required','numeric'],
+            'anio' => ['required', 'numeric','min:1900','max:3000'],
+            'periodo'=>['required','numeric','min:1','max:3'],
             'deathline'=>['required','date'],
             'deathline2'=>['required','date']
         ]);

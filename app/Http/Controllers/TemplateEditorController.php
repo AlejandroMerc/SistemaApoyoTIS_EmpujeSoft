@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
 use App\Models\Plantilla;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -19,22 +20,8 @@ class TemplateEditorController extends Controller
     {
         $user_type = Session::get('type');
         $user_id = Session::get('id');
+        $title = $this->title($user_id, $user_type);
 
-        $title = 'Asesor';
-        if($user_type == 'estudiante')
-        {
-            $row = Estudiante::where('user_id', $user_id)->first();
-            $ge_id = $row->grupoempresa_id;
-            if($ge_id == null)
-            {
-                $title = '[Sin grupo empresa]';
-            }
-            else
-            {
-                $row = Grupoempresa::where('id', $ge_id)->first();
-                $title = $row->nombre_largo;
-            }
-        }
         if ($id === '-1')
         {
             $doc = '';
@@ -46,7 +33,37 @@ class TemplateEditorController extends Controller
             $doc = $template->html_code;
             $name = $template->nombre;
         }
+
         return view('templateeditor',['id' =>  $id, 'user_type' => $user_type, 'title' => $title, 'name' => $name, 'dochtml' => $doc]);
+    }
+
+    private function title($id, $rol){
+        if ($rol === 'admin')
+        {
+            return 'Administrador';
+        }
+        else if ($rol === 'asesor_tis')
+        {
+            return 'Asesor TIS';
+        }
+        else if ($rol === 'estudiante')
+        {
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+            if ($ge_id === null)
+            {
+                return '[Sin grupo empresa]';
+            }
+            else
+            {
+                $ge = Grupoempresa::where('id',$ge_id)->first();
+                return $ge->nombre_largo;
+            }
+        }
+        else
+        {
+            return 'Invitado';
+        }
     }
 
     public function save($id, Request $request)

@@ -43,13 +43,32 @@
                             <label for="uploadFiles" class="col-md-4 col-form-label text-md-right">{{ __('Adjuntar Archivos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="uploadFiles" type="file" class="form-control @error('uploadFiles') is-invalid @enderror" name="uploadFiles" multiple>
-
-                                @error('uploadFiles')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="input-group hdtuto control-group lst increment" >
+                                    <input type="file" name="filenames[]" class="myfrm form-control">
+                                    <div class="input-group-btn"> 
+                                      <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                                    </div>
+                                  </div>
+                                  <div class="clone hide">
+                                    <div class="hdtuto control-group lst input-group" style="margin-top:10px">
+                                      <input type="file" name="filenames[]" class="myfrm form-control">
+                                      <div class="input-group-btn"> 
+                                        <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  @if (count($errors) > 0)
+                                    @foreach ($errors->all() as $error)
+                                        @if ($error=="Los archivos adjuntos deben de ser de formato: jpg, jpge, gif, png, xls, xlsx, doc, docx, pdf, zip, rar")
+                                            <br>
+                                            <div class="alert alert-danger">     
+                                                {{ $error }}
+                                            </div>
+                                            
+                                        @endif
+                                    
+                                @endforeach
+                                @endif
                             </div>
                         </div>
 

@@ -143,10 +143,15 @@ return [
         ]
         ,
         'title'=>[
-            'regex'=> 'El título solo debe contener caracteres alfanumericos'
+            'regex'=> 'El título solo debe contener caracteres alfanumericos',
+            'max'=> 'El título no debe ser mayor que 50 caracteres'
         ],
-        'uploadFiles'=>[
-            'mimetypes'=>'Los archivos adjuntos deben de ser de formato: jpg, jpge, gif, png, xls, xlsx, doc, docx, pdf'
+        'description'=>[
+            'max'=>'La descripción no debe ser mayor que 350 caracteres'
+        ]
+        ,
+        'filenames.*'=>[
+            'mimes'=>'Los archivos adjuntos deben de ser de formato: jpg, jpge, gif, png, xls, xlsx, doc, docx, pdf, zip, rar'
         ],
     ],
 ];

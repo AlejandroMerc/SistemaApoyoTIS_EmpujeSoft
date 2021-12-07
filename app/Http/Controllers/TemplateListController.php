@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
 use App\Models\Plantilla;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use ZipArchive;
 use DOMDocument;
@@ -20,24 +21,38 @@ class TemplateListController extends Controller
     {
         $user_type = Session::get('type');
         $id = Session::get('id');
+        $title = $this->title($id, $user_type);
         $templates = Plantilla::all();
+        return view('template',['user_type' => $user_type, 'title' => $title, 'template_list' => $templates]);
+    }
 
-        $title = 'Asesor';
-        if($user_type == 'estudiante')
+    private function title($id, $rol){
+        if ($rol === 'admin')
         {
-            $row = Estudiante::where('user_id',$id)->first();
-            $ge_id = $row->grupoempresa_id;
-            if($ge_id == null)
+            return 'Administrador';
+        }
+        else if ($rol === 'asesor_tis')
+        {
+            return 'Asesor TIS';
+        }
+        else if ($rol === 'estudiante')
+        {
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+            if ($ge_id === null)
             {
-                $title = '[Sin grupo empresa]';
+                return '[Sin grupo empresa]';
             }
             else
             {
-                $row = Grupoempresa::where('id',$ge_id)->first();
-                $title = $row->nombre_largo;
+                $ge = Grupoempresa::where('id',$ge_id)->first();
+                return $ge->nombre_largo;
             }
         }
-        return view('template',['user_type' => $user_type, 'title' => $title, 'template_list' => $templates]);
+        else
+        {
+            return 'Invitado';
+        }
     }
 
     private function readDocx($filePath)
