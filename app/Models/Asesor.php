@@ -9,6 +9,8 @@ class Asesor extends Model
 {
     use HasFactory;
     
+    protected $table = 'asesores';
+    
     /**
     * The attributes that are mass assignable.
     *
@@ -36,11 +38,7 @@ class Asesor extends Model
         return $this->hasMany(Grupo::class);
     }
 
-    /**
-     * Obtener las grupoempresas supervisadas por el asesor.
-     */
-    public function grupoempresas()
-    {
-        return $this->hasMany(Grupoempresa::class);
+    public function publicaciones(){
+        return $this->hasMany(Publicacion::class);
     }
 }

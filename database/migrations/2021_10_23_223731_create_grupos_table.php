@@ -22,7 +22,7 @@ class CreateGruposTable extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             $table->foreignId('asesor_id')
-                ->references('id')->on('asesors')
+                ->references('id')->on('asesores')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

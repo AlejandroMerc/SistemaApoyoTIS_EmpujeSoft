@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAsesorsTable extends Migration
+class CreatePublicacions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateAsesorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('asesores', function (Blueprint $table) {
+        Schema::create('publicaciones', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                  ->references('id')->on('users')
+            $table->string('titulo_publicacion');
+            $table->dateTime('fecha_publicacion', $precision = 0);
+            $table->string('descripcion_publicacion');
+            $table->foreignId('asesor_id')
+                  ->references('id')->on('asesores')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
         });
@@ -29,6 +32,6 @@ class CreateAsesorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asesores');
+        Schema::dropIfExists('publicaciones');
     }
 }

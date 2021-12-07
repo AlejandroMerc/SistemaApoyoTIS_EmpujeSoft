@@ -27,7 +27,7 @@
     <div class="scrollbar-inner">
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
-        <a class="navbar-brand" href="javascript:void(0)">
+        <a class="navbar-brand" href=" {{ route('home') }} ">
           <h1>EmpujeSoft</h1>
         </a>
       </div>
@@ -65,7 +65,7 @@
               <a class="nav-link" href={{ route('crearGrupo') }}>
 
                 <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">crear Grupo</span>
+                <span class="nav-link-text">Crear Grupo</span>
               </a>
             </li>
             <li class="nav-item">
@@ -209,51 +209,9 @@
       </div>
     </div> --}}
 
-
-
-<div class="containter-fluid">
-  @foreach ($publications as $publication)
-      <div class="card border rounded-lg" value={{$publication->id}}>
-        @if ($publication->tipo=="Publicación")
-            <div class="card-header text-white bg-info">
-              <i class="fas fa-bullhorn text-white"></i>
-              {{$publication->titulo_publicacion}}
-            </div>
-        @else
-        <div class="card-header text-white bg-danger">
-          <i class="fas fa-tasks text-white"></i>
-          {{$publication->titulo_publicacion}}
-        </div>
-        @endif
-
-        <div class="card-body">
-
-          <p class="card-text">{{$publication->descripcion_publicacion}}</p>
-          @foreach($publication->adjuntos as $adjunto)
-            <p><a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></p>
-          @endforeach
-          @if ($publication->tipo=="Actividad")
-          @if ($user_type == 'asesor_tis')
-          <a href="{{route('verRespuestasDos',['publicacion_id' => $publication->id])}}" class="btn btn-primary">Ver Respuestas</a>
-          @else
-          <a href="#" class="btn btn-primary">Responder</a>
-          @endif
-          <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
-          @endif
-
-
-        </div>
-        <div class="card-footer text-muted">
-
-         {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}
-        </div>
-      </div>
-
-  @endforeach
-
-</div>
-
-
+<main class="py-2">
+    @yield('content')
+</main>
 
   </div>
   <!-- Argon Scripts -->
@@ -268,6 +226,7 @@
   <script src="/assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="/assets/js/argon.js?v=1.2.0"></script>
+  @yield('scripts')
 </body>
 
 </html>

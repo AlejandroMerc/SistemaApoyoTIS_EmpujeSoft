@@ -5,7 +5,13 @@ use App\Http\Controllers\RegisterAdviserController;
 use App\Http\Controllers\RegisterStudentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomLoginController;
+use App\Http\Controllers\PostPublicationController;
+use App\Http\Controllers\TemplateListController;
+use App\Http\Controllers\TemplateEditorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\crearGrupoController;
+use App\Http\Controllers\CreateSemesterController;
+use App\Http\Controllers\CreateActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +35,27 @@ Route::post('registroasesor', [RegisterAdviserController::class, 'registerData']
 Route::get('registroestudiante', [RegisterStudentController::class, 'index'])->name('register-student-view');
 Route::post('registroestudiante', [RegisterStudentController::class, 'registerData'])->name('register-student-data');
 
+Route::get('plantillas', [TemplateListController::class, 'index'])->name('template');
+Route::post('plantillas', [TemplateListController::class, 'uploadFile'])->name('template');
+
+Route::get('plantillas/editor/{id}', [TemplateEditorController::class, 'index'])->name('template-editor-id');
+Route::post('plantillas/editor/{id}', [TemplateEditorController::class, 'save'])->name('template-editor-id');
+
 Route::post('registroge', [App\Http\Controllers\RegisterGEController::class, 'registrarGE'])->name('register-ge-data');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/registerGE', [App\Http\Controllers\RegisterGEController::class, 'registerGE'])->name('registerGE');
 Route::get('listarGrupoEmpresa', [ListGEController::class, 'showListGE'])->name('listGE');
+
+Route::get('/postPublication', [PostPublicationController::class, 'showPostPublication'])->name('postPublication');
+Route::post('/postPublication',[PostPublicationController::class,'registerPublicationData'])->name('register-publication');
+
+Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
+Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::class, 'store'])->name('store-data');
+
+Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
+
+
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
@@ -41,3 +63,12 @@ Route::get('password/reset/{token}', '\App\Http\Controllers\Auth\ResetPasswordCo
 Route::post('password/reset', '\App\Http\Controllers\Auth\ResetPasswordController@reset')->name('password.update');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 
+Route::get('createActivity', [CreateActivityController::class, 'showCreateActivity'])->name('createActivity');
+
+Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGrupo');
+Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');
+Route::post('createActivity', [CreateActivityController::class, 'registerActivityData'])->name('registir-activity-data');
+
+Route::get('/link', function () {   
+    Artisan::call('storage:link');
+    });

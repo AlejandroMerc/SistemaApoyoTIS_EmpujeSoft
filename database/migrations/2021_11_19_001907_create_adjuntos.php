@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAsesorsTable extends Migration
+class CreateAdjuntos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateAsesorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('asesores', function (Blueprint $table) {
+        Schema::create('adjuntos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                  ->references('id')->on('users')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
+            $table->string('name');
+            $table->string('path');
         });
     }
 
@@ -29,6 +27,6 @@ class CreateAsesorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asesores');
+        Schema::dropIfExists('adjuntos');
     }
 }

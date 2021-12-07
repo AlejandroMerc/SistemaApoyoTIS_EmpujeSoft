@@ -15,7 +15,7 @@ class Grupoempresa extends Model
     * @var string[]
     */
     protected $fillable = [
-       'asesor_id',
+       'grupo_id',
        'rep_legal_id',
        'nombre_largo',
        'nombre_corto',
@@ -27,11 +27,11 @@ class Grupoempresa extends Model
     public $timestamps = false;
    
     /**
-     * Obtener el asesor a cargo de la grupoempresa.
+     * Obtener el grupo de la grupoempresa.
      */
-    public function asesor()
+    public function grupo()
     {
-        return $this->belongsTo(Asesor::class);
+        return $this->belongsTo(Grupo::class);
     }
 
     /**

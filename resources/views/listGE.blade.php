@@ -52,6 +52,20 @@
                             {{$grupoempresa->periodo}}/{{$grupoempresa->year}}
                         </td>
                     </tr> 
+                @endforeach    
+                @foreach ($historico_ge as $grupoempresa)
+                    <tr>
+                        <td>
+                            {{$grupoempresa->id}}
+                        </td>
+                        <td>
+                            {{$grupoempresa->nombre_corto}}
+                        </td>
+                        <td>
+                            {{$grupoempresa->nombre_largo}}
+                        </td>
+                        <td>-</td>
+                    </tr> 
                 @endforeach
             </tbody>
         </table>

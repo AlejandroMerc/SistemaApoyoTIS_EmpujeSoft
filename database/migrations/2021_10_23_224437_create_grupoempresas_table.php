@@ -15,20 +15,22 @@ class CreateGrupoempresasTable extends Migration
     {
         Schema::create('grupoempresas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('asesor_id')
-                  ->references('id')->on('asesors')
+            $table->foreignId('grupo_id')
+                  ->nullable()
+                  ->references('id')->on('grupos')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
             $table->foreignId('rep_legal_id')
+                  ->nullable()
                   ->references('id')->on('estudiantes')
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
-            $table->string('nombre_largo')->unique();
+            $table->string('nombre_largo')->unique()->nullable();
             $table->string('nombre_corto')->unique();
-            $table->string('email')->unique();
-            $table->string('tipo_sociedad');
-            $table->string('direccion_ge');
-            $table->integer('telefono_ge');
+            $table->string('email')->unique()->nullable();
+            $table->string('tipo_sociedad')->nullable();
+            $table->string('direccion_ge')->nullable();
+            $table->integer('telefono_ge')->nullable();
         });
     }
 
