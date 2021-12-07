@@ -68,3 +68,7 @@ Route::get('createActivity', [CreateActivityController::class, 'showCreateActivi
 Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGrupo');
 Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');
 Route::post('createActivity', [CreateActivityController::class, 'registerActivityData'])->name('registir-activity-data');
+
+Route::get('/link', function () {   
+    Artisan::call('storage:link');
+    });
