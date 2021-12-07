@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Redirect;
 class crearGrupoController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -93,13 +97,15 @@ class crearGrupoController extends Controller
         if ($grupo->save()) {
             # code...
             //Alert::success('Grupo Creado', 'Completado');
-            return Redirect::back()->with('message','Operation Successful !');
+            return redirect()->back()->with('alert','grupo creado !');
+
             //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
 
         }else{
             //Alert::warning("no se creo grupo");
             //return view('crearGrupo',compact('docentesArray'),compact('semestreArray'));
-            return Redirect::back()->with('message','Operation Successful !');
+            return redirect()->back()->with('alert','no se creo grupo !');
+
         }
 
     }

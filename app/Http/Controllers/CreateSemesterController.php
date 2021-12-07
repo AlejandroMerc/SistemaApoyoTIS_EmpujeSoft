@@ -18,13 +18,17 @@ class CreateSemesterController extends Controller
             'deathline'=>['required','date'],
             'deathline2'=>['required','date']
         ]);
+        $correcto = strtotime($request -> deathline2) > strtotime($request -> deathline);
+        if(!$correcto){
+            return Redirect::back()->with('message','Fechas Incorrectas');
+        }
         $semest=new Semestre;
         $semest->year=$request->anio;
         $semest->periodo=$request->periodo;
         $semest->fecha_inicio=$request->deathline;
         $semest->fecha_fin=$request->deathline2;
         if($semest->save()){
-            return Redirect::back()->with('message','Operation Successful !');
+            return Redirect::back()->with('message','Se guardo correctamente !');
         }else{
             return "no se guardo";
         }

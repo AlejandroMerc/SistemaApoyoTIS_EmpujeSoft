@@ -22,7 +22,7 @@
                         <label for="sigla" class="form-label">Sigla del grupo:</label>
                       </div>
                       <div class="col-sm-8">
-                        <input id="sigla" type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" required>
+                        <input id="sigla" type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" placeholder="Sigla de grupo" required>
                         <div class="valid-feedback">
 
                         </div>
@@ -89,7 +89,7 @@
                         <div class="col-sm-3"></div>
                         <div class="col-sm-3"></div>
                         <div class="col-sm-6">
-                            <button type="submit" id="crear" class="btn btn-primary">{{ __('crearGrupo') }}</button>
+                            <button type="submit" id="crear" class="btn btn-primary">{{ __('Crear Grupo') }}</button>
                         </div>
                     </div>
 
@@ -98,4 +98,12 @@
             <div class="col-sm-3"></div>
         </div>
     </div>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        var msg = '{{Session::get('alert')}}';
+        var exist = '{{Session::has('alert')}}';
+        if(exist){
+            alert(msg);
+        }
+    </script>
 @endsection('content')

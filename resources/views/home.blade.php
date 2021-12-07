@@ -40,7 +40,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
                 <i class="fas fa-bullhorn text-dark"></i>
-                
+
                 <span class="nav-link-text">Nueva Publicación</span>
               </a>
             </li>
@@ -48,12 +48,12 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('createActivity') }}">
                 <i class="fas fa-tasks text-primary"></i>
-                
+
                 <span class="nav-link-text">Crear Actividad</span>
               </a>
             </li>
             @endif
-            
+
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
                 <i class="ni ni-bullet-list-67 text-green"></i>
@@ -65,7 +65,7 @@
               <a class="nav-link" href={{ route('crearGrupo') }}>
 
                 <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">crearGrupo</span>
+                <span class="nav-link-text">crear Grupo</span>
               </a>
             </li>
             <li class="nav-item">
@@ -215,19 +215,19 @@
   @foreach ($publications as $publication)
       <div class="card border rounded-lg" value={{$publication->id}}>
         @if ($publication->tipo=="Publicación")
-            <div class="card-header text-white bg-info"> 
+            <div class="card-header text-white bg-info">
               <i class="fas fa-bullhorn text-white"></i>
               {{$publication->titulo_publicacion}}
             </div>
         @else
-        <div class="card-header text-white bg-danger"> 
+        <div class="card-header text-white bg-danger">
           <i class="fas fa-tasks text-white"></i>
           {{$publication->titulo_publicacion}}
         </div>
         @endif
-        
+
         <div class="card-body">
-          
+
           <p class="card-text">{{$publication->descripcion_publicacion}}</p>
           @foreach($publication->adjuntos as $adjunto)
             <p><a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></p>
@@ -240,17 +240,17 @@
           @endif
           <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
           @endif
-          
-          
+
+
         </div>
         <div class="card-footer text-muted">
 
-         {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}  
+         {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}
         </div>
       </div>
-      
+
   @endforeach
-  
+
 </div>
 
 
