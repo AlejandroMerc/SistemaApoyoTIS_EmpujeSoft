@@ -230,11 +230,11 @@
           
           <p class="card-text">{{$publication->descripcion_publicacion}}</p>
           @foreach($publication->adjuntos as $adjunto)
-            <a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a>
+            <p><a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></p>
           @endforeach
           @if ($publication->tipo=="Actividad")
           @if ($user_type == 'asesor_tis')
-          <a href="{{route('verRespuestasDos',['publicacion_id' => Crypt::encryptString($publication->id)])}}" class="btn btn-primary">Ver Respuestas</a>
+          <a href="{{route('verRespuestasDos',['publicacion_id' => $publication->id])}}" class="btn btn-primary">Ver Respuestas</a>
           @else
           <a href="#" class="btn btn-primary">Responder</a>
           @endif
