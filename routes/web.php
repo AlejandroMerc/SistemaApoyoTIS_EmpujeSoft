@@ -55,6 +55,8 @@ Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::cl
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 
+Route::get('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'showCreateEvent'])->name('crearEvento');
+Route::post('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'createEvent'])->name('crearEvent-data');
 
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
