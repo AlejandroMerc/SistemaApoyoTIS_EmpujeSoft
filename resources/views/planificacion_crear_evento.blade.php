@@ -22,7 +22,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Nuevo Evento') }}</div>
                         <div class="card-body">
-                            <form method="POST" action="{{ route(crearEvent-data) }}">
+                            <form method="POST" action="{{ route('crearEvento-data') }}">
                               @csrf
                                 <div class="col-md-12">
                                     <div class="form-group row">
