@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\crearGrupoController;
 use App\Http\Controllers\CreateSemesterController;
 use App\Http\Controllers\CreateActivityController;
+use App\Http\Controllers\TurnInActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,7 @@ Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::cl
 Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::class, 'store'])->name('store-data');
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
+Route::get('/responderActividad',[TurnInActivityController::class, 'showTurnIn'])->name('responderActividad');
 
 
 // Auth::routes();
