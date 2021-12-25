@@ -56,7 +56,7 @@ Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::cl
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 Route::get('/responderActividad',[TurnInActivityController::class, 'showTurnIn'])->name('responderActividad');
-
+Route::post('/responderActividad', [TurnInActivityController::class,'sendActivity'])->name('sendActivity');
 
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
