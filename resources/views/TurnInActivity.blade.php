@@ -4,7 +4,7 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10 col-sm-1">
         
             <div class="card border border-dark">
                 
@@ -70,11 +70,18 @@
                     </div>
                   
                 </div>      
-                
+                <div class="row">
+                    <div class="col-md-6 col-sm-auto border border-secondary border-top-0">
+                        <h5><i class="far fa-question-circle" style="font-size:20px;color:rgb(97, 102, 112);"></i><b> Estado de entrega</b></h5>
+                    </div>
+                    <div class="col-md-6 col-sm-auto border border-secondary border-left-0 border-top-0">
+                        <h5 class="text-danger"><b>Sin Entregar</b></h5>
+                    </div>
+                </div>
                 
                 <br>
                 
-                
+               
                 <div class="container">
                     <div class="row ">
                         <div class="col-md-12">
@@ -83,10 +90,11 @@
                                      <h5><i class="fas fa-file-upload" style="font-size:20px;color:rgb(97, 102, 112);"></i> Subir Archivos</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form action="{{ route('sendActivity') }}"
+                                    <form action="{{ route('validateFiles') }}"
                                     method="POST"
                                     class="dropzone"
                                     id="my-awesome-dropzone">
+                                    <input type="hidden" value="{{$actividad->id}}" class="form-control" id="idActividad" name="idActividad">
                                 </form>
                                 </div>
                             </div>
@@ -116,6 +124,28 @@
                                
                                 Dropzone.options.myAwesomeDropzone = {
                                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                                    
+                                    
+                                    init: function() {
+                                        var submitButton = document.querySelector("#submit")
+                                            myDropzone = this; // closure
+
+                                        submitButton.addEventListener("click", function() {
+                                        myDropzone.processQueue(); // Tell Dropzone to process all queued files.
+                                        });
+
+                                        // You might want to show the submit button only when 
+                                        // files are dropped here:
+                                        this.on("addedfile", function() {
+                                        // Show submit button here and/or inform user to click it.
+                                            alert("Agregado");
+                                        });
+
+                                    this.on("queuecomplete", function (file) {
+                                        alert("Todos los archivos se han cargo correctamente");
+                                    });
+
+                                    },
                                     accept: function(file, done) {
                                         
                                         var typeFile=file.name.split('.').pop();
@@ -156,7 +186,7 @@
                                         file.previewTemplate.querySelector(".dz-image img").style.width="120px";
                                         done();
                                     },
-                                    dictDefaultMessage: "Arrastre un archivo al recuadro para subirlo",
+                                    dictDefaultMessage: "Presione Aquí o Arrastre un archivo al recuadro para subirlo",
                                     acceptedFiles: tipo,
                                     maxFilesize: 50,
                                     maxFiles: cantidad,
@@ -186,13 +216,16 @@
                     </div>
                 </div>
                 <br>
-                <div class="form-group row mb-0 justify-content-center">
-                    <div class="col-md-6 offset-md-4 ">
-                        <button type="submit" class="btn btn-primary">
-                            {{ __('Enviar') }}
-                        </button>
-                    </div>
-                </div>
+                    
+                        <div class="form-group row mb-0 justify-content-center">
+                            <div class="col-md-6 offset-md-4 ">
+                                
+                                <button id="submit" class="btn btn-primary pull-right" >{{ __('Enviar') }}</button>
+
+                            </div>
+                        </div>
+                  
+                
                 </div>
                 
             </div>
