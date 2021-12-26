@@ -236,7 +236,7 @@
           @if ($user_type == 'asesor_tis')
           <a href="{{route('verRespuestasDos',['publicacion_id' => $publication->id])}}" class="btn btn-primary">Ver Respuestas</a>
           @else
-          <a href="#" class="btn btn-primary">Responder</a>
+          <a href="{{route('responderActividad',['publicacion_id'=>$publication->id])}}" class="btn btn-primary">Responder</a>
           @endif
           <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
           @endif

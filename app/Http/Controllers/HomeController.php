@@ -188,7 +188,10 @@ class HomeController extends Controller
 
     public function getPublicacionesEstudiante($user)
     {
-        $semestre = Semestre::semestreActual();
+       
+        $currentDate = date('Y-m-d');
+        $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
+                    ->where('fecha_fin','>=',$currentDate)->first();
         $publicaciones = $this->getPublicacionesSemestre($semestre->id);
         
         $estudiante = $user->estudiante()->first();

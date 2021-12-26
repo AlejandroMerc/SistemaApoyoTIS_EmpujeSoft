@@ -6,32 +6,72 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
         
-            <div class="card">
-                <div class="card-header">
-                    <div class="row justify-content-center">
-                        <h3 class="text-bold">{{ __('Título Actividad') }}</h3>
+            <div class="card border border-dark">
+                
+                <div class="card-header bg-primary border border-dark">
+                    <div class="row justify-content-center">  
+                            <h3 class="text-bold text-white">{{$publicacion_a_Responder->titulo_publicacion}}</h3>
                     </div>
                 </div>
                
                 <br>
                 <div class="card-body">
                     <div class="row ">
-                   
-                        <h5 class=""><i class="fas fa-info-circle fa-fw"> </i> Descripción titulo es esta</h5>
-                  
+                        <div class="col-auto">
+                            <h5 class=""><i class="fas fa-info-circle fa-fw" style="font-size:20px;color:rgb(89, 93, 102);"> </i> {{$publicacion_a_Responder->descripcion_publicacion}}</h5>
+
+                        </div>
+        
                     
                 </div>    <br>
+                <div class="row">
+                    <div class="col-auto">
+                        <h5>
+                            <i class="fas fa-paperclip" style="font-size:20px;color:rgb(89, 93, 102);"></i> Archivos Adjuntos: 
+                        </h5>
+                    </div>
+                   <div class="col-auto">
+                    @if ($publicacion_a_Responder->adjuntos->isEmpty())
+                        <h5> Ninguno</h5>
+                    @endif
+                    @foreach($publicacion_a_Responder->adjuntos as $adjunto)
+                        <h5> <a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></h5>
+                @endforeach
+                   </div>
+                    
+                </div>
+                <br>
                 <div class="row ">
-                     <h5 class=""><i class="far fa-calendar fa-fw"></i> Fecha de Entrega: 30-12-2021 08:00</h5>
+                    <div class="col-md-6 col-sm-auto  border border-secondary   border-bottom-0">
+                        <h5 class=""><i class="far fa-calendar fa-fw" style="font-size:20px;color:rgb(97, 102, 112);" ></i> <b>Fecha de Entrega</b> </h5>
+                    </div>
+                    <div class="col-md-6 col-sm-auto  border border-secondary border-left-0   border-bottom-0">
+                       <h5> {{$actividad->fecha_fin_actividad}}</h5>
+                    </div>
+                      
                 </div> 
-                <br>
+
                 <div class="row ">
-                     <h5 class=""><i class="far fa-folder"></i> Cantidad de archivos permitidos:</h5> <h5 id="cantidadId">2</h5>
-                </div>      
-                <br>
-                <div class="row ">
-                     <h5 class=""><i class="far fa-file"></i> Formato permitido: </h5> <h5 id=tipoID>Cualquiera</h5>
+                    <div class="col-md-6 col-sm-auto border border-secondary  border-bottom-0">
+                        <h5 class=""><i class="far fa-file" style="font-size:20px;color:rgb(97, 102, 112);"></i> <b> Formato permitido </b> </h5>
+                    </div>
+                    <div class="col-md-6 col-sm-auto border border-secondary border-left-0  border-bottom-0">
+                        <h5 id=tipoID>{{$actividad->tipo_archivos_perm}}</h5>
+                    </div>
+                    
                 </div>  
+
+                <div class="row ">
+                    <div class="col-md-6 col-sm-auto border border-secondary  ">
+                        <h5 class=""><i class="far fa-folder" style="font-size:20px;color:rgb(97, 102, 112);"></i> <b> Cantidad de archivos permitidos</b> </h5>
+                    </div>
+                    <div class="col-md-6 col-sm-auto border border-secondary border-left-0  ">
+                        <h5 id="cantidadId">{{$actividad->cantidad_archivos_perm}}</h5>
+                    </div>
+                  
+                </div>      
+                
+                
                 <br>
                 
                 
@@ -40,7 +80,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                     <h5><i class="fas fa-file-upload"></i> Subir Archivos</h5>
+                                     <h5><i class="fas fa-file-upload" style="font-size:20px;color:rgb(97, 102, 112);"></i> Subir Archivos</h5>
                                 </div>
                                 <div class="card-body">
                                     <form action="{{ route('sendActivity') }}"
@@ -56,14 +96,14 @@
                             <script>
                                 var tipoActividad=document.getElementById('tipoID').innerHTML;
                                 var tipo="";
-                                if(tipoActividad=="Documentos"){
+                                if(tipoActividad=="Documentos (pdf, docx, txt, pptx, xlsx)"){
                                     
                                     tipo="application/pdf,.doc,.docx,.xls,.xlsx,.txt,.ppt,.pptx";
                                 }else{
-                                    if(tipoActividad=="Imágenes"){
+                                    if(tipoActividad=="Imágenes (jpg, jpge, png, gif, bpm)"){
                                         tipo="image/jpeg, image/png, image/jpg, image/gif, image/bpm";
                                     }else{
-                                        if(tipoActividad=="Comprimidos"){
+                                        if(tipoActividad=="Comprimidos (zip, rar)"){
                                             
                                             tipo=".zip, .rar";
                                             

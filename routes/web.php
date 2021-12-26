@@ -55,7 +55,7 @@ Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::cl
 Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::class, 'store'])->name('store-data');
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
-Route::get('/responderActividad',[TurnInActivityController::class, 'showTurnIn'])->name('responderActividad');
+Route::get('/responderActividad/{publicacion_id}',[TurnInActivityController::class, 'showTurnIn'])->name('responderActividad');
 Route::post('/responderActividad', [TurnInActivityController::class,'sendActivity'])->name('sendActivity');
 
 // Auth::routes();
