@@ -70,18 +70,32 @@
                     </div>
                   
                 </div>      
-                <div class="row">
-                    <div class="col-md-6 col-sm-auto border border-secondary border-top-0">
-                        <h5><i class="far fa-question-circle" style="font-size:20px;color:rgb(97, 102, 112);"></i><b> Estado de entrega</b></h5>
-                    </div>
-                    <div class="col-md-6 col-sm-auto border border-secondary border-left-0 border-top-0">
-                        <h5 class="text-danger"><b>Sin Entregar</b></h5>
-                    </div>
-                </div>
-                
-                <br>
-                
                
+                
+                
+                
+                
+                   
+                    @if ($hayEntregado!=null)
+                    <div class="row">
+                        <div class="col-md-6 col-sm-auto border border-secondary border-top-0">
+                            <h5><i class="far fa-question-circle" style="font-size:20px;color:rgb(97, 102, 112);"></i><b> Estado de entrega</b></h5>
+                        </div>
+                        <div class="col-md-6 col-sm-auto border border-secondary border-left-0 border-top-0">
+                            <h5 class="text-success"><b>Entregado</b></h5>
+                        </div>
+                    </div>
+                    @else
+                    <div class="row">
+                        <div class="col-md-6 col-sm-auto border border-secondary border-top-0">
+                            <h5><i class="far fa-question-circle" style="font-size:20px;color:rgb(97, 102, 112);"></i><b> Estado de entrega</b></h5>
+                        </div>
+                        <div class="col-md-6 col-sm-auto border border-secondary border-left-0 border-top-0">
+                            <h5 class="text-danger"><b>Sin Entregar</b></h5>
+                        </div>
+                        
+                    </div>
+                    <br>
                 <div class="container">
                     <div class="row ">
                         <div class="col-md-12">
@@ -224,6 +238,10 @@
 
                             </div>
                         </div>
+                    @endif
+                
+                
+               
                   
                 
                 </div>

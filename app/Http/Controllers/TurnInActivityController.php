@@ -24,9 +24,19 @@ class TurnInActivityController extends Controller
         $this->middleware('auth');
     }
     public function showTurnIn($publicacion_id){
-        Log::info($publicacion_id);
+        $idUser=Session::get('id');
+        $user = User::find($idUser);
+        $estudiante=$user->estudiante()->first();
+
+        $entregado=false;
         $actividad=Actividad::where('publicacion_id','=',$publicacion_id)->first();
-        Log::info($actividad->tipo_archivos_perm);
+        
+        $hayEntregado=Entrega::where('actividad_id','=',$actividad->id)->where('grupoempresa_id','=',$estudiante->grupoempresa_id)->first();
+        if($hayEntregado!=null){
+            $entregado=true;
+            
+        }
+
         if($actividad->tipo_archivos_perm=="docs"){
             $actividad->tipo_archivos_perm="Documentos (pdf, docx, txt, pptx, xlsx)";
         }else{
@@ -48,8 +58,8 @@ class TurnInActivityController extends Controller
         $publicacion_a_Responder=Publicacion::where('id','=',$publicacion_id)->first();
         $adjuntos = $this->getAdjuntos($publicacion_a_Responder);
             $publicacion_a_Responder['adjuntos'] = $adjuntos;
-        Log::info($publicacion_a_Responder->id);
-        return view('TurnInActivity', compact('actividad'),compact ('publicacion_a_Responder'));
+        
+        return view('TurnInActivity', compact('actividad'),compact ('publicacion_a_Responder','hayEntregado'));
     }
 
     public function validateFiles(Request $request){
@@ -65,7 +75,7 @@ class TurnInActivityController extends Controller
         $user = User::find($idUser);
         $estudiante=$user->estudiante()->first();
          
-        Log::info($estudiante->grupoempresa_id);
+        
         
         $entrega=new Entrega;
         $currentTime=Carbon::now();
@@ -78,7 +88,7 @@ class TurnInActivityController extends Controller
         $adjunto_entrega->entrega_id=$entrega->id;
         $adjunto_entrega->adjunto_id = $adjunto->id;
         $addedAdjuntoEntrega = $adjunto_entrega->save();
-        
+
         return response()->json(['success'=>$fileName]);
     }
     
