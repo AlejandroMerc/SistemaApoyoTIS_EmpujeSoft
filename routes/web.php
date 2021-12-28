@@ -13,6 +13,7 @@ use App\Http\Controllers\crearGrupoController;
 use App\Http\Controllers\CreateSemesterController;
 use App\Http\Controllers\CreateActivityController;
 use App\Http\Controllers\TurnInActivityController;
+use App\Http\Controllers\ActivityResponseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,9 @@ Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGr
 Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');
 Route::post('createActivity', [CreateActivityController::class, 'registerActivityData'])->name('registir-activity-data');
 
-Route::get('/link', function () {   
+Route::get('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'index'])->name('verRespuesta.revision');
+Route::post('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'response'])->name('verRespuesta.revision');
+
+Route::get('/link', function () {
     Artisan::call('storage:link');
     });
