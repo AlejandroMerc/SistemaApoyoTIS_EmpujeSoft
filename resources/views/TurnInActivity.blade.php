@@ -152,11 +152,12 @@
                                         // files are dropped here:
                                         this.on("addedfile", function() {
                                         // Show submit button here and/or inform user to click it.
-                                            alert("Agregado");
+                                            document.getElementById("submit").disabled=false;
                                         });
 
                                     this.on("queuecomplete", function (file) {
-                                        alert("Todos los archivos se han cargo correctamente");
+                                        
+                                        document.location.reload();
                                     });
 
                                     },
@@ -234,7 +235,7 @@
                         <div class="form-group row mb-0 justify-content-center">
                             <div class="col-md-6 offset-md-4 ">
                                 
-                                <button id="submit" class="btn btn-primary pull-right" >{{ __('Enviar') }}</button>
+                                <button id="submit" class="btn btn-primary pull-right" disabled>{{ __('Enviar') }}</button>
 
                             </div>
                         </div>
