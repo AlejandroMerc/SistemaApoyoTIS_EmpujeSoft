@@ -163,7 +163,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_1280.png">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
@@ -209,7 +209,7 @@
       </div>
     </div> --}}
 
-<main class="py-2">
+<main class="p-2">
     @yield('content')
 </main>
 
