@@ -14,10 +14,10 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-sm-3">
+        <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">{{ __('Grupo Empresas') }}</div>
-                    <div class="card w-20">
+                    <div class="card w-300">
                         @foreach ($grupoEmpresas as $grupoempresa)    
                             <div class="card-body">
                                 <a href="#" class="btn btn-primary">{{$grupoempresa->nombre_corto}}</a>
@@ -40,7 +40,47 @@
                                         
                                             <label for="deathline" class="col-md-2 col-form-label text-md-right">{{ __('Fecha') }}</label>
                                                 <div class="col-md-3">                     
-                                                     <h5>02/12/2021<h4>
+                                                     <h5>02/11/2021<h4>
+                                                </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-header">{{ __('Entrega Sprint 2') }}</div>
+                        <div class="card w-20">
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('Descripción:') }}</label>
+                                                <div class="col-md-4">
+                                                    <h4>aaaaaaaaaaaaaaaaaaaaaasdsadsadsadas<h2>
+                                                </div>
+                                        
+                                            <label for="deathline" class="col-md-2 col-form-label text-md-right">{{ __('Fecha') }}</label>
+                                                <div class="col-md-3">                     
+                                                     <h5>12/12/2021<h4>
+                                                </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-header">{{ __('Entrega Sprint 2') }}</div>
+                        <div class="card w-20">
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('Descripción:') }}</label>
+                                                <div class="col-md-4">
+                                                    <h4>aaaaaaaaaaaaaaaaaaaaaasdsadsadsadas<h2>
+                                                </div>
+                                        
+                                            <label for="deathline" class="col-md-2 col-form-label text-md-right">{{ __('Fecha') }}</label>
+                                                <div class="col-md-3">                     
+                                                     <h5>12/12/2021<h4>
                                                 </div>
                                         </div>
                                 </div>

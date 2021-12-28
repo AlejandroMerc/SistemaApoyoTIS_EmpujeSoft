@@ -105,6 +105,12 @@
                 <span class="nav-link-text">Planificacion de GE</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('planificacionAsesor') }}>
+                <i class="far fa-file-text text-yellow"></i>
+                <span class="nav-link-text">Calendario TIS</span>
+              </a>
+            </li>
             @endif
           </ul>
           <!-- Divider -->

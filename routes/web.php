@@ -63,6 +63,9 @@ Route::post('/validateFiles', [TurnInActivityController::class,'validateFiles'])
 Route::get('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'showCreateEvent'])->name('crearEvento');
 Route::post('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'createEvent'])->name('crearEvento-data');
 
+Route::get('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'showCreateEventTIS'])->name('crearEventoTIS');
+Route::post('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'createEventTIS'])->name('crearEvento-data-tis');
+
 Route::get('/planificacionAsesor', [App\Http\Controllers\PlanificacionAsesorController::class, 'showPlanificacion'])->name('planificacionAsesor');
 
 // Auth::routes();

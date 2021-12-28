@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Grupoempresa;
 class PlanificacionAsesorController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    //public function __construct()
+    //{
+    //    $this->middleware('auth');
+   // }
     public function showPlanificacion()
     {
         $grupoEmpresas= Grupoempresa::join('estudiantes','estudiantes.id','grupoempresas.rep_legal_id')
