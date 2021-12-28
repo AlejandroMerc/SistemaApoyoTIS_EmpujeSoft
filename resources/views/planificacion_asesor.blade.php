@@ -9,33 +9,41 @@
     <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
     <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    @endsection
+@endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <div class="card">
-                <div class="card-header">{{ __('Lista de Asignados') }}</div>
+                <div class="card-header">{{ __('Grupo Empresas') }}</div>
                     <div class="card w-20">
-                        @foreach ($asignados as $asignado)
+                        @foreach ($grupoEmpresas as $grupoempresa)    
                             <div class="card-body">
-                                <h5 class="card-title">{{$asignado->nombre_corto}}</h5>
-                                    <a href="#" class="btn btn-primary">Ver Respuestas</a>
+                                <a href="#" class="btn btn-primary">{{$grupoempresa->nombre_corto}}</a>
                             </div>
-                        @endforeach
+                        @endforeach 
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-sm-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Archivos') }}</div>
-                        <div class="card w-60">
+                    <div class="card-header">{{ __('Entrega Sprint 1') }}</div>
+                        <div class="card w-20">
                             <div class="card-body">
-                                <h5 class="card-title">Entregado</h5>
-                                
-                                    <a href="#" class="btn btn-primary">Orden de Cambio</a>
-                                    <a href="#" class="btn btn-primary">Aceptar Respuesta</a>  
+                                <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label for="name" class="col-md-2 col-form-label text-md-right">{{ __('Descripción:') }}</label>
+                                                <div class="col-md-4">
+                                                    <h4>aaaaaaaaaaaaaaaaaaaaaasdsadsadsadas<h2>
+                                                </div>
+                                        
+                                            <label for="deathline" class="col-md-2 col-form-label text-md-right">{{ __('Fecha') }}</label>
+                                                <div class="col-md-3">                     
+                                                     <h5>02/12/2021<h4>
+                                                </div>
+                                        </div>
+                                </div>
                             </div>
                         </div>
                     </div>

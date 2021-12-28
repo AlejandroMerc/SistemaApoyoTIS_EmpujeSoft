@@ -60,6 +60,11 @@ Route::get('/responderActividad/{publicacion_id}',[TurnInActivityController::cla
 Route::post('/responderActividad', [TurnInActivityController::class,'sendActivity'])->name('sendActivity');
 Route::post('/validateFiles', [TurnInActivityController::class,'validateFiles'])->name('validateFiles');
 
+Route::get('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'showCreateEvent'])->name('crearEvento');
+Route::post('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'createEvent'])->name('crearEvento-data');
+
+Route::get('/planificacionAsesor', [App\Http\Controllers\PlanificacionAsesorController::class, 'showPlanificacion'])->name('planificacionAsesor');
+
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
 Route::post('password/email', '\App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');

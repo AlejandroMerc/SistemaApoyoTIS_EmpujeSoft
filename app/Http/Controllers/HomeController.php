@@ -188,10 +188,7 @@ class HomeController extends Controller
 
     public function getPublicacionesEstudiante($user)
     {
-       
-        $currentDate = date('Y-m-d');
-        $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
-                    ->where('fecha_fin','>=',$currentDate)->first();
+        $semestre = $this->semestreActual();
         $publicaciones = $this->getPublicacionesSemestre($semestre->id);
         
         $estudiante = $user->estudiante()->first();
@@ -213,6 +210,13 @@ class HomeController extends Controller
         $adjuntos = Adjunto_publicacion::where('publicacion_id','=',$publicacion->id)
         ->join('adjuntos','adjuntos.id','=','adjunto_publicaciones.adjunto_id');
         return $adjuntos->get();
+    }
+    public function semestreActual()
+    {
+        $currentDate = date('Y-m-d');
+        $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
+                    ->where('fecha_fin','>=',$currentDate)->first();
+        return $semestre;
     }
 
 }
