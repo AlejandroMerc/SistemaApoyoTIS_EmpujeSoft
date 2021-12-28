@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\crearGrupoController;
 use App\Http\Controllers\CreateSemesterController;
 use App\Http\Controllers\CreateActivityController;
+use App\Http\Controllers\perfilGEController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,8 @@ Route::get('createActivity', [CreateActivityController::class, 'showCreateActivi
 Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGrupo');
 Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');
 Route::post('createActivity', [CreateActivityController::class, 'registerActivityData'])->name('registir-activity-data');
+
+Route::get('/perfilGE', [perfilGEController::class, 'index'])->name('perfilGE');
 
 Route::get('/link', function () {   
     Artisan::call('storage:link');
