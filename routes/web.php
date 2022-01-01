@@ -12,7 +12,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\crearGrupoController;
 use App\Http\Controllers\CreateSemesterController;
 use App\Http\Controllers\CreateActivityController;
-
+use App\Http\Controllers\ControllerEvent;
+use App\Http\Controllers\ControllerCalendar;
+use App\Http\Controllers\CalendarioEventoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,8 +57,9 @@ Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::cl
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 
-Route::get('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'showCreateEvent'])->name('crearEvento');
-Route::post('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'createEvent'])->name('crearEvento-data');
+Route::get('/evento', [CalendarioEventoController::class, 'index']);
+Route::get('/evento/mostrar', [CalendarioEventoController::class, 'show']);
+Route::post('/evento/agregar', [CalendarioEventoController::class, 'store']);
 
 Route::get('/planificacionAsesor', [App\Http\Controllers\PlanificacionAsesorController::class, 'showPlanificacion'])->name('planificacionAsesor');
 

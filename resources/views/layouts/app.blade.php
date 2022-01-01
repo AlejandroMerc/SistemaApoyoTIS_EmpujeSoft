@@ -9,15 +9,24 @@
 
     <title>SATIS</title>
 
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+    <!-- Scripts
+    <script type ="text/javascript">
+        var baseURL = {!! json_encode(url('/')) !!}
+    </script>
+    -->
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -88,7 +97,10 @@
                 </div>
             </div>
         </nav>
-
+    <script type ="text/javascript">
+        var baseURL = {!! json_encode(url('/')) !!}
+    </script>
+    <script src="{{ asset('js/calendario.js') }}" defer></script>
         <main class="py-4">
             @yield('content')
         </main>
