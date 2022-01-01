@@ -106,7 +106,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href={{ route('planificacionAsesor') }}>
+              <a class="nav-link" href={{ route('crearEventoTIS') }}>
                 <i class="far fa-file-text text-yellow"></i>
                 <span class="nav-link-text">Calendario TIS</span>
               </a>
