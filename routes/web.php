@@ -13,6 +13,8 @@ use App\Http\Controllers\crearGrupoController;
 use App\Http\Controllers\CreateSemesterController;
 use App\Http\Controllers\CreateActivityController;
 use App\Http\Controllers\perfilGEController;
+use App\Http\Controllers\TurnInActivityController;
+use App\Http\Controllers\ActivityResponseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +57,17 @@ Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::cl
 Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::class, 'store'])->name('store-data');
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
+Route::get('/responderActividad/{publicacion_id}',[TurnInActivityController::class, 'showTurnIn'])->name('responderActividad');
+Route::post('/responderActividad', [TurnInActivityController::class,'sendActivity'])->name('sendActivity');
+Route::post('/validateFiles', [TurnInActivityController::class,'validateFiles'])->name('validateFiles');
 
+Route::get('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'showCreateEvent'])->name('crearEvento');
+Route::post('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'createEvent'])->name('crearEvento-data');
+
+Route::get('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'showCreateEventTIS'])->name('crearEventoTIS');
+Route::post('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'createEventTIS'])->name('crearEvento-data-tis');
+
+Route::get('/planificacionAsesor', [App\Http\Controllers\PlanificacionAsesorController::class, 'showPlanificacion'])->name('planificacionAsesor');
 
 // Auth::routes();
 Route::get('password/reset', '\App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -73,5 +85,9 @@ Route::post('createActivity', [CreateActivityController::class, 'registerActivit
 Route::get('/perfilGE', [perfilGEController::class, 'index'])->name('perfilGE');
 
 Route::get('/link', function () {   
+Route::get('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'index'])->name('verRespuesta.revision');
+Route::post('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'response'])->name('verRespuesta.revision');
+
+Route::get('/link', function () {
     Artisan::call('storage:link');
     });

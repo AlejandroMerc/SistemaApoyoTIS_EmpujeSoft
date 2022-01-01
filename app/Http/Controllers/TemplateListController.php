@@ -143,5 +143,11 @@ class TemplateListController extends Controller
         return $id;
     }
 
+    //api
 
+    public function getTemplate($id)
+    {
+        $template = Plantilla::find($id);
+        return response()->json($template, 200);
+    }
 }

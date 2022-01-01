@@ -27,10 +27,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">{{ __('Archivos') }}</div>
-                        <div class="card w-20">
+                        <div class="card w-60">
                             <div class="card-body">
                                 <h5 class="card-title">Entregado</h5>
                                 

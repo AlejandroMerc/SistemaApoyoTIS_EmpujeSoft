@@ -80,9 +80,14 @@
             @if($user_type == 'estudiante')
             <li class="nav-item">
               <a class="nav-link" href={{ route('registerGE') }}>
-
                 <i class="fa fa-users text-blue" aria-hidden="true"></i>
                 <span class="nav-link-text">Registrar GE</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('crearEvento') }}>
+                <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                <span class="nav-link-text">Planificacion</span>
               </a>
             </li>
             @endif
@@ -92,6 +97,18 @@
               <a class="nav-link" href={{ route('template') }}>
                 <i class="far fa-file-text text-yellow"></i>
                 <span class="nav-link-text">Plantillas</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('planificacionAsesor') }}>
+                <i class="far fa-file-text text-yellow"></i>
+                <span class="nav-link-text">Planificacion de GE</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('planificacionAsesor') }}>
+                <i class="far fa-file-text text-yellow"></i>
+                <span class="nav-link-text">Calendario TIS</span>
               </a>
             </li>
             @endif
@@ -236,7 +253,7 @@
           @if ($user_type == 'asesor_tis')
           <a href="{{route('verRespuestasDos',['publicacion_id' => $publication->id])}}" class="btn btn-primary">Ver Respuestas</a>
           @else
-          <a href="#" class="btn btn-primary">Responder</a>
+          <a href="{{route('responderActividad',['publicacion_id'=>$publication->id])}}" class="btn btn-primary">Responder</a>
           @endif
           <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
           @endif
