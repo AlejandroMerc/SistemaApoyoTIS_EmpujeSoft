@@ -60,6 +60,10 @@ Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespue
 Route::get('/evento', [CalendarioEventoController::class, 'index']);
 Route::get('/evento/mostrar', [CalendarioEventoController::class, 'show']);
 Route::post('/evento/agregar', [CalendarioEventoController::class, 'store']);
+Route::post('/evento/editar/{id}', [CalendarioEventoController::class, 'edit']);
+Route::post('/evento/actualizar/{evento}', [CalendarioEventoController::class, 'update']);
+Route::post('/evento/borrar/{id}', [CalendarioEventoController::class, 'destroy']);
+
 
 Route::get('/planificacionAsesor', [App\Http\Controllers\PlanificacionAsesorController::class, 'showPlanificacion'])->name('planificacionAsesor');
 

@@ -4,16 +4,9 @@
 
 <div class="container">
     <div id="calendario">
-        Calendario
     </div>
 </div>
 
- 
-<!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#evento">
-      Launch
-    </button>
- <!-- Modal -->
  <div class="modal fade" id="evento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -36,11 +29,11 @@
                 </div>
                 <div class="form-group">
                     <label for="start" class="col-md-1 col-form-label">{{ __('*Start') }}</label>
-                    <input type="text" class="form-control" name="start" id="start" aria-describedby="helpId" placeholder="Fecha de Inicio"></input>
+                    <input type="date" class="form-control" name="start" id="start" aria-describedby="helpId" placeholder="Fecha de Inicio"></input>
                 </div>
                 <div class="form-group">
                     <label for="end" class="col-md-1 col-form-label">{{ __('*End') }}</label>
-                    <input type="text" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de Fin"></input>
+                    <input type="date" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de Fin"></input>
                 </div>        
             </form>
           </div>
