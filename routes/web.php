@@ -82,9 +82,10 @@ Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGr
 Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');
 Route::post('createActivity', [CreateActivityController::class, 'registerActivityData'])->name('registir-activity-data');
 
-Route::get('/perfilGE', [perfilGEController::class, 'index'])->name('perfilGE');
+Route::get('/perfilGE/{grupoE}', [perfilGEController::class, 'index'])->name('perfilGE');
+//Route::get('/perfilGE', [ListGEController::class, 'showPerfilGE'])->name('perfilGE');
 
-Route::get('/link', function () {   
+#Route::get('/link', function () {   
 Route::get('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'index'])->name('verRespuesta.revision');
 Route::post('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'response'])->name('verRespuesta.revision');
 
