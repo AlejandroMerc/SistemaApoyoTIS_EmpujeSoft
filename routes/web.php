@@ -15,6 +15,9 @@ use App\Http\Controllers\CreateActivityController;
 use App\Http\Controllers\TurnInActivityController;
 use App\Http\Controllers\ActivityResponseController;
 
+use App\Http\Controllers\ControllerEvent;
+use App\Http\Controllers\ControllerCalendar;
+use App\Http\Controllers\CalendarioEventoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,8 +63,13 @@ Route::get('/responderActividad/{publicacion_id}',[TurnInActivityController::cla
 Route::post('/responderActividad', [TurnInActivityController::class,'sendActivity'])->name('sendActivity');
 Route::post('/validateFiles', [TurnInActivityController::class,'validateFiles'])->name('validateFiles');
 
-Route::get('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'showCreateEvent'])->name('crearEvento');
-Route::post('/crearEvento', [App\Http\Controllers\PlanificacionCrearEventoController::class, 'createEvent'])->name('crearEvento-data');
+Route::get('/evento', [CalendarioEventoController::class, 'index']);
+Route::get('/evento/mostrar', [CalendarioEventoController::class, 'show']);
+Route::post('/evento/agregar', [CalendarioEventoController::class, 'store']);
+Route::post('/evento/editar/{id}', [CalendarioEventoController::class, 'edit']);
+Route::post('/evento/actualizar/{evento}', [CalendarioEventoController::class, 'update']);
+Route::post('/evento/borrar/{id}', [CalendarioEventoController::class, 'destroy']);
+
 
 Route::get('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'showCreateEventTIS'])->name('crearEventoTIS');
 Route::post('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'createEventTIS'])->name('crearEvento-data-tis');
