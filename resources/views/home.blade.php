@@ -99,12 +99,14 @@
                 <span class="nav-link-text">Plantillas</span>
               </a>
             </li>
+            <!-- Divider 
             <li class="nav-item">
-              <a class="nav-link" href={{ route('planificacionAsesor') }}>
+              <a class="nav-link" href={{ route('calendarioTis') }}>
                 <i class="far fa-file-text text-yellow"></i>
-                <span class="nav-link-text">Planificacion de GE</span>
+                <span class="nav-link-text">Calendario TIS</span>
               </a>
             </li>
+            -->
             @endif
           </ul>
           <!-- Divider -->

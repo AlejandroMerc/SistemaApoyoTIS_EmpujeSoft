@@ -15,6 +15,7 @@ use App\Http\Controllers\CreateActivityController;
 use App\Http\Controllers\ControllerEvent;
 use App\Http\Controllers\ControllerCalendar;
 use App\Http\Controllers\CalendarioEventoController;
+use App\Http\Controllers\CalendarioGEController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,13 +58,22 @@ Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::cl
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 
+Route::get('/calendarioTis',function(){
+    return view('eventos.index');
+});
+
+Route::group(['middleware'=> ['auth']],function(){
+
 Route::get('/evento', [CalendarioEventoController::class, 'index']);
-Route::get('/evento/mostrar', [CalendarioEventoController::class, 'show']);
+Route::post('/evento/mostrar', [CalendarioEventoController::class, 'show']);
 Route::post('/evento/agregar', [CalendarioEventoController::class, 'store']);
 Route::post('/evento/editar/{id}', [CalendarioEventoController::class, 'edit']);
 Route::post('/evento/actualizar/{evento}', [CalendarioEventoController::class, 'update']);
 Route::post('/evento/borrar/{id}', [CalendarioEventoController::class, 'destroy']);
+});
 
+Route::get('/calendarioGE', [CalendarioGEController::class, 'index']);
+Route::post('/calendarioGE/mostrar', [CalendarioGEController::class, 'show']);
 
 Route::get('/planificacionAsesor', [App\Http\Controllers\PlanificacionAsesorController::class, 'showPlanificacion'])->name('planificacionAsesor');
 

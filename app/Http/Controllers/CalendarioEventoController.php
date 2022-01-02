@@ -8,6 +8,11 @@ use Carbon\Carbon;
 
 class CalendarioEventoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index(){
         return view('evento.index');
     }
@@ -27,7 +32,7 @@ class CalendarioEventoController extends Controller
         return response()->json($evento);
     }
     public function destroy($id){
-        $evento = Evento::findOrFail($id);
+        $evento = Evento::find($id)->first();
         $evento->delete();
         return response()->json($evento);
         
