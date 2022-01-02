@@ -34,7 +34,8 @@ class TurnInActivityController extends Controller
         $hayEntregado=Entrega::where('actividad_id','=',$actividad->id)->where('grupoempresa_id','=',$estudiante->grupoempresa_id)->first();
         if($hayEntregado!=null){
             $entregado=true;
-            $adjuntosEntrega=Adjunto_entrega::where('entrega_id','=',$hayEntregado->id)
+            $adjuntosEntrega=Entrega::where('actividad_id','=',$actividad->id)
+                                ->join('adjunto_entregas','entrega_id','=','entregas.id')
                                 ->join('adjuntos','adjuntos.id','=','adjunto_entregas.adjunto_id')->get();
             $hayEntregado['adjuntosEntrega']=$adjuntosEntrega;
         }
