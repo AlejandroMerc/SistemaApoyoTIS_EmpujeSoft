@@ -15,7 +15,7 @@
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('*Título') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus placeholder="Título Publicación">
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
 
                             <div class="col-md-6">
                         
-                                <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="5" id="description" value="{{ old('description') }}" required autofocus></textarea>
+                                <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="5" id="description" value="{{ old('description') }}" required autofocus placeholder="Descripción Publicación"></textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -71,7 +71,7 @@
                                     </span>
                                 @enderror
                                     <div class="input-group-btn"> 
-                                      <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                                      <button class="btn btn-outline-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Agregar</button>
                                     </div>
                                   </div>
                                   <div class="clone hide">
@@ -83,7 +83,7 @@
                                         </span>
                                     @enderror
                                       <div class="input-group-btn"> 
-                                        <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+                                        <button class="btn btn-outline-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Quitar</button>
                                       </div>
                                     </div>
                                   </div>
@@ -113,7 +113,7 @@
                      
       
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0 justify-content-center">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Publicar') }}
