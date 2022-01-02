@@ -95,7 +95,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-sm-auto border border-secondary border-top-0">
-                            <h5><i class="fas fa-clipboard-check" style="font-size:20px;color:rgb(97, 102, 112);"></i><b> Fecha de Entrega</b></h5>
+                            <h5><i class="fas fa-clipboard-check" style="font-size:20px;color:rgb(97, 102, 112);"></i><b> Fecha de Envío</b></h5>
                         </div>
                         <div class="col-md-6 col-sm-auto border border-secondary border-left-0 border-top-0">
                             <h5>{{$hayEntregado->fecha_entrega}}</h5>
