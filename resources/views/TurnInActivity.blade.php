@@ -101,6 +101,20 @@
                             <h5>{{$hayEntregado->fecha_entrega}}</h5>
                         </div>
                     </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-auto">
+                            <h5>
+                                <i class="fas fa-paperclip" style="font-size:20px;color:rgb(89, 93, 102);"></i> Adjuntos Entrega: 
+                            </h5>
+                        </div>
+                       <div class="col-auto">
+                        
+                        @foreach($hayEntregado->adjuntosEntrega as $adjunto)
+                            <h5> <a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></h5>
+                    @endforeach
+                       </div>
+                    </div>
                     @else
                     <div class="row">
                         <div class="col-md-6 col-sm-auto border border-secondary border-top-0">
