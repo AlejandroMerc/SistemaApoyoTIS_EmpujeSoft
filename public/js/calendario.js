@@ -1,34 +1,39 @@
+var calendario_id = 0;
+window.onload = load;
+function load(){
+  calendario_id = document.getElementById('calendario_id').value;
+  console.log(calendario_id);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    
-    let formulario = document.querySelector("#formularioEventos");
-    var calendarEl = document.getElementById('calendario');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth',
-      locale:'es',
-      displayEventTime:false,
-      headerToolbar:{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,listWeek'
-      },
-      //events: baseURL+"/evento/mostrar",
-      eventSources:{
-        url: baseURL+"/evento/mostrar",
-        method:"POST",
-        extraParams:{
-          _token: formulario._token.value,
-        }
-      },
+  let formulario = document.querySelector("#formularioEventos");
+  var calendarEl = document.getElementById('calendario');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    locale:'es',
+    displayEventTime:false,
+    headerToolbar:{
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,listWeek'
+  },
+  //events: baseURL+"/evento/mostrar",
+  eventSources:{
+    url: baseURL+"/evento/mostrar",
+    method:"POST",
+    extraParams:{
+      _token: formulario._token.value,
+    }
+  },
 
       dateClick:function(info){
         formulario.reset();
         formulario.start.value = info.dateStr;
-        formulario.end.value = info.dateStr;  
+        formulario.end.value = info.dateStr;
         $("#evento").modal("show");
       },
       eventClick:function(info){
         var evento = info.event;
-        console.log(evento);
         axios.post(baseURL+"/evento/editar/"+info.event.id).
         then(
             (respuesta)=>{
@@ -48,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 
     document.getElementById("btn_guardar").addEventListener("click",function(){
-       enviarDatos("/evento/agregar/"+formulario.calendario_id.value);
+      console.log(calendario_id);
+       enviarDatos("/evento/agregar/"+calendario_id);
     });
 
     document.getElementById("btn_eliminar").addEventListener("click",function(){

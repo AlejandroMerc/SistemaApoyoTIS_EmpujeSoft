@@ -24,13 +24,8 @@ class CalendarioEventoController extends Controller
 
     public function store(Request $request){
         request()->validate(Evento::$rules);
-        $evento = new Evento;
-        $evento->title = $request->title;
-        $evento->description = $request->description;
-        $evento->start = $request->start;
-        $evento->end = $request->end;
-        $evento->calendario_id = $request->calendario_id;
-        $evento->save();
+        $evento = Evento::create($request->all());
+        return response()->json($evento);
     }
     public function show(Evento $evento){
         $evento = Evento::all();

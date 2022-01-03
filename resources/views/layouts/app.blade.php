@@ -113,10 +113,10 @@
     <script type ="text/javascript">
         var baseURL = {!! json_encode(url('/')) !!}
     </script>
-    <script src="{{ asset('js/calendario.js') }}" defer></script>
-        <main class="py-4">
-            @yield('content')
-        </main>
+    <main class="py-4">
+        @yield('content')
+    </main>
+    <script src="{{ asset('js/calendario.js') }}" ></script>
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
