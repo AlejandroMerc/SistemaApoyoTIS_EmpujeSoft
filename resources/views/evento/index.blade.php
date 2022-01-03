@@ -34,7 +34,10 @@
                 <div class="form-group">
                     <label for="end" class="col-md-1 col-form-label">{{ __('*End') }}</label>
                     <input type="date" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de Fin"></input>
-                </div>        
+                </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="calendario_id" id="calendario_id" aria-describedby="helpId">{{$calendario_id}}</input>
+                </div>           
             </form>
           </div>
           <div class="modal-footer">

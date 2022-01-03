@@ -12,4 +12,14 @@ class Calendario_semestre extends Model
     protected $fillable = ['calendario_id', 'semestre_id'];
 
     public $timestamps = false;
+
+    public function calendario()
+    {
+        return $this->belongsTo(Calendario::class);
+    }
+
+    public function semestre()
+    {
+        return $this->belongsTo(Semestre::class);
+    }
 }

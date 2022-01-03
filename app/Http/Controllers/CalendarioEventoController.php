@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Evento;
+use App\Models\Calendario;
+use App\Models\Calendario_semestre;
+use App\Models\Semestre;
 use Carbon\Carbon;
 
 class CalendarioEventoController extends Controller
@@ -14,12 +17,20 @@ class CalendarioEventoController extends Controller
     }
     
     public function index(){
-        return view('evento.index');
+        $semestre = $this->semestreActual();
+        $calendario = $semestre->calendario_semestre->calendario;
+        return view('evento.index', ['calendario_id' => $calendario->id]);
     }
 
     public function store(Request $request){
         request()->validate(Evento::$rules);
-        $evento = Evento::create($request->all());
+        $evento = new Evento;
+        $evento->title = $request->title;
+        $evento->description = $request->description;
+        $evento->start = $request->start;
+        $evento->end = $request->end;
+        $evento->calendario_id = $request->calendario_id;
+        $evento->save();
     }
     public function show(Evento $evento){
         $evento = Evento::all();
@@ -37,5 +48,20 @@ class CalendarioEventoController extends Controller
         return response()->json($evento);
         
     }
-   
+    public function semestreActual()
+    {
+        $currentDate = date('Y-m-d');
+        $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
+                    ->where('fecha_fin','>=',$currentDate)->first();
+        return $semestre;
+    }
+    public function calendario_id($semestre_id)
+    {
+        $calendario_id = Semestre::find($semestre_id)
+        ->join('calendario_semestres','semestre.id','=','calendario_semestres.semestre_id')
+        ->join('calendario','calendario.id','=','calendario_semestres.calendario_id')
+        ->select('calendario.id')
+        ->first();
+        return $calendario_id;
+    }
 }

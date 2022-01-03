@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Calendario;
+use App\Models\Calendario_semestre;
 use App\Models\Semestre;
 use Illuminate\Http\Request;
 
@@ -28,6 +30,12 @@ class CreateSemesterController extends Controller
         $semest->fecha_inicio=$request->deathline;
         $semest->fecha_fin=$request->deathline2;
         if($semest->save()){
+            $calendario = new Calendario;
+            $save2 = $calendario->save();
+            $calendario_semestre = new Calendario_semestre;
+            $calendario_semestre->calendario_id = $calendario->id;
+            $calendario_semestre->semestre_id = $semest->id;
+            $save3 = $calendario_semestre->save();
             return Redirect::back()->with('message','Se guardo correctamente !');
         }else{
             return "no se guardo";
