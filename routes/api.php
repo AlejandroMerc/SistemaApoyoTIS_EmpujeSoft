@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/template/{id}', [TemplateController::class, 'getTemplate'])->name('getTemplate');
+Route::get('/template/delete/{id}', [TemplateController::class, 'deleteTemplate'])->name('deleteTemplate');

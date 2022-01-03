@@ -13,4 +13,11 @@ class TemplateController extends Controller
         $template = Plantilla::find($id);
         return response()->json($template, 200);
     }
+
+    public function deleteTemplate($id)
+    {
+        $template = Plantilla::find($id);
+        $template->delete();
+        return response(true, 200);
+    }
 }

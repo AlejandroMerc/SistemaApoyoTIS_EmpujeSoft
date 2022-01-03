@@ -114,6 +114,19 @@
                 <span class="nav-link-text">Plantillas</span>
               </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href={{ route('calendarioTis') }}>
+                  <i class="far fa-file-text text-yellow"></i>
+                  <span class="nav-link-text">Calendario TIS</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{ route('calendarioGE') }}>
+                  <i class="far fa-file-text text-yellow"></i>
+                  <span class="nav-link-text">Calendario GE</span>
+                </a>
+              </li>
             @endif
           </ul>
           <!-- Divider -->
