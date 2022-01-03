@@ -28,7 +28,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href=" {{ route('home') }} ">
-          <h1>EmpujeSoft</h1>
+          <h1>SATIS</h1>
         </a>
       </div>
       <div class="navbar-inner">

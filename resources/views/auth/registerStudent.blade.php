@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Registrar Estudiante') }}</div>
+            <div class="card border border-dark rounded-lg">
+                <div class="card-header bg-primary text-white"><h5><b>{{ __('Registrar Estudiante') }}</b></h5></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register-student-data') }}">
@@ -129,7 +129,7 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0 justify-content-center">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Registrar') }}
