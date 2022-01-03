@@ -19,7 +19,7 @@ class CreateEventosTable extends Migration
             $table -> text("description");
             $table -> dateTime("start");
             $table -> dateTime("end");
-            $tabke -> foreignId('calendario_id')
+            $table -> foreignId('calendario_id')
             -> references('id') -> on('calendarios')
             -> onUpdate('cascade')
             -> onDelete('cascade');
