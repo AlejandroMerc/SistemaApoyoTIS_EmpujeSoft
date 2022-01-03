@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actividad;
+use App\Models\Adjunto;
 use App\Models\Adjunto_publicacion;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
@@ -17,7 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Storage;
 
 class ActivitySendCorrectionController extends Controller
 {
@@ -30,6 +31,7 @@ class ActivitySendCorrectionController extends Controller
 
         $grupoempresa = Grupoempresa::find($id_grupoempresa)->nombre_largo;
         $activity = Publicacion::find($id_activity)->titulo_publicacion;
+        $activity_data = Actividad::where('publicacion_id',$id_activity)->first();
         $template_content = $this->arrayTemplate();
 
         return view('activityCorrected',[
@@ -39,15 +41,14 @@ class ActivitySendCorrectionController extends Controller
             'activity' => $activity,
             'user_type' => $user_type,
             'title' => $title,
-            'template_content' => $template_content
+            'template_content' => $template_content,
+            'lastMaxFiles' => $activity_data->cantidad_archivos_perm,
+            'lastTypeFiles' => $activity_data->tipo_archivos_perm
         ]);
     }
 
-    public function sendActivity($id_grupoempresa, $id_activity, Request $request) {
-
-        $this->createPdfFromHtml('');
-        return 'fin';
-
+    public function sendActivity($id_grupoempresa, $id_activity, Request $request)
+    {
         $request->validate([
             'title' => ['required', 'string', 'max:50','regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ_-]*)*)+$/'],
             'description'=>['required','string','max:350'],
@@ -55,48 +56,26 @@ class ActivitySendCorrectionController extends Controller
             'deathline'=>['required','date'],
             'cantFilesMax'=>['required','numeric','min:1','max:10']
         ]);
+
         $asesor = $this->getAsesor();
-        $publication = new Publicacion;
-        $publication->titulo_publicacion=$request->title;
-        $currentTime=Carbon::now();
-        $publication->fecha_publicacion=$currentTime->toDateTimeString();
-        $publication->descripcion_publicacion=$request->description;
         $idAdviser = $asesor->id;
-        $publication->asesor_id=$idAdviser;
 
-        $added=$publication->save();
+        $publication = new Publicacion;
+        $publication->titulo_publicacion = $request->title;
+        $currentTime = Carbon::now();
+        $publication->fecha_publicacion = $currentTime->toDateTimeString();
+        $publication->descripcion_publicacion = $request->description;
+        $publication->asesor_id = $idAdviser;
 
-        if($request->toWhom=="everybody"){
-            $currentDate = date('Y-m-d');
-            $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
-                        ->where('fecha_fin','>=',$currentDate)->first();
-            $publiSemestre = new Publicacion_semestre();
-            $publiSemestre->publicacion_id = $publication->id;
-            $publiSemestre->semestre_id = $semestre->id;
-            $added2=$publiSemestre->save();
-        }
-        else
-        {
+        $added = $publication->save();
 
-            $toWhoms=explode(", ",$request->toWhom );
-            $tipo = $toWhoms[0];
-            $id = $toWhoms[1];
+        $id = $id_grupoempresa;
 
-            if($tipo == 'grupo')
-            {
-                $publiGroup=new Publicacion_grupo();
-                $publiGroup->publicacion_id=$publication->id;
-                $publiGroup->grupo_id=$id;
-                $added2=$publiGroup->save();
-            }
-            else
-            {
-                $publiGroup=new Publicacion_grupoempresa();
-                $publiGroup->publicacion_id=$publication->id;
-                $publiGroup->grupoempresa_id=$id;
-                $added2=$publiGroup->save();
-            }
-        }
+        $publiGroup = new Publicacion_grupoempresa();
+        $publiGroup->publicacion_id = $publication->id;
+        $publiGroup->grupoempresa_id = $id;
+        $added2 = $publiGroup->save();
+
         $files = [];
         if($request->hasfile('filenames'))
             {
@@ -112,38 +91,50 @@ class ActivitySendCorrectionController extends Controller
                 $adjunto_publicacion->adjunto_id = $adjunto->id;
                 $added4 = $adjunto_publicacion->save();
             }
-            }
-/*
-        if($request->uploadFiles != null)
+        }
+        if ( $request->has('cbxEditor') )
         {
-            $adjunto = $this->saveFiles($request->uploadFiles);
+            $name = time().rand(1,100).'.pdf';
+            $path = 'files/'.$name;
+
+            $this->createPdfFromHtml($request->editor, $path);
+
+            $adjunto = $this->createAdjuntoEditor('documento', $path);
             $added3 = $adjunto->save();
 
-            $adjunto_publicacion = new Adjunto_publicacion;
+            $adjunto_publicacion = new Adjunto_publicacion();
             $adjunto_publicacion->publicacion_id = $publication->id;
             $adjunto_publicacion->adjunto_id = $adjunto->id;
             $added4 = $adjunto_publicacion->save();
         }
-*/
-        $activity=new Actividad();
-        $activity->fecha_inicio_actividad=$currentTime->toDateTimeString();
-        $activity->fecha_fin_actividad=$request->deathline;
-        $activity->cantidad_archivos_perm=$request->cantFilesMax;
-        $activity->tipo_archivos_perm=$request->typeFiles;
-        $activity->publicacion_id=$publication->id;
-        $added3=$activity->save();
+        $activity = new Actividad();
+        $activity->fecha_inicio_actividad = $currentTime->toDateTimeString();
+        $activity->fecha_fin_actividad = $request->deathline;
+        $activity->cantidad_archivos_perm = $request->cantFilesMax;
+        $activity->tipo_archivos_perm = $request->typeFiles;
+        $activity->publicacion_id = $publication->id;
+        $added3 = $activity->save();
 
-        if($added && $added3){
+        if ($added && $added3)
+        {
             return redirect('home');
         }
 
     }
 
-    public function createPdfFromHtml($html_code) {
+    public function createAdjuntoEditor($name, $path) {
+        $adjunto = new Adjunto();
+        $adjunto->name = $name;
+        $adjunto->path = $path;
+        return $adjunto;
+    }
+
+    public function createPdfFromHtml($html_code, $path) {
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($html_code);
 
-        return $pdf->download('archivoprueba.pdf');
+        $content = $pdf->download()->getOriginalContent();
+        Storage::put($path, $content);
     }
 
     public function getAsesor(){
@@ -151,6 +142,14 @@ class ActivitySendCorrectionController extends Controller
         $user = User::find($idAdviser);
         $asesor=$user->asesor()->first();
         return $asesor;
+    }
+
+    public function saveFiles($uploadFiles)
+    {
+        $adjunto = new Adjunto();
+        $adjunto->name = $uploadFiles->getClientOriginalName();
+        $adjunto->path = $uploadFiles->store('files');
+        return $adjunto;
     }
 
     private function title($id, $rol){
