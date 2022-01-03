@@ -36,6 +36,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <meta name="csrf-token" content="{{ csrf_token() }}"> 
@@ -43,10 +45,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Sistema de Apoyo a la empresa TIS - SATIS
+                   <b>Sistema de Apoyo para TIS </b> 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -89,15 +91,17 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                                
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    <b><i class="fas fa-user-circle"></i> {{ Auth::user()->name }}</b>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                          <i class="fas fa-running"></i>
+                                        {{ __('Cerrar Sesión') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="get" class="d-none">
@@ -120,14 +124,26 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
-          $(".btn-success").click(function(){ 
+          $(".btn-outline-success").click(function(){ 
               var lsthmtl = $(".clone").html();
               $(".increment").after(lsthmtl);
           });
-          $("body").on("click",".btn-danger",function(){ 
+          $("body").on("click",".btn-outline-danger",function(){ 
               $(this).parents(".hdtuto").remove();
           });
         });
     </script>
+    <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Optional JS -->
+  <script src="/assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="/assets/js/argon.js?v=1.2.0"></script>
 </body>
 </html>

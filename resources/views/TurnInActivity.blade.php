@@ -81,9 +81,39 @@
                         <div class="col-md-6 col-sm-auto border border-secondary border-top-0">
                             <h5><i class="far fa-question-circle" style="font-size:20px;color:rgb(97, 102, 112);"></i><b> Estado de entrega</b></h5>
                         </div>
+                       
+                       @if ($hayEntregado->fecha_entrega<$actividad->fecha_fin_actividad)
                         <div class="col-md-6 col-sm-auto border border-secondary border-left-0 border-top-0">
                             <h5 class="text-success"><b>Entregado</b></h5>
                         </div>
+                       @else
+                       <div class="col-md-6 col-sm-auto border border-secondary border-left-0 border-top-0">
+                            <h5 class="text-primary"><b>Entregado con retraso</b></h5>
+                        </div>
+                       @endif
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-auto border border-secondary border-top-0">
+                            <h5><i class="fas fa-clipboard-check" style="font-size:20px;color:rgb(97, 102, 112);"></i><b> Fecha de Envío</b></h5>
+                        </div>
+                        <div class="col-md-6 col-sm-auto border border-secondary border-left-0 border-top-0">
+                            <h5>{{$hayEntregado->fecha_entrega}}</h5>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-auto">
+                            <h5>
+                                <i class="fas fa-paperclip" style="font-size:20px;color:rgb(89, 93, 102);"></i> Adjuntos Entrega: 
+                            </h5>
+                        </div>
+                       <div class="col-auto">
+                        
+                        @foreach($hayEntregado->adjuntosEntrega as $adjunto)
+                            <h5> <a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></h5>
+                    @endforeach
+                       </div>
                     </div>
                     @else
                     <div class="row">
@@ -152,11 +182,12 @@
                                         // files are dropped here:
                                         this.on("addedfile", function() {
                                         // Show submit button here and/or inform user to click it.
-                                            alert("Agregado");
+                                            document.getElementById("submit").disabled=false;
                                         });
 
                                     this.on("queuecomplete", function (file) {
-                                        alert("Todos los archivos se han cargo correctamente");
+                                        
+                                        document.location.reload();
                                     });
 
                                     },
@@ -234,7 +265,7 @@
                         <div class="form-group row mb-0 justify-content-center">
                             <div class="col-md-6 offset-md-4 ">
                                 
-                                <button id="submit" class="btn btn-primary pull-right" >{{ __('Enviar') }}</button>
+                                <button id="submit" class="btn btn-primary pull-right" disabled>{{ __('Enviar') }}</button>
 
                             </div>
                         </div>

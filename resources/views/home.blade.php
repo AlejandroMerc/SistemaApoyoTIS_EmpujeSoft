@@ -28,7 +28,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href="javascript:void(0)">
-          <h1>EmpujeSoft</h1>
+          <h1>SATIS</h1>
         </a>
       </div>
       <div class="navbar-inner">
@@ -182,7 +182,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
+                    <i class="far fa-user"></i>
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
@@ -231,22 +231,24 @@
 
 
 <div class="containter-fluid">
-  @foreach ($publications as $publication)
-      <div class="card border rounded-lg" value={{$publication->id}}>
+    <br>
+    <div class="col-md-12">
+      @foreach ($publications as $publication)
+      <div class="card border border-light rounded-lg"  value={{$publication->id}}>
         @if ($publication->tipo=="Publicación")
-            <div class="card-header text-white bg-info">
-              <i class="fas fa-bullhorn text-white"></i>
+            <div class="card-header border border-light  bg-light text-black-50">
+              <i class="fas fa-bullhorn text-black-50"></i>
               {{$publication->titulo_publicacion}}
             </div>
         @else
-        <div class="card-header text-white bg-danger">
-          <i class="fas fa-tasks text-white"></i>
+        <div class="card-header border border-light text-white bg-info text-muted">
+          <i class="fas fa-tasks text-white text-muted"></i>
           {{$publication->titulo_publicacion}}
         </div>
         @endif
-
-        <div class="card-body">
-
+  
+        <div class="card-body  border border-light">
+  
           <p class="card-text">{{$publication->descripcion_publicacion}}</p>
           @foreach($publication->adjuntos as $adjunto)
             <p><a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></p>
@@ -259,16 +261,20 @@
           @endif
           <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
           @endif
-
-
+  
+  
         </div>
-        <div class="card-footer text-muted">
-
+        <div class="card-footer text-muted border border-light ">
+  
          {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}
         </div>
       </div>
-
+  
   @endforeach
+    </div>
+   
+ 
+ 
 
 </div>
 

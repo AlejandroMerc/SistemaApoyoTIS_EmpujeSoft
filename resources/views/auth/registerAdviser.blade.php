@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Registrar Asesor') }}</div>
+            <div class="card border border-dark rounded-lg">
+                <div class="card-header bg-primary text-white"><h5><b>{{ __('Registrar Asesor') }}</b></h5></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register-adviser-data') }}">

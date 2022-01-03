@@ -34,7 +34,10 @@ class TurnInActivityController extends Controller
         $hayEntregado=Entrega::where('actividad_id','=',$actividad->id)->where('grupoempresa_id','=',$estudiante->grupoempresa_id)->first();
         if($hayEntregado!=null){
             $entregado=true;
-            
+            $adjuntosEntrega=Entrega::where('actividad_id','=',$actividad->id)
+                                ->join('adjunto_entregas','entrega_id','=','entregas.id')
+                                ->join('adjuntos','adjuntos.id','=','adjunto_entregas.adjunto_id')->get();
+            $hayEntregado['adjuntosEntrega']=$adjuntosEntrega;
         }
 
         if($actividad->tipo_archivos_perm=="docs"){
@@ -89,6 +92,7 @@ class TurnInActivityController extends Controller
         $adjunto_entrega->adjunto_id = $adjunto->id;
         $addedAdjuntoEntrega = $adjunto_entrega->save();
 
+        
         return response()->json(['success'=>$fileName]);
     }
     
