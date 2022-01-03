@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
 use App\Models\Plantilla;
+use App\Models\Publicacion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -16,19 +17,71 @@ class ActivityResponseController extends Controller
         $this->middleware('auth');
     }
 
-    public function index($grupoempresa)
+    public function indexResponse($id_grupoempresa, $id_activity)
     {
         $user_type = Session::get('type');
         $user_id = Session::get('id');
         $title = $this->title($user_id, $user_type);
 
+        $grupoempresa = Grupoempresa::find($id_grupoempresa)->nombre_largo;
+        $activity = Publicacion::find($id_activity)->titulo_publicacion;
         $template_content = $this->arrayTemplate();
 
-        return view('activityResponse',['grupoempresa' =>  $grupoempresa, 'user_type' => $user_type, 'title' => $title, 'template_content' => $template_content]);
+        return view('activityResponse',[
+            'grupoempresa' =>  $grupoempresa,
+            'id_grupoempresa'=>$id_grupoempresa,
+            'id_activity' => $id_activity,
+            'activity' => $activity,
+            'user_type' => $user_type,
+            'title' => $title,
+            'template_content' => $template_content
+        ]);
     }
 
-    public function response($grupoempresa) {
+    public function response($id_grupoempresa, $id_activity, Request $request) {
+        if ( $request->has('save') ) // Seleccionó guardado
+        {
+            if ($request->has('cbxEditor'))
+            {
+                return "guardando con editor seleccionado";
+            }
+            else
+            {
+                return "guardando con archivo seleccionado";
+            }
+        }
+        else // Seleccionó enviar
+        {
+            if ($request->has('cbxEditor'))
+            {
+                $rules = ['editor' => 'required'];
+                $errormsg = [
+                    'required' => 'El contenido está vacio'
+                ];
+                $this->validate($request, $rules, $errormsg);
+                /*
 
+                GUARDAR EN BASE DE DATOS
+
+
+                */
+            }
+            else
+            {
+                $rules = ['file' => 'required'];
+                $errormsg = [
+                    'required' => 'Debe subir un archivo'
+                ];
+                $this->validate($request, $rules, $errormsg);
+                /*
+
+                GUARDAR EN BASE DE DATOS
+
+
+                */
+            }
+        }
+        return redirect(route('verRespuesta.correccion',['id_grupoempresa'=>$id_grupoempresa, 'id_activity'=>$id_activity]));
     }
 
     private function title($id, $rol){
