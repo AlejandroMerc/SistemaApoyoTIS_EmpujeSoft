@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 
     document.getElementById("btn_guardar").addEventListener("click",function(){
-       enviarDatos("/evento/agregar/{calendario_id}");
+       enviarDatos("/evento/agregar/"+formulario.calendario_id.value);
     });
 
     document.getElementById("btn_eliminar").addEventListener("click",function(){
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function enviarDatos(url){
         const datos = new FormData(formulario);
-        const nuevaURL = baseURL+url; 
+        const nuevaURL = baseURL+url;
         axios.post(nuevaURL,datos).
         then(
           (respuesta) => {

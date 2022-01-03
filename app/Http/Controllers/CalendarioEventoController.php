@@ -19,7 +19,7 @@ class CalendarioEventoController extends Controller
     public function index(){
         $semestre = $this->semestreActual();
         $calendario = $semestre->calendario_semestre->calendario;
-        return view('evento.index', compact($calendario));
+        return view('evento.index', ['calendario_id' => $calendario->id]);
     }
 
     public function store(Request $request){
@@ -29,7 +29,7 @@ class CalendarioEventoController extends Controller
         $evento->description = $request->description;
         $evento->start = $request->start;
         $evento->end = $request->end;
-        $evento->calendario_id = $this->calendario_id;
+        $evento->calendario_id = $request->calendario_id;
         $evento->save();
     }
     public function show(Evento $evento){

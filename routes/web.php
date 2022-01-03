@@ -68,7 +68,7 @@ Route::post('/validateFiles', [TurnInActivityController::class,'validateFiles'])
 /*Route::get('/calendarioTis',function(){
     return view('eventos.index');
 });*/
-Route::get('/calendarioTis/{semestre_id}',[CalendarioEventoController::class, 'index'])->name('calendarioTis');;
+Route::get('/calendarioTis',[CalendarioEventoController::class, 'index'])->name('calendarioTis');;
 
 Route::group(['middleware'=> ['auth']],function(){
 
