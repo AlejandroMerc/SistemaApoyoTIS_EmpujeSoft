@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="/assets/css/argon.css?v=1.2.0" type="text/css">
   <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -99,7 +100,7 @@
                 <span class="nav-link-text">Plantillas</span>
               </a>
             </li>
-             
+
             <li class="nav-item">
               <a class="nav-link" href={{ route('calendarioTis') }}>
                 <i class="far fa-file-text text-yellow"></i>
@@ -112,7 +113,7 @@
                 <span class="nav-link-text">Calendario GE</span>
               </a>
             </li>
-            
+
             @endif
           </ul>
           <!-- Divider -->
@@ -246,9 +247,9 @@
           {{$publication->titulo_publicacion}}
         </div>
         @endif
-  
+
         <div class="card-body  border border-light">
-  
+
           <p class="card-text">{{$publication->descripcion_publicacion}}</p>
           @foreach($publication->adjuntos as $adjunto)
             <p><a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></p>
@@ -261,20 +262,20 @@
           @endif
           <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
           @endif
-  
-  
+
+
         </div>
         <div class="card-footer text-muted border border-light ">
-  
+
          {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}
         </div>
       </div>
-  
+
   @endforeach
     </div>
-   
- 
- 
+
+
+
 
 </div>
 
