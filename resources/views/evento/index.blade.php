@@ -3,52 +3,49 @@
 @section('content')
 
 <div class="container">
-    <div id="calendario">
-    </div>
+  <div id="calendario">
+  </div>
 </div>
-
- <div class="modal fade" id="evento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <h4 class="modal-title" id="modelTitleId">Crear Evento</h4>
-          </div>
-          <div class="modal-body">
-            <form action="" id="formularioEventos">
-                {!! csrf_field() !!}
-                <div class="form-group">
-                    <label for="title" class="col-md-8 col-form-label">{{ __('*Nombre de Evento') }}</label>
-                    <input type="text" class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="Nombre Evento"></input>
-                </div>            
-                <div class="form-group">
-                    <label for="description" class="col-md-1 col-form-label">{{ __('*Descripción') }}</label>
-                    <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="3" id="description" required autofocus></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="start" class="col-md-1 col-form-label">{{ __('*Start') }}</label>
-                    <input type="date" class="form-control" name="start" id="start" aria-describedby="helpId" placeholder="Fecha de Inicio"></input>
-                </div>
-                <div class="form-group">
-                    <label for="end" class="col-md-1 col-form-label">{{ __('*End') }}</label>
-                    <input type="date" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de Fin"></input>
-                </div>
-                <div class="form-group">
-                    <input type="hidden" class="form-control" name="calendario_id" id="calendario_id" aria-describedby="helpId">{{$calendario_id}}</input>
-                </div>           
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
-            <button type="button" class="btn btn-warning" id="btn_modificar">Modificar</button>
-            <button type="button" class="btn btn-danger" id="btn_eliminar">Eliminar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
-          </div>
-        </div>
+<div class="modal fade" id="evento" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="modelTitleId">Crear Evento</h4>
+      </div>
+      <div class="modal-body">
+        <form action="" id="formularioEventos">
+            {!! csrf_field() !!}
+            <div class="form-group">
+                <label for="title" class="col-md-8 col-form-label">{{ __('*Nombre de Evento') }}</label>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="Nombre Evento"></input>
+            </div>            
+            <div class="form-group">
+                <label for="description" class="col-md-1 col-form-label">{{ __('*Descripción') }}</label>
+                <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="3" id="description" required autofocus></textarea>
+            </div>
+            <div class="form-group">
+                <label for="start" class="col-md-1 col-form-label">{{ __('*Start') }}</label>
+                <input type="date" class="form-control" name="start" id="start" aria-describedby="helpId" placeholder="Fecha de Inicio">
+            </div>
+            <div class="form-group">
+                <label for="end" class="col-md-1 col-form-label">{{ __('*End') }}</label>
+                <input type="date" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de Fin">
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" id="calendario_id" name="calendario_id" value="{{$calendario_id}}" onload="load()">
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
       </div>
     </div>
+  </div>
+</div>
 
 
 @endsection
