@@ -10,10 +10,13 @@
                     <div class="card w-30">
                         @foreach ($grupoEmpresas as $grupoempresa)    
                             <div class="card-body">
-                                <a href="#" class="btn btn-primary">{{$grupoempresa->nombre_corto}}</a>
+                                <form action="{{route('mostrarGE', $grupoempresa->id)}}" method="post">
+                                    <button id='ge_button' class="btn btn-primary" name="{{$grupoempresa->id}}" value="{{$grupoempresa->id}}">{{$grupoempresa->nombre_corto}}</button>
+                                </form>
                             </div>
                         @endforeach 
                     </div>
+                    
                 </div>
             </div>
             <div class="col-sm-9">
@@ -24,7 +27,7 @@
                                 <div class="col-md-12">
                                         <div class="form-group row">
                                           <div class="container">
-                                            <div id="calendario">
+                                            <div id="calendario2">
                                           </div> 
                                         </div>
                                 </div>

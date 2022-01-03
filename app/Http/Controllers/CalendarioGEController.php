@@ -21,9 +21,19 @@ class CalendarioGEController extends Controller
         request()->validate(Evento::$rules);
         $evento = Evento::create($request->all());
     }
+
     public function show(Evento $evento){
         $evento = Evento::all();
         return response()->json($evento);
+    }
+
+    public function showCalendarGE($ge_id){
+        $eventos = Grupoempresa::find($ge_id)
+        ->join('calendario_grupoempreas','grupoempresa.id','=','calendario_grupoempresas.grupoempresa_id')
+        ->join('calendario','calendario.id','=','calendario_grupoempresas.calendario_id')
+        ->join('eventos','calendario.id','=','eventos.calendario_id')
+        ->get();
+        return response()->json($eventos);
     }
     
 }
