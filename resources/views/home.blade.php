@@ -85,7 +85,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href={{ route('crearEvento') }}>
+              <a class="nav-link" href={{ route('calendarioGE') }}>
                 <i class="fa fa-users text-blue" aria-hidden="true"></i>
                 <span class="nav-link-text">Planificacion</span>
               </a>
@@ -99,18 +99,20 @@
                 <span class="nav-link-text">Plantillas</span>
               </a>
             </li>
+             
             <li class="nav-item">
-              <a class="nav-link" href={{ route('planificacionAsesor') }}>
-                <i class="far fa-file-text text-yellow"></i>
-                <span class="nav-link-text">Planificacion de GE</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href={{ route('crearEventoTIS') }}>
+              <a class="nav-link" href={{ route('calendarioTis') }}>
                 <i class="far fa-file-text text-yellow"></i>
                 <span class="nav-link-text">Calendario TIS</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioGE') }}>
+                <i class="far fa-file-text text-yellow"></i>
+                <span class="nav-link-text">Calendario GE</span>
+              </a>
+            </li>
+            
             @endif
           </ul>
           <!-- Divider -->

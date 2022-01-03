@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    let formulario = document.querySelector("form");
+    let formulario = document.querySelector("#formularioEventos");
     var calendarEl = document.getElementById('calendario');
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
@@ -11,7 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
           center: 'title',
           right: 'dayGridMonth,timeGridWeek,listWeek'
       },
-      events: baseURL+"/evento/mostrar",
+      //events: baseURL+"/evento/mostrar",
+      eventSources:{
+        url: baseURL+"/evento/mostrar",
+        method:"POST",
+        extraParams:{
+          _token: formulario._token.value,
+        }
+      },
 
       dateClick:function(info){
         formulario.reset();

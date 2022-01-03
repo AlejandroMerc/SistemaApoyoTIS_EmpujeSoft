@@ -18,6 +18,7 @@ use App\Http\Controllers\ActivityResponseController;
 use App\Http\Controllers\ControllerEvent;
 use App\Http\Controllers\ControllerCalendar;
 use App\Http\Controllers\CalendarioEventoController;
+use App\Http\Controllers\CalendarioGEController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,13 +64,23 @@ Route::get('/responderActividad/{publicacion_id}',[TurnInActivityController::cla
 Route::post('/responderActividad', [TurnInActivityController::class,'sendActivity'])->name('sendActivity');
 Route::post('/validateFiles', [TurnInActivityController::class,'validateFiles'])->name('validateFiles');
 
+/*Route::get('/calendarioTis',function(){
+    return view('eventos.index');
+});*/
+Route::get('/calendarioTis',[CalendarioEventoController::class, 'index'])->name('calendarioTis');;
+
+Route::group(['middleware'=> ['auth']],function(){
+
 Route::get('/evento', [CalendarioEventoController::class, 'index']);
-Route::get('/evento/mostrar', [CalendarioEventoController::class, 'show']);
+Route::post('/evento/mostrar', [CalendarioEventoController::class, 'show']);
 Route::post('/evento/agregar', [CalendarioEventoController::class, 'store']);
 Route::post('/evento/editar/{id}', [CalendarioEventoController::class, 'edit']);
 Route::post('/evento/actualizar/{evento}', [CalendarioEventoController::class, 'update']);
 Route::post('/evento/borrar/{id}', [CalendarioEventoController::class, 'destroy']);
+});
 
+Route::get('/calendarioGE', [CalendarioGEController::class, 'index'])->name('calendarioGE');
+Route::post('/calendarioGE/mostrar', [CalendarioGEController::class, 'show']);
 
 Route::get('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'showCreateEventTIS'])->name('crearEventoTIS');
 Route::post('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'createEventTIS'])->name('crearEvento-data-tis');

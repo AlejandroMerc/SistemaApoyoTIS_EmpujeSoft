@@ -1,9 +1,39 @@
 @extends('layouts.app')
 
-@section('content')
 
+@section('content')
 <div class="container">
-    <div id="calendario">
+    <div class="row justify-content-center">
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">{{ __('Grupo Empresas') }}</div>
+                    <div class="card w-30">
+                        @foreach ($grupoEmpresas as $grupoempresa)    
+                            <div class="card-body">
+                                <a href="#" class="btn btn-primary">{{$grupoempresa->nombre_corto}}</a>
+                            </div>
+                        @endforeach 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="card">
+                    <div class="card-header">{{ __('Calendario de Grupo Empresas') }}</div>
+                        <div class="card w-20">
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                        <div class="form-group row">
+                                          <div class="container">
+                                            <div id="calendario">
+                                          </div> 
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -14,7 +44,7 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-            <h4 class="modal-title" id="modelTitleId">Crear Evento</h4>
+            <h4 class="modal-title" id="modelTitleId">Evento</h4>
           </div>
           <div class="modal-body">
             <form action="" id="formularioEventos">
@@ -38,9 +68,11 @@
             </form>
           </div>
           <div class="modal-footer">
+            <!--
             <button type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
             <button type="button" class="btn btn-warning" id="btn_modificar">Modificar</button>
             <button type="button" class="btn btn-danger" id="btn_eliminar">Eliminar</button>
+             -->
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
           </div>
         </div>
