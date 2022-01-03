@@ -14,6 +14,7 @@ use App\Http\Controllers\CreateSemesterController;
 use App\Http\Controllers\CreateActivityController;
 use App\Http\Controllers\TurnInActivityController;
 use App\Http\Controllers\ActivityResponseController;
+use App\Http\Controllers\ActivitySendCorrectionController;
 
 use App\Http\Controllers\ControllerEvent;
 use App\Http\Controllers\ControllerCalendar;
@@ -100,8 +101,10 @@ Route::get('/crearGrupo', [crearGrupoController::class, 'index'])->name('crearGr
 Route::post('/crearGrupo', [crearGrupoController::class, 'validar'])->name('crearGrupo');
 Route::post('createActivity', [CreateActivityController::class, 'registerActivityData'])->name('registir-activity-data');
 
-Route::get('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'index'])->name('verRespuesta.revision');
-Route::post('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'response'])->name('verRespuesta.revision');
+Route::get('verRespuestasDos/revision/{id_grupoempresa}/{id_activity}', [ActivityResponseController::class, 'indexResponse'])->name('verRespuesta.revision');
+Route::post('verRespuestasDos/revision/{id_grupoempresa}/{id_activity}', [ActivityResponseController::class, 'response'])->name('verRespuesta.revision');
+Route::get('verRespuestasDos/correccion/{id_grupoempresa}/{id_activity}', [ActivitySendCorrectionController::class, 'index'])->name('verRespuesta.correccion');
+Route::post('verRespuestasDos/correccion/{id_grupoempresa}/{id_activity}', [ActivitySendCorrectionController::class, 'sendActivity'])->name('verRespuesta.correccion');
 
 Route::get('/link', function () {
     Artisan::call('storage:link');
