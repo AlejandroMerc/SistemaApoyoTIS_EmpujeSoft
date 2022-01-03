@@ -41,8 +41,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
-        <button type="button" class="btn btn-warning" id="btn_modificar">Modificar</button>
-        <button type="button" class="btn btn-danger" id="btn_eliminar">Eliminar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
       </div>
     </div>

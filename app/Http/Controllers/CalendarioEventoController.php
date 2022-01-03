@@ -27,7 +27,7 @@ class CalendarioEventoController extends Controller
         $evento = Evento::create($request->all());
         return response()->json($evento);
     }
-    public function show(Evento $evento){
+    public function show(){
         $evento = Evento::all();
         return response()->json($evento);
     }
