@@ -58,9 +58,10 @@ Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::cl
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 
-Route::get('/calendarioTis',function(){
+/*Route::get('/calendarioTis',function(){
     return view('eventos.index');
-});
+});*/
+Route::get('/calendarioTis',[CalendarioEventoController::class, 'index'])->name('calendarioTis');;
 
 Route::group(['middleware'=> ['auth']],function(){
 
@@ -72,7 +73,7 @@ Route::post('/evento/actualizar/{evento}', [CalendarioEventoController::class, '
 Route::post('/evento/borrar/{id}', [CalendarioEventoController::class, 'destroy']);
 });
 
-Route::get('/calendarioGE', [CalendarioGEController::class, 'index']);
+Route::get('/calendarioGE', [CalendarioGEController::class, 'index'])->name('calendarioGE');
 Route::post('/calendarioGE/mostrar', [CalendarioGEController::class, 'show']);
 
 Route::get('/planificacionAsesor', [App\Http\Controllers\PlanificacionAsesorController::class, 'showPlanificacion'])->name('planificacionAsesor');
