@@ -7,7 +7,7 @@ function load(){
 
 document.addEventListener('DOMContentLoaded', function() {
   let formulario = document.querySelector("#formularioEventos");
-  var calendarEl = document.getElementById('calendario');
+  var calendarEl = document.getElementById('calendario2');
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: 'dayGridMonth',
     locale:'es',
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
   },
   //events: baseURL+"/evento/mostrar",
   eventSources:{
-    url: baseURL+"/evento/mostrar",
+    url: baseURL+"/calendarioGE/mostrar"+document.getElementById('ge_button').value,
     method:"POST",
     extraParams:{
       _token: formulario._token.value,
