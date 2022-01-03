@@ -17,7 +17,7 @@ class Evento extends Model
         'start'=>'required',
         'end'=>'required',
     ];
-    protected $fillable = ['title','description','start','end'];
+    protected $fillable = ['title','description','start','end','calendario_id'];
 
     public $timestamps = false;
 }

@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Calendario_semestre extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['calendario_id', 'semestre_id'];
+
+    public $timestamps = false;
+}
