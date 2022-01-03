@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Actividad;
 use App\Models\Grupo;
 use App\Models\Grupoempresa;
 use App\Models\Publicacion;
@@ -20,7 +22,9 @@ class VerRespuestasDosController extends Controller
 
     public function verRespuestasDos($publicacion_id){
         $asignados = $this->getAsignados($publicacion_id);
-        return view('verRespuestas2', ['id' => $publicacion_id], compact('asignados'));
+        $fecha_limite = Actividad::where('publicacion_id',$publicacion_id)->first()->fecha_fin_actividad;
+
+        return view('verRespuestas2', ['id' => $publicacion_id, 'fecha_limite'=>$fecha_limite], compact('asignados'));
     }
 
     public function getAsignados($publicacion_id)

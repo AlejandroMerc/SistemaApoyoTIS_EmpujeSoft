@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EntregaController;
 use App\Http\Controllers\TemplateController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/template/{id}', [TemplateController::class, 'getTemplate'])->name('getTemplate');
 Route::get('/template/delete/{id}', [TemplateController::class, 'deleteTemplate'])->name('deleteTemplate');
+
+Route::get('/adjunto/entrega/{activity_id}/{grupoempresa_id}', [EntregaController::class, 'getFiles'])->name('getAdjuntoFiles');
