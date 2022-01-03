@@ -212,22 +212,24 @@
 
 
 <div class="containter-fluid">
-  @foreach ($publications as $publication)
-      <div class="card border rounded-lg" value={{$publication->id}}>
+    <br>
+    <div class="col-md-12">
+      @foreach ($publications as $publication)
+      <div class="card border border-light rounded-lg"  value={{$publication->id}}>
         @if ($publication->tipo=="Publicación")
-            <div class="card-header text-white bg-info">
-              <i class="fas fa-bullhorn text-white"></i>
+            <div class="card-header border border-light  bg-light text-black-50">
+              <i class="fas fa-bullhorn text-black-50"></i>
               {{$publication->titulo_publicacion}}
             </div>
         @else
-        <div class="card-header text-white bg-danger">
-          <i class="fas fa-tasks text-white"></i>
+        <div class="card-header border border-light text-white bg-info text-muted">
+          <i class="fas fa-tasks text-white text-muted"></i>
           {{$publication->titulo_publicacion}}
         </div>
         @endif
-
-        <div class="card-body">
-
+  
+        <div class="card-body  border border-light">
+  
           <p class="card-text">{{$publication->descripcion_publicacion}}</p>
           @foreach($publication->adjuntos as $adjunto)
             <p><a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></p>
@@ -240,16 +242,20 @@
           @endif
           <p class="card-text">Fecha de Entrega: {{$publication->fechaDeEntrega}}</p>
           @endif
-
-
+  
+  
         </div>
-        <div class="card-footer text-muted">
-
+        <div class="card-footer text-muted border border-light ">
+  
          {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}
         </div>
       </div>
-
+  
   @endforeach
+    </div>
+   
+ 
+ 
 
 </div>
 
