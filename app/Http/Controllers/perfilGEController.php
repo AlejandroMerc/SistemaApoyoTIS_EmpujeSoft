@@ -12,6 +12,10 @@ use SebastianBergmann\Environment\Console;
 class perfilGEController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index($id){
         $user_type = Session::get('type');
         //$id = Session::get('id');
