@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home_layout')
 
 @section('content')
 
@@ -6,16 +6,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card border border-dark rounded-lg">
-                <div class="card-header bg-primary text-white"><strong><h5>{{ __('Nueva Actividad') }}</h5></div>
+                <div class="card-header bg-primary text-white"><strong><h5>Actividad de corrección</h5></div>
 
                 <div class="card-body ">
-                    <form method="POST" action="{{ route('registir-activity-data') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('verRespuesta.correccion', ['id_grupoempresa' => $id_grupoempresa, 'id_activity'=>$id_activity]) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('*Título') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus placeholder="Título Actividad">
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title', 'Corrección de '.$activity) }}" required autocomplete="title" autofocus>
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -29,9 +29,7 @@
 
                             <div class="col-md-6">
 
-                        
-                                <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="5" id="description" required autofocus placeholder="Descripción Actividad"></textarea>
-
+                                <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="5" id="description" required autofocus></textarea>
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,19 +45,15 @@
                             <div class="col-md-6">
                                 <div class="input-group hdtuto control-group lst increment" >
                                     <input type="file" name="filenames[]" class="myfrm form-control">
-
-                                    <div class="input-group-btn"> 
-                                      <button class="btn btn-outline-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Agregar</button>
-
+                                    <div class="input-group-btn">
+                                      <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
                                     </div>
                                   </div>
                                   <div class="clone hide">
                                     <div class="hdtuto control-group lst input-group" style="margin-top:10px">
                                       <input type="file" name="filenames[]" class="myfrm form-control">
-
-                                      <div class="input-group-btn"> 
-                                        <button class="btn btn-outline-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Quitar</button>
-
+                                      <div class="input-group-btn">
+                                        <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
                                       </div>
                                     </div>
                                   </div>
@@ -72,11 +66,10 @@
                                             </div>
 
                                         @endif
-
                                 @endforeach
                                 @endif
                                 {{-- parte plantilla --}}
-                                <div class='mt-2'>
+                                <div class="mt-2">
                                     <input type="checkbox" id="cbxEditor" name="cbxEditor" value="cbxEditor" style="display: none" {{ (old('cbxEditor') !== null)? 'checked' : '' }}>
 
                                     <button class="btn btn-outline-primary btn-block" id='templateAddBtn' type="button" onclick="template()">
@@ -135,19 +128,7 @@
                             <label for="toWhom" class="col-md-4 col-form-label text-md-right">{{ __('Para') }}</label>
 
                             <div class="col-md-6">
-
-                                <select id="toWhom"  class="form-control @error('toWhom') is-invalid @enderror" name="toWhom">
-                                    <option value="everybody">Todos</option>
-
-                                    @foreach ($grupos as $grupo)
-                                    <option value='grupo, {{$grupo->id}}'>Grupo:  {{$grupo->sigla_grupo}}</option>
-                                    @endforeach
-
-                                    @foreach ($grupoEmpresas as $grupoEmpresa)
-                                    <option value='grupoEmpresa, {{$grupoEmpresa->id}}'>GrupoEmpresa:  {{$grupoEmpresa->nombre_corto}}</option>
-                                    @endforeach
-
-                                </select>
+                                <input id="toWhom" type="text" class="form-control" name="toWhom" value="Grupo Empresa: {{ $grupoempresa}}" required readonly>
 
                             </div>
                         </div>
@@ -171,7 +152,7 @@
                             <label for="cantFilesMax" class="col-md-4 col-form-label text-md-right">{{ __('*Cant. de archivos permitidos') }}</label>
 
                             <div class="col-md-6">
-                                <input type="number" id="cantFilesMax" class="form-control @error('cantFilesMax') is-invalid @enderror" name="cantFilesMax" min="1" max="10">
+                                <input type="number" id="cantFilesMax" class="form-control @error('cantFilesMax') is-invalid @enderror" value="{{ $lastMaxFiles }}" name="cantFilesMax" min="1" max="10">
 
                                 @error('cantFilesMax')
                                     <span class="invalid-feedback" role="alert">
@@ -187,7 +168,7 @@
 
                             <div class="col-md-6">
 
-                                <select id="typeFiles"  class="form-control @error('typeFiles') is-invalid @enderror" name="typeFiles">
+                                <select id="typeFiles"  class="form-control @error('typeFiles') is-invalid @enderror" name="typeFiles" value="{{ $lastTypeFiles }}">
                                     <option value="anything">Cualquiera</option>
                                     <option value="docs">Documentos (pdf, docx, txt, pptx, xlsx)</option>
                                     <option value="images">Imágenes (jpg, jpge, png, gif, bpm)</option>
@@ -198,7 +179,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0 justify-content-center"">
+                        <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Publicar') }}
@@ -235,20 +216,31 @@
     }
 
     async function loadTemplate() {
-            var editor = document.getElementById('ckeditor');
-            var selected = document.getElementById('template-list').value;
-            if (selected !== 0){
-                try{
-                    var hostname = window.location.host;
-                    var response = await fetch("http://" + hostname + "/api/template/" +selected);
-                    var json = await response.json();
-                    CKEDITOR.instances.ckeditor.setData(json.html_code);
-                } catch (error) {
-                    error;
-                    console.log(error);
-                }
+        var editor = document.getElementById('ckeditor');
+        var selected = document.getElementById('template-list').value;
+        if (selected !== 0){
+            try{
+                var hostname = window.location.host;
+                var response = await fetch("http://" + hostname + "/api/template/" +selected);
+                var json = await response.json();
+                CKEDITOR.instances.ckeditor.setData(json.html_code);
+            } catch (error) {
+                error;
+                console.log(error);
             }
         }
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".btn-success").click(function(){
+          var lsthmtl = $(".clone").html();
+          $(".increment").after(lsthmtl);
+      });
+      $("body").on("click",".btn-danger",function(){
+          $(this).parents(".hdtuto").remove();
+      });
+    });
 </script>
 
 @endsection

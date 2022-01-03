@@ -11,6 +11,9 @@
   <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
   <!-- Icons -->
   <link rel="stylesheet" href="/assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
@@ -18,6 +21,23 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="/assets/css/argon.css?v=1.2.0" type="text/css">
   <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+  {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -94,6 +114,19 @@
                 <span class="nav-link-text">Plantillas</span>
               </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href={{ route('calendarioTis') }}>
+                  <i class="far fa-file-text text-yellow"></i>
+                  <span class="nav-link-text">Calendario TIS</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href={{ route('calendarioGE') }}>
+                  <i class="far fa-file-text text-yellow"></i>
+                  <span class="nav-link-text">Calendario GE</span>
+                </a>
+              </li>
             @endif
           </ul>
           <!-- Divider -->
@@ -163,7 +196,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
+                    <img alt="Image placeholder" src="https://cdn.pixabay.com/photo/2017/02/25/22/04/user-icon-2098873_1280.png">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
@@ -209,7 +242,7 @@
       </div>
     </div> --}}
 
-<main class="py-2">
+<main class="p-2">
     @yield('content')
 </main>
 

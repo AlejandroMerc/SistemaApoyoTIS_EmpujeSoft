@@ -41,10 +41,28 @@
         </div>
         </div>
     @else
-        <div class="container-fluid list-group">
+        {{-- <div class="container-fluid list-group">
         @foreach ($template_list as $template)
             <a href="{{ route('template-editor-id', ['id' => $template->id]) }}" role="button" class="list-group-item list-group-item-action">{{ $template->nombre }}</a>
+            <button class="btn btn-default btn-xs pull-right remove-item">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
         @endforeach
+        </div> --}}
+
+        <div class="container-fluid">
+            @foreach ($template_list as $template)
+                    <div class="container-fluid d-flex">
+                        <div class="d-flex" style="width: 100%; max-width: 100%;">
+                            <a href="{{ route('template-editor-id', ['id' => $template->id]) }}" role="button" class="list-group-item list-group-item-action">{{ $template->nombre }}</a>
+                        </div>
+                        <div class="ml-auto d-inline-flex">
+                            <button class="btn btn-secondary" onclick="deleteTemplate( {{ $template->id }} )">
+                                X
+                            </button>
+                        </div>
+                    </div>
+            @endforeach
         </div>
     @endif
 
@@ -54,6 +72,19 @@
         var exist = '{{Session::has('alert')}}';
         if(exist){
             alert(msg);
+        }
+
+        async function deleteTemplate(templateId) {
+            try{
+                var hostname = window.location.host;
+                var response = await fetch("http://" + hostname + "/api/template/delete/" +templateId);
+                if (response) {
+                    location.reload();
+                }
+            } catch (error) {
+                error;
+                console.log(error);
+            }
         }
 
         function uploadingFile(oInput) {
