@@ -44,4 +44,8 @@ class Semestre extends Model
         return $this->hasMany(Publicacion_semestres::class);
     }
 
+    public function calendario_semestre()
+    {
+        return $this->hasOne(Calendario_semestre::class);
+    }
 }

@@ -67,13 +67,13 @@ Route::post('/validateFiles', [TurnInActivityController::class,'validateFiles'])
 /*Route::get('/calendarioTis',function(){
     return view('eventos.index');
 });*/
-Route::get('/calendarioTis',[CalendarioEventoController::class, 'index'])->name('calendarioTis');;
+Route::get('/calendarioTis/{semestre_id}',[CalendarioEventoController::class, 'index'])->name('calendarioTis');;
 
 Route::group(['middleware'=> ['auth']],function(){
 
 Route::get('/evento', [CalendarioEventoController::class, 'index']);
 Route::post('/evento/mostrar', [CalendarioEventoController::class, 'show']);
-Route::post('/evento/agregar', [CalendarioEventoController::class, 'store']);
+Route::post('/evento/agregar/{calendario_id}', [CalendarioEventoController::class, 'store']);
 Route::post('/evento/editar/{id}', [CalendarioEventoController::class, 'edit']);
 Route::post('/evento/actualizar/{evento}', [CalendarioEventoController::class, 'update']);
 Route::post('/evento/borrar/{id}', [CalendarioEventoController::class, 'destroy']);

@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 
     document.getElementById("btn_guardar").addEventListener("click",function(){
-       enviarDatos("/evento/agregar");
+       enviarDatos("/evento/agregar/{calendario_id}");
     });
 
     document.getElementById("btn_eliminar").addEventListener("click",function(){

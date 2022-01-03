@@ -10,4 +10,9 @@ class Calendario extends Model
     use HasFactory;
 
     public $timestamps = false;
+
+    public function eventos()
+    {
+        return $this->hasMany(Evento::class);
+    }
 }

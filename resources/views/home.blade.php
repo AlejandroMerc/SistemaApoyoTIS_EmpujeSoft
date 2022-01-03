@@ -101,7 +101,7 @@
             </li>
              
             <li class="nav-item">
-              <a class="nav-link" href={{ route('calendarioTis') }}>
+              <a class="nav-link" href={{ route('calendarioTis',$semestre_id) }}>
                 <i class="far fa-file-text text-yellow"></i>
                 <span class="nav-link-text">Calendario TIS</span>
               </a>

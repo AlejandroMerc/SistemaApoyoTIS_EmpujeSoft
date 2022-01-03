@@ -20,4 +20,9 @@ class Evento extends Model
     protected $fillable = ['title','description','start','end','calendario_id'];
 
     public $timestamps = false;
+
+    public function calendario()
+    {
+        return $this->belongsTo(Calendario::class);
+    }
 }

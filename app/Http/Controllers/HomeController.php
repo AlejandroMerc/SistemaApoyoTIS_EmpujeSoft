@@ -58,7 +58,8 @@ class HomeController extends Controller
                 } 
             }
         }
-        return view('home',['user_type' => $user_type, 'title' => $title],compact('publications'));
+        $semestre_id = $this->semestreActual()->id;
+        return view('home',['user_type' => $user_type, 'title' => $title, 'semestre_id' => $semestre_id],compact('publications'));
     }
 
     public function title($id){
