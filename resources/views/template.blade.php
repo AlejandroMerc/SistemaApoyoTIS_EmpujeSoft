@@ -11,7 +11,10 @@
                 <li class="nav-item dropdown">
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
-                        <i class="fas fa-plus-circle" style="font-size:24px;color:black;"></i>
+                        <h5>
+                            Crear  <i class="far fa-plus-square text-primary ml-2" style="font-size:24px;color:black;"></i> 
+                        </h5>
+                       
                     </div>
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right ">
@@ -57,8 +60,9 @@
                             <a href="{{ route('template-editor-id', ['id' => $template->id]) }}" role="button" class="list-group-item list-group-item-action">{{ $template->nombre }}</a>
                         </div>
                         <div class="ml-auto d-inline-flex">
-                            <button class="btn btn-secondary" onclick="deleteTemplate( {{ $template->id }} )">
-                                X
+                            <button class="btn" onclick="deleteTemplate( {{ $template->id }} )">
+                               <h3><i class="far fa-times-circle text-danger"></i>
+                                   </h3> 
                             </button>
                         </div>
                     </div>

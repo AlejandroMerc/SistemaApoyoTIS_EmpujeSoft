@@ -33,7 +33,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href=" {{ route('home') }} ">
-          <h1>SATIS</h1>
+          <h1><i class="fab fa-centercode"></i> SATIS</h1>
         </a>
       </div>
       <div class="navbar-inner">
@@ -44,40 +44,53 @@
             @if ($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
-                <i class="fas fa-bullhorn text-dark"></i>
+                <h5>
+                  <i class="fas fa-bullhorn text-dark"></i>
 
-                <span class="nav-link-text">Nueva Publicación</span>
+                  <span class="nav-link-text">Nueva Publicación</span>
+                </h5>
+                
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{{ route('createActivity') }}">
-                <i class="fas fa-tasks text-primary"></i>
+                <h5>
+                  <i class="fas fa-tasks text-primary"></i>
 
-                <span class="nav-link-text">Crear Actividad</span>
+                  <span class="nav-link-text">Crear Actividad</span>
+                </h5>
+                
               </a>
             </li>
             @endif
 
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
-                <i class="ni ni-bullet-list-67 text-green"></i>
-                <span class="nav-link-text">Listar GE</span>
+                <h5>
+                  <i class="ni ni-bullet-list-67 text-green"></i>
+                  <span class="nav-link-text">Listar GE</span>
+                </h5>
+               
               </a>
             </li>
             @if($user_type == 'admin')
             <li class="nav-item">
               <a class="nav-link" href={{ route('crearGrupo') }}>
-
-                <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">Crear Grupo</span>
+                <h5>
+                  <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                  <span class="nav-link-text">Crear Grupo</span>
+                </h5>
+                
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href={{ route('createSemester') }}>
-
-                <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">Crear Semestre</span>
+                <h5>
+                  <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                  <span class="nav-link-text">Crear Semestre</span>
+                </h5>
+              
               </a>
             </li>
             @endif
@@ -85,9 +98,20 @@
             @if($user_type == 'estudiante')
             <li class="nav-item">
               <a class="nav-link" href={{ route('registerGE') }}>
-
-                <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">Registrar GE</span>
+                <h5>
+                  <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                  <span class="nav-link-text">Registrar GE</span>
+                </h5>
+               
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioGE') }}>
+                <h5>
+                  <i class="fas fa-calendar-day"></i>
+                  <span class="nav-link-text">Planificacion</span>
+                </h5>
+                
               </a>
             </li>
             @endif
@@ -95,23 +119,32 @@
             @if($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href={{ route('template') }}>
-                <i class="far fa-file-text text-yellow"></i>
-                <span class="nav-link-text">Plantillas</span>
+                <h5>
+                  <i class="far fa-file-text text-yellow"></i>
+                  <span class="nav-link-text">Plantillas</span>
+                </h5>
+                
               </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href={{ route('calendarioTis') }}>
-                  <i class="far fa-file-text text-yellow"></i>
+              <a class="nav-link" href={{ route('calendarioTis') }}>
+                <h5>
+                  <i class="far fa-calendar-alt"></i>
                   <span class="nav-link-text">Calendario TIS</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href={{ route('calendarioGE') }}>
-                  <i class="far fa-file-text text-yellow"></i>
-                  <span class="nav-link-text">Calendario GE</span>
-                </a>
-              </li>
+                  </h5>
+                
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioGE') }}>
+               <h5>
+                <i class="fas fa-calendar-day text-primary"></i>
+                <span class="nav-link-text"> Calendario GE</span>
+                 </h5> 
+              </a>
+            </li>
+
             @endif
           </ul>
           <!-- Divider -->
