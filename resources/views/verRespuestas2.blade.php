@@ -16,12 +16,19 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">{{ __('Lista de Asignados') }}</div>
+                <div class="card-header">{{ __('Pendientes de entrega') }}</div>
                     <div class="card w-20">
                         @foreach ($asignados as $asignado)
                             <div class="card-body">
                                 <h5 class="card-title">{{$asignado->nombre_corto}}</h5>
-                                    <a class="btn btn-primary" onclick="verRespuestas( {{ $asignado->id }}, {{ $id }} )">Ver Respuestas</a>
+                                @if ($asignado->estado=="Aceptado")
+                                    <h6 class="text-success">{{$asignado->estado}}</h6>
+                                @elseif ($asignado->estado=="Revisado con observaciones")
+                                    <h6 class="text-primary">{{$asignado->estado}}</h6> 
+                                @else
+                                    <h6 class="text-danger">{{$asignado->estado}}</h6>
+                                @endif
+                                <a class="btn btn-primary" onclick="verRespuestas( {{ $asignado->id }}, {{ $id }}, '{{$asignado->estado}}' )">Ver Respuestas</a>
                             </div>
                         @endforeach
                     </div>
@@ -32,19 +39,24 @@
                     <div class="card-header">{{ __('Archivos') }}</div>
                         <div class="card w-60">
                             <div class="card-body" id='resultados'>
-
-
-                                <h5 class="card-title" id='status' hidden>Entregado</h5>
-
+                                    <h5 id='etiqueta' hidden>No hay entregas</h5>
                                     <div id='archivos_adjuntos'>
 
                                     </div>
 
                                     <a href="#" class="btn btn-primary mt-2" id='orden' hidden>Orden de Cambio</a>
-                                    <a href="#" class="btn btn-primary" id='aceptar' hidden>Aceptar Respuesta</a>
-
-
-
+                                    <form method="POST" action="{{route('aceptarEntrega')}}">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input id="actividad_id" type="number" class="form-control" name="actividad_id" value="" hidden>
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="grupoempresa_id" type="number" class="form-control"  name="grupoempresa_id" value="" hidden>
+                                        </div>
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" id='aceptar' hidden type="submit">Aceptar Respuesta</button>
+                                        </div>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -54,7 +66,7 @@
     </div>
 </div>
 <script>
-    async function verRespuestas(grupoempresa_id, activity_id) {
+    async function verRespuestas(grupoempresa_id, activity_id, estado) {
         var hostname = window.location.host;
 
         console.log(grupoempresa_id);
@@ -67,8 +79,10 @@
         var contenedor = document.getElementById('archivos_adjuntos');
         contenedor.innerHTML='';
 
-        json.forEach(element => {
+        var nroAdjuntos = 0;
 
+        json.forEach(element => {
+            nroAdjuntos++;
             var archivo = document.createElement('a');
             archivo.setAttribute('href','http://' + hostname + '/' + element['path']);
             archivo.setAttribute('class','card-link');
@@ -81,12 +95,26 @@
         var aceptarBtn = document.getElementById('aceptar');
 
         ordenBtn.setAttribute('href' ,"http://" + hostname + "/verRespuestasDos/correccion/"+grupoempresa_id+"/" +activity_id);
-        ordenBtn.hidden=false;
-        // aceptarBtn.hidden=false;
-
-        // document.getElementById('status').hidden = false;
-
-
+        if(estado === "No revisado" && nroAdjuntos > 0){
+            ordenBtn.hidden=false;
+            aceptarBtn.hidden=false;
+        }
+        else{
+            ordenBtn.hidden=true;
+            aceptarBtn.hidden=true;
+        }
+        if(nroAdjuntos === 0)
+        {
+            document.getElementById('etiqueta').hidden = false;
+        }
+        else
+        {
+            document.getElementById('etiqueta').hidden = true;
+        }
+        var hidden_actividad_id = document.getElementById('actividad_id');
+        hidden_actividad_id.value = activity_id;
+        var hidden_grupoempresa_id = document.getElementById('grupoempresa_id');
+        hidden_grupoempresa_id.value = grupoempresa_id;
     }
 </script>
 @endsection

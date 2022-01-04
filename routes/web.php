@@ -20,6 +20,7 @@ use App\Http\Controllers\ControllerEvent;
 use App\Http\Controllers\ControllerCalendar;
 use App\Http\Controllers\CalendarioEventoController;
 use App\Http\Controllers\CalendarioGEController;
+use App\Http\Controllers\VerRespuestasDosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -106,6 +107,7 @@ Route::get('verRespuestasDos/revision/{id_grupoempresa}/{id_activity}', [Activit
 Route::post('verRespuestasDos/revision/{id_grupoempresa}/{id_activity}', [ActivityResponseController::class, 'response'])->name('verRespuesta.revision');
 Route::get('verRespuestasDos/correccion/{id_grupoempresa}/{id_activity}', [ActivitySendCorrectionController::class, 'index'])->name('verRespuesta.correccion');
 Route::post('verRespuestasDos/correccion/{id_grupoempresa}/{id_activity}', [ActivitySendCorrectionController::class, 'sendActivity'])->name('verRespuesta.correccion');
+Route::post('aceptarEntrega', [VerRespuestasDosController::class, 'aceptar'])->name('aceptarEntrega');
 
 Route::get('/link', function () {
     Artisan::call('storage:link');

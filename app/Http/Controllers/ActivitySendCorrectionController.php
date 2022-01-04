@@ -12,6 +12,7 @@ use App\Models\Publicacion;
 use App\Models\Publicacion_grupo;
 use App\Models\Publicacion_grupoempresa;
 use App\Models\Publicacion_semestre;
+use App\Models\Revision;
 use App\Models\Semestre;
 use App\Models\User;
 use Carbon\Carbon;
@@ -117,6 +118,14 @@ class ActivitySendCorrectionController extends Controller
 
         if ($added && $added3)
         {
+            $actividad = Actividad::where('actividades.publicacion_id','=',$id_activity)->first();
+            $revision = new Revision;
+            $revision->actividad_id = $actividad->id;
+            $revision->grupoempresa_id = $id_grupoempresa;
+            $currentTime = Carbon::now();
+            $revision->fecha_revision = $currentTime->toDateTimeString();
+            $revision->estado = "Revisado con observaciones";
+            $query = $revision->save();
             return redirect('home');
         }
 
