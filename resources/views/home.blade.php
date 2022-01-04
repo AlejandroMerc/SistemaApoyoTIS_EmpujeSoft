@@ -25,7 +25,7 @@
 
           <p class="card-text">{{$publication->descripcion_publicacion}}</p>
           @foreach($publication->adjuntos as $adjunto)
-            <p><a href="{{asset($adjunto->path)}}" class="card-link">{{$adjunto->name}}</a></p>
+            <p><a href="{{asset($adjunto->path)}}" class="card-link"><i class="fas fa-paperclip"></i> {{$adjunto->name}}</a></p>
           @endforeach
           @if ($publication->tipo=="Actividad")
           @if ($user_type == 'asesor_tis')
