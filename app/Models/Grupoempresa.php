@@ -49,4 +49,9 @@ class Grupoempresa extends Model
     {
         return $this->hasMany(Estudiante::class);
     }
+
+    public function calendario_ge()
+    {
+        return $this->hasOne(Calendario_grupoempresa::class);
+    }
 }

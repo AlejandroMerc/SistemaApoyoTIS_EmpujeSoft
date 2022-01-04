@@ -19,6 +19,11 @@
   <link rel="stylesheet" href="/assets/css/argon.css?v=1.2.0" type="text/css">
   <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
+
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -28,7 +33,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href=" {{ route('home') }} ">
-          <h1>EmpujeSoft</h1>
+          <h1><i class="fab fa-centercode"></i> SATIS</h1>
         </a>
       </div>
       <div class="navbar-inner">
@@ -39,40 +44,53 @@
             @if ($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
-                <i class="fas fa-bullhorn text-dark"></i>
+                <h5>
+                  <i class="fas fa-bullhorn text-dark"></i>
 
-                <span class="nav-link-text">Nueva Publicación</span>
+                  <span class="nav-link-text">Nueva Publicación</span>
+                </h5>
+                
               </a>
             </li>
 
             <li class="nav-item">
               <a class="nav-link" href="{{ route('createActivity') }}">
-                <i class="fas fa-tasks text-primary"></i>
+                <h5>
+                  <i class="fas fa-tasks text-primary"></i>
 
-                <span class="nav-link-text">Crear Actividad</span>
+                  <span class="nav-link-text">Crear Actividad</span>
+                </h5>
+                
               </a>
             </li>
             @endif
 
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
-                <i class="ni ni-bullet-list-67 text-green"></i>
-                <span class="nav-link-text">Listar GE</span>
+                <h5>
+                  <i class="ni ni-bullet-list-67 text-green"></i>
+                  <span class="nav-link-text">Listar GE</span>
+                </h5>
+               
               </a>
             </li>
             @if($user_type == 'admin')
             <li class="nav-item">
               <a class="nav-link" href={{ route('crearGrupo') }}>
-
-                <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">Crear Grupo</span>
+                <h5>
+                  <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                  <span class="nav-link-text">Crear Grupo</span>
+                </h5>
+                
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href={{ route('createSemester') }}>
-
-                <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">Crear Semestre</span>
+                <h5>
+                  <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                  <span class="nav-link-text">Crear Semestre</span>
+                </h5>
+              
               </a>
             </li>
             @endif
@@ -80,9 +98,32 @@
             @if($user_type == 'estudiante')
             <li class="nav-item">
               <a class="nav-link" href={{ route('registerGE') }}>
-
-                <i class="fa fa-users text-blue" aria-hidden="true"></i>
-                <span class="nav-link-text">Registrar GE</span>
+                <h5>
+                  <i class="fa fa-users text-blue" aria-hidden="true"></i>
+                  <span class="nav-link-text">Registrar GE</span>
+                </h5>
+               
+              </a>
+            </li>
+            
+            @if ($title !== "Sin grupoempresa")
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioGE') }}>
+                <h5>
+                  <i class="fas fa-calendar-day"></i>
+                  <span class="nav-link-text">Planificacion</span>
+                </h5>
+                
+              </a>
+            </li>
+            @endif
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioTis') }}>
+                <h5>
+                  <i class="far fa-calendar-alt"></i>
+                  <span class="nav-link-text">Calendario TIS</span>
+                  </h5>
+                
               </a>
             </li>
             @endif
@@ -90,10 +131,32 @@
             @if($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href={{ route('template') }}>
-                <i class="far fa-file-text text-yellow"></i>
-                <span class="nav-link-text">Plantillas</span>
+                <h5>
+                  <i class="far fa-file-text text-yellow"></i>
+                  <span class="nav-link-text">Plantillas</span>
+                </h5>
+                
               </a>
             </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioTis') }}>
+                <h5>
+                  <i class="far fa-calendar-alt"></i>
+                  <span class="nav-link-text">Calendario TIS</span>
+                  </h5>
+                
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioGE') }}>
+               <h5>
+                <i class="fas fa-calendar-day text-primary"></i>
+                <span class="nav-link-text"> Calendario GE</span>
+                 </h5> 
+              </a>
+            </li>
+
             @endif
           </ul>
           <!-- Divider -->
@@ -162,9 +225,9 @@
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg">
-                  </span>
+                    <span class="avatar avatar-sm rounded-circle">
+                        <i class="far fa-user"></i>
+                      </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
                   </div>
@@ -209,7 +272,7 @@
       </div>
     </div> --}}
 
-<main class="py-2">
+<main class="p-2">
     @yield('content')
 </main>
 

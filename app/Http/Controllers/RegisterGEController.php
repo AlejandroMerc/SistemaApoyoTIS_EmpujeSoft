@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Asesor;
+use App\Models\Calendario;
+use App\Models\Calendario_grupoempresa;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
 use App\Models\User;
@@ -42,7 +44,7 @@ class RegisterGEController extends Controller
         }
 
         $user_rep_legal = User::where('email','=',$request->miembros[0])->first();
-        $rep_legal = $user_rep_legal->estudiante->first();
+        $rep_legal = Estudiante::where('estudiantes.user_id','=',$user_rep_legal->id)->first();
         $grupo = $rep_legal->grupo;
 
         $grupoempresa = new Grupoempresa;
@@ -64,6 +66,13 @@ class RegisterGEController extends Controller
 
         if($query)
         {
+          $calendario = new Calendario;
+          $query2 = $calendario->save();
+
+          $calendario_ge = new Calendario_grupoempresa;
+          $calendario_ge->calendario_id = $calendario->id;
+          $calendario_ge->grupoempresa_id = $grupoempresa->id;
+          $query3 = $calendario_ge->save();
           session()->flash('success','GrupoEmpresa registrada');
           return redirect('listarGrupoEmpresa');
         }

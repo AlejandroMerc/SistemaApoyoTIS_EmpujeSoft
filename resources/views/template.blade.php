@@ -11,7 +11,10 @@
                 <li class="nav-item dropdown">
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
-                        <i class="fas fa-plus-circle" style="font-size:24px;color:black;"></i>
+                        <h5>
+                            Crear  <i class="far fa-plus-square text-primary ml-2" style="font-size:24px;color:black;"></i> 
+                        </h5>
+                       
                     </div>
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right ">
@@ -41,10 +44,29 @@
         </div>
         </div>
     @else
-        <div class="container-fluid list-group">
+        {{-- <div class="container-fluid list-group">
         @foreach ($template_list as $template)
             <a href="{{ route('template-editor-id', ['id' => $template->id]) }}" role="button" class="list-group-item list-group-item-action">{{ $template->nombre }}</a>
+            <button class="btn btn-default btn-xs pull-right remove-item">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
         @endforeach
+        </div> --}}
+
+        <div class="container-fluid">
+            @foreach ($template_list as $template)
+                    <div class="container-fluid d-flex">
+                        <div class="d-flex" style="width: 100%; max-width: 100%;">
+                            <a href="{{ route('template-editor-id', ['id' => $template->id]) }}" role="button" class="list-group-item list-group-item-action">{{ $template->nombre }}</a>
+                        </div>
+                        <div class="ml-auto d-inline-flex">
+                            <button class="btn" onclick="deleteTemplate( {{ $template->id }} )">
+                               <h3><i class="far fa-times-circle text-danger"></i>
+                                   </h3> 
+                            </button>
+                        </div>
+                    </div>
+            @endforeach
         </div>
     @endif
 
@@ -54,6 +76,19 @@
         var exist = '{{Session::has('alert')}}';
         if(exist){
             alert(msg);
+        }
+
+        async function deleteTemplate(templateId) {
+            try{
+                var hostname = window.location.host;
+                var response = await fetch("http://" + hostname + "/api/template/delete/" +templateId);
+                if (response) {
+                    location.reload();
+                }
+            } catch (error) {
+                error;
+                console.log(error);
+            }
         }
 
         function uploadingFile(oInput) {

@@ -4,8 +4,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Inicio de Sesion') }}</div>
+            <div class="card border border-dark rounded-lg">
+                <div class="card-header bg-primary text-white"><h5><b><i class="fas fa-user"></i> {{ __('Inicio de Sesion') }}</b></h5></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">                        

@@ -36,7 +36,7 @@
                         <div class="form-group row">    
                         <label for="telefono_ge" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
                             <div class="col-md-6">                               
-                                    <input id="telefono_ge" type="number" class="form-control @error('telefono_ge') is-invalid @enderror" min="19000000" max="99999999" name = "telefono_ge" value="{{ old('telefono_ge') }}" required autocomplete="telefono_ge">
+                                    <input id="telefono_ge" type="number" class="form-control @error('telefono_ge') is-invalid @enderror" min="1000000" max="99999999" name = "telefono_ge" value="{{ old('telefono_ge') }}" required autocomplete="telefono_ge">
                                     @error('telefono_ge')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -84,7 +84,7 @@
                         </div>
                         <table class="table table-bordered" id="dynamicAddRemove">
                             <tr>
-                                <th>Miembros</th>
+                                <th>Correos electrónicos de los miembros</th>
                                 <th></th>
                             </tr>
                             <tr>

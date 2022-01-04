@@ -142,6 +142,4 @@ class TemplateListController extends Controller
         }
         return $id;
     }
-
-
 }

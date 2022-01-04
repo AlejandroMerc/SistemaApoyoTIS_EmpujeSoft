@@ -1,13 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Actividad;
 use App\Models\Grupo;
 use App\Models\Grupoempresa;
 use App\Models\Publicacion;
 use App\Models\Publicacion_grupo;
 use App\Models\Publicacion_grupoempresa;
 use App\Models\Publicacion_semestre;
+use App\Models\Revision;
 use App\Models\Semestre;
+use Carbon\Carbon;
+use DateTime;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 
@@ -20,7 +26,22 @@ class VerRespuestasDosController extends Controller
 
     public function verRespuestasDos($publicacion_id){
         $asignados = $this->getAsignados($publicacion_id);
-        return view('verRespuestas2', ['id' => $publicacion_id], compact('asignados'));
+        foreach($asignados as $asignado)
+        {
+            $actividad_id = Actividad::where('publicacion_id',$publicacion_id)->first()->id;
+            $revision = Revision::where('grupoempresa_id','=',$asignado->id)
+            ->where('actividad_id','=',$actividad_id)->first();
+            if($revision == null)
+            {
+                $asignado['estado'] = 'No revisado';
+            }
+            else
+            {
+                $asignado['estado'] = $revision->estado;
+            }
+        }
+        $fecha_limite = Actividad::where('publicacion_id',$publicacion_id)->first()->fecha_fin_actividad;
+        return view('verRespuestas2', ['id' => $publicacion_id, 'fecha_limite'=>$fecha_limite], compact('asignados'));
     }
 
     public function getAsignados($publicacion_id)
@@ -60,5 +81,18 @@ class VerRespuestasDosController extends Controller
             }
         }
         return $asignados;
+    }
+
+    public function aceptar(Request $request)
+    {
+        $actividad = Actividad::where('actividades.publicacion_id','=',$request->actividad_id)->first();
+        $revision = new Revision;
+        $revision->actividad_id = $actividad->id;
+        $revision->grupoempresa_id = $request->grupoempresa_id;
+        $currentTime = Carbon::now();
+        $revision->fecha_revision = $currentTime->toDateTimeString();
+        $revision->estado = "Aceptado";
+        $query = $revision->save();
+        return $this->verRespuestasDos($request->actividad_id);
     }
 }
