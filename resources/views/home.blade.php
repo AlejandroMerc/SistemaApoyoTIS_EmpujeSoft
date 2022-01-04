@@ -9,6 +9,15 @@
     <div class="col-md-12">
         @if ( $publications->isEmpty() )
          {{-- aqui poner bienvenida --}}
+         <div class="row justify-content-center mt-5">
+           <div class="col-auto">
+              <h1 class="text-muted">
+                Bienvenido
+              </h1>
+           </div>
+            
+         </div>
+        
         @else
             @foreach ($publications as $publication)
                 <div class="card border border-secondary border-1 rounded-lg"  value={{$publication->id}}>
