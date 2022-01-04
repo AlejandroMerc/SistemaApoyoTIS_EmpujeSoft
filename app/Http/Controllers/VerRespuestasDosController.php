@@ -28,7 +28,9 @@ class VerRespuestasDosController extends Controller
         $asignados = $this->getAsignados($publicacion_id);
         foreach($asignados as $asignado)
         {
-            $revision = Revision::where('grupoempresa_id','=',$asignado->id)->first();
+            $actividad_id = Actividad::where('publicacion_id',$publicacion_id)->first()->id;
+            $revision = Revision::where('grupoempresa_id','=',$asignado->id)
+            ->where('actividad_id','=',$actividad_id)->first();
             if($revision == null)
             {
                 $asignado['estado'] = 'No revisado';
