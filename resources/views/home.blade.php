@@ -235,20 +235,20 @@
     <br>
     <div class="col-md-12">
       @foreach ($publications as $publication)
-      <div class="card border border-light rounded-lg"  value={{$publication->id}}>
+      <div class="card border border-secondary border-1 rounded-lg"  value={{$publication->id}}>
         @if ($publication->tipo=="Publicación")
-            <div class="card-header border border-light  bg-light text-black-50">
-              <i class="fas fa-bullhorn text-black-50"></i>
+            <div class="card-header border border-1 bg-opacity-10 bg-secondary text-white" style="opacity: .8;">
+              <i class="fas fa-bullhorn text-white-30"></i>
               {{$publication->titulo_publicacion}}
             </div>
         @else
-        <div class="card-header border border-light text-white bg-info text-muted">
-          <i class="fas fa-tasks text-white text-muted"></i>
+        <div class="card-header border border-1 text-white bg-info">
+          <i class="fas fa-tasks text-white-30"></i>
           {{$publication->titulo_publicacion}}
         </div>
         @endif
 
-        <div class="card-body  border border-light">
+        <div class="card-body  border border-1">
 
           <p class="card-text">{{$publication->descripcion_publicacion}}</p>
           @foreach($publication->adjuntos as $adjunto)
@@ -265,7 +265,7 @@
 
 
         </div>
-        <div class="card-footer text-muted border border-light ">
+        <div class="card-footer text-muted border border-1 ">
 
          {{$publication->name}} {{$publication->lastname}} a las: {{$publication->fecha_publicacion}}
         </div>
