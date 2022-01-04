@@ -16,7 +16,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">{{ __('Pendientes de entrega') }}</div>
+                <div class="card-header">{{ __('Grupoempresas asignadas') }}</div>
                     <div class="card w-20">
                         @foreach ($asignados as $asignado)
                             <div class="card-body">

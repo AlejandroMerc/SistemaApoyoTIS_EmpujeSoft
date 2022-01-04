@@ -105,6 +105,8 @@
                
               </a>
             </li>
+            
+            @if ($title !== "Sin grupoempresa")
             <li class="nav-item">
               <a class="nav-link" href={{ route('calendarioGE') }}>
                 <h5>
@@ -114,6 +116,7 @@
                 
               </a>
             </li>
+            @endif
             <li class="nav-item">
               <a class="nav-link" href={{ route('calendarioTis') }}>
                 <h5>
