@@ -4,22 +4,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-sm-3">
-            <div class="card">
-                <div class="card-header">{{ __('Grupo Empresas') }}</div>
-                    <div class="card w-30">
-                        @foreach ($grupoEmpresas as $grupoempresa)    
-                            <div class="card-body">
-                                    <button id='ge_button{{$grupoempresa->id}}' onclick='showCalendar({{$grupoempresa->id}},{{$grupoempresa->calendario_id}},"{{$grupoempresa->nombre_corto}}")' class="btn btn-primary" name="{{$grupoempresa->id}}" value="{{$grupoempresa->id}}">{{$grupoempresa->nombre_corto}}</button>
-                            </div>
-                        @endforeach 
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 <div class="card">
-                    <div id="titulo" class="card-header">{{ __('Calendario de Grupo Empresas') }}
+                    <div id="titulo" class="card-header">{{ __('Calendario') }}
                     </div>
                         <div class="card w-20">
                             <div class="card-body">
@@ -27,7 +14,8 @@
                                         <div class="form-group row">
                                           <div class="container">
                                             <div id="calendario2">
-                                          </div> 
+                                          </div>
+                                          <input type="hidden" class="form-control" id="grupoempresa_id" name="grupoempresa_id" value="{{$grupoempresa_id}}">
                                         </div>
                                 </div>
                             </div>
@@ -68,34 +56,23 @@
                     <input type="date" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de Fin">
                 </div>
                 <div class="form-group">
-                    <input type="hidden" class="form-control" id="calendario_id" name="calendario_id" value="" onload="load()">
+                    <input type="hidden" class="form-control" id="calendario_id" name="calendario_id" value="{{$calendario_id}}" onload="load()">
                 </div>      
             </form>
           </div>
           <div class="modal-footer">
-            <button @if($user_type == "asesor_tis") hidden @endif type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
-            <button @if($user_type == "asesor_tis") hidden @endif type="button" class="btn btn-warning" id="btn_modificar">Modificar</button>
-            <button @if($user_type == "asesor_tis") hidden @endif type="button" class="btn btn-danger" id="btn_eliminar">Eliminar</button>
+            <button type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
+            <button @if($user_type == "estudiante") hidden @endif type="button" class="btn btn-warning" id="btn_modificar">Modificar</button>
+            <button @if($user_type == "estudiante") hidden @endif type="button" class="btn btn-danger" id="btn_eliminar">Eliminar</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>            
           </div>
         </div>
       </div>
     </div>
 
-    <script src="{{ asset('js/calendarioGE.js') }}" ></script>
+    <script src="{{ asset('js/calendarioEstudiante.js') }}" ></script>
     <script>
-        async function showCalendar(grupoempresa_id, calendario_id, nombre_corto){
-            console.log(nombre_corto);
-            calendario(grupoempresa_id);
-            var hostname = window.location.host;
-            console.log(grupoempresa_id);
-            var response = await fetch("http://" + hostname + "/api/calendarioGE/" +grupoempresa_id);
-            var json = await response.json();
-            console.log(json);
-            var hidden_id = document.getElementById('calendario_id');
-            hidden_id.value = calendario_id;
-            document.getElementById('titulo').innerHTML = nombre_corto;
-        };
+        
     </script>
 @endsection
 

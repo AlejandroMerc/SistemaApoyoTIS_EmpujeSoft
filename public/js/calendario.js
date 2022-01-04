@@ -56,13 +56,6 @@ document.getElementById("btn_guardar").addEventListener("click",function(){
   console.log(calendario_id);
     enviarDatos("/evento/agregar/"+calendario_id);
 });
-
-document.getElementById("btn_eliminar").addEventListener("click",function(){
-    enviarDatos("/evento/borrar/"+formulario.id.value);
-});
-    //document.getElementById("btn_modificar").addEventListener("click",function(){
-    //    enviarDatos("/evento/actualizar/"+formulario.id.value);
-    //});
     
 function enviarDatos(url){
     const datos = new FormData(formulario);

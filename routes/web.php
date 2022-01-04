@@ -81,7 +81,7 @@ Route::post('/evento/borrar/{id}', [CalendarioEventoController::class, 'destroy'
 });
 
 Route::get('/calendarioGE', [CalendarioGEController::class, 'index'])->name('calendarioGE');
-Route::post('/calendarioGE/mostrar', [CalendarioGEController::class, 'show']);
+//Route::post('/calendarioGE/mostrar', [CalendarioGEController::class, 'show']);
 Route::post('/calendarioGE/mostrar/{ge_id}', [CalendarioGEController::class, 'showCalendarGE'])->name('mostrarGE');
 
 Route::get('/crearEventoTIS', [App\Http\Controllers\CalendarioTISController::class, 'showCreateEventTIS'])->name('crearEventoTIS');

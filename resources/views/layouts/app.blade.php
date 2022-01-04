@@ -121,7 +121,6 @@
         @yield('content')
     </main>
     <script src="{{ asset('js/calendario.js') }}" ></script>
-    <script src="{{ asset('js/calendarioGE.js') }}" ></script>
     </div>
     <script type="text/javascript">
         $(document).ready(function() {

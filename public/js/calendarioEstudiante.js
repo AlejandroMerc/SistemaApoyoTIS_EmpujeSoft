@@ -1,10 +1,11 @@
 var calendario_id = 0;
+
 window.onload = load;
 function load(){
   calendario_id = document.getElementById('calendario_id').value;
   console.log(calendario_id);
 }
-function calendario(grupoempresa_id) {
+document.addEventListener('DOMContentLoaded', function() {
   let formulario = document.querySelector("#formularioEventos");
   var calendarEl = document.getElementById('calendario2');
   var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -18,7 +19,7 @@ function calendario(grupoempresa_id) {
   },
   //events: baseURL+"/evento/mostrar",
   eventSources:{
-    url: baseURL+"/calendarioGE/mostrar/"+grupoempresa_id,
+    url: baseURL+"/calendarioGE/mostrar/" + document.getElementById('grupoempresa_id').value,
     method:"POST",
     extraParams:{
       _token: formulario._token.value,
@@ -52,9 +53,7 @@ function calendario(grupoempresa_id) {
 calendar.render();
 
 document.getElementById("btn_guardar").addEventListener("click",function(){
-  var input_id = document.getElementById('calendario_id').value;
-  console.log(input_id);
-  enviarDatos("/evento/agregar/"+input_id);
+    enviarDatos("/evento/agregar/"+document.getElementById('calendario_id').value);
 });
     
 function enviarDatos(url){
@@ -71,6 +70,4 @@ function enviarDatos(url){
         }
     )
 }
-}
-
-calendario()
+});

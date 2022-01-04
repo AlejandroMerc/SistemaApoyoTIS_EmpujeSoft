@@ -40,7 +40,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
+        <button type="button" @if($user_type == "estudiante") hidden @endif class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>            
       </div>
     </div>

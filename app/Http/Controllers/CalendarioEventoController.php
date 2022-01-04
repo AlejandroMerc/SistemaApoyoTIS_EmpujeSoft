@@ -8,6 +8,7 @@ use App\Models\Calendario;
 use App\Models\Calendario_semestre;
 use App\Models\Semestre;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class CalendarioEventoController extends Controller
 {
@@ -17,9 +18,10 @@ class CalendarioEventoController extends Controller
     }
     
     public function index(){
+        $user_type = Session::get('type');
         $semestre = $this->semestreActual();
         $calendario = $semestre->calendario_semestre->calendario;
-        return view('evento.index', ['calendario_id' => $calendario->id]);
+        return view('evento.index', ['calendario_id' => $calendario->id, 'user_type' => $user_type]);
     }
 
     public function store(Request $request){
@@ -28,8 +30,18 @@ class CalendarioEventoController extends Controller
         return response()->json($evento);
     }
     public function show(){
-        $evento = Evento::all();
-        return response()->json($evento);
+        $semestre = $this->semestreActual();
+        $eventos = Semestre::where('semestres.id','=',$semestre->id)
+        ->join('calendario_semestres','semestres.id','=','calendario_semestres.semestre_id')
+        ->join('calendarios','calendarios.id','=','calendario_semestres.calendario_id')
+        ->join('eventos','calendarios.id','=','eventos.calendario_id')
+        ->get();
+        return response()->json($eventos);
+    }
+    public function showCalendar($calendar_id)
+    {
+        $eventos = Calendario::find($calendar_id)->eventos;
+        return response()->json($eventos, 200);
     }
     public function edit($id){
         $evento = Evento::find($id);

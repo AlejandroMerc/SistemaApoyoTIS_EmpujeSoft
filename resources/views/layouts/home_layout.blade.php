@@ -114,6 +114,15 @@
                 
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioTis') }}>
+                <h5>
+                  <i class="far fa-calendar-alt"></i>
+                  <span class="nav-link-text">Calendario TIS</span>
+                  </h5>
+                
+              </a>
+            </li>
             @endif
 
             @if($user_type == 'asesor_tis')

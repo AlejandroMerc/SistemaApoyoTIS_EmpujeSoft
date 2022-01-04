@@ -12,4 +12,9 @@ class Calendario_grupoempresa extends Model
     protected $fillable = ['calendario_id','grupoempresa_id'];
 
     public $timestamps = false;
+
+    public function calendario()
+    {
+        return $this->belongsTo(Calendario::class);
+    }
 }
