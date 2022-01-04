@@ -27,10 +27,14 @@ class TurnInActivityController extends Controller
         $idUser=Session::get('id');
         $user = User::find($idUser);
         $estudiante=$user->estudiante()->first();
+        if($estudiante->grupoempresa_id == null)
+        {
+            return redirect()->back();
+        }
 
         $entregado=false;
         $actividad=Actividad::where('publicacion_id','=',$publicacion_id)->first();
-        
+
         $hayEntregado=Entrega::where('actividad_id','=',$actividad->id)->where('grupoempresa_id','=',$estudiante->grupoempresa_id)->first();
         if($hayEntregado!=null){
             $entregado=true;

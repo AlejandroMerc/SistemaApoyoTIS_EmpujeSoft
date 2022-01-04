@@ -18,18 +18,11 @@ class perfilGEController extends Controller
     }
     public function index($id){
         $user_type = Session::get('type');
-        //$id = Session::get('id');
-
-        $title = 'Asesor';
+        $title = 'Perfil GE';
         $GrupoE = Grupoempresa::where('id','=',$id)->first();
-        //$GE = Grupoempresa::where('id','=',$id)->select('*')->get();
-        //$GrupoE=head($GE);         
-        
-        //$GrupoE=head($GE);
-        //$rep_legal_id=1;
         $rep_legal_id=$GrupoE->rep_legal_id;
-        $representante = User::join("estudiantes","estudiantes.user_id","=","users.id")
-        ->where('estudiantes.id','=',$rep_legal_id)
+        $representante = Estudiante::where('estudiantes.id','=',$rep_legal_id)
+        ->join('users','users.id','=','estudiantes.user_id')
         ->select('users.name','users.lastname')->first();
         
         $integrantesArray = User::join("estudiantes","estudiantes.user_id","=","users.id")

@@ -137,8 +137,6 @@
                             <div class="col-md-6">
 
                                 <select id="toWhom"  class="form-control @error('toWhom') is-invalid @enderror" name="toWhom">
-                                    <option value="everybody">Todos</option>
-
                                     @foreach ($grupos as $grupo)
                                     <option value='grupo, {{$grupo->id}}'>Grupo:  {{$grupo->sigla_grupo}}</option>
                                     @endforeach
