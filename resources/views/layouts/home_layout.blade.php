@@ -49,7 +49,7 @@
 
                   <span class="nav-link-text">Nueva Publicación</span>
                 </h5>
-                
+
               </a>
             </li>
 
@@ -60,7 +60,7 @@
 
                   <span class="nav-link-text">Crear Actividad</span>
                 </h5>
-                
+
               </a>
             </li>
             @endif
@@ -71,7 +71,7 @@
                   <i class="ni ni-bullet-list-67 text-green"></i>
                   <span class="nav-link-text">Listar GE</span>
                 </h5>
-               
+
               </a>
             </li>
             @if($user_type == 'admin')
@@ -81,7 +81,7 @@
                   <i class="fa fa-users text-blue" aria-hidden="true"></i>
                   <span class="nav-link-text">Crear Grupo</span>
                 </h5>
-                
+
               </a>
             </li>
             <li class="nav-item">
@@ -90,7 +90,7 @@
                   <i class="fa fa-users text-blue" aria-hidden="true"></i>
                   <span class="nav-link-text">Crear Semestre</span>
                 </h5>
-              
+
               </a>
             </li>
             @endif
@@ -102,25 +102,27 @@
                   <i class="fa fa-users text-blue" aria-hidden="true"></i>
                   <span class="nav-link-text">Registrar GE</span>
                 </h5>
-               
+
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href={{ route('calendarioGE') }}>
-                <h5>
-                  <i class="fas fa-calendar-day"></i>
-                  <span class="nav-link-text">Planificacion</span>
-                </h5>
-                
-              </a>
-            </li>
+                @if ($title !== "Sin grupoempresa")
+                <li class="nav-item">
+                <a class="nav-link" href={{ route('calendarioGE') }}>
+                    <h5>
+                    <i class="fas fa-calendar-day"></i>
+                    <span class="nav-link-text">Planificacion</span>
+                    </h5>
+
+                </a>
+                </li>
+                @endif
             <li class="nav-item">
               <a class="nav-link" href={{ route('calendarioTis') }}>
                 <h5>
                   <i class="far fa-calendar-alt"></i>
                   <span class="nav-link-text">Calendario TIS</span>
                   </h5>
-                
+
               </a>
             </li>
             @endif
@@ -132,7 +134,7 @@
                   <i class="far fa-file-text text-yellow"></i>
                   <span class="nav-link-text">Plantillas</span>
                 </h5>
-                
+
               </a>
             </li>
 
@@ -142,7 +144,7 @@
                   <i class="far fa-calendar-alt"></i>
                   <span class="nav-link-text">Calendario TIS</span>
                   </h5>
-                
+
               </a>
             </li>
             <li class="nav-item">
@@ -150,7 +152,7 @@
                <h5>
                 <i class="fas fa-calendar-day text-primary"></i>
                 <span class="nav-link-text"> Calendario GE</span>
-                 </h5> 
+                 </h5>
               </a>
             </li>
 
