@@ -43,7 +43,7 @@
                             {{$grupoempresa->id}}
                         </td>
                         <td>
-                            {{$grupoempresa->nombre_corto}}
+                            <a href="{{ route('perfilGE',$grupoempresa->id) }}" method('POST') action="{{ route('perfilGE',$grupoempresa->id) }}">{{$grupoempresa->nombre_corto}}</a>
                         </td>
                         <td>
                             {{$grupoempresa->nombre_largo}}
