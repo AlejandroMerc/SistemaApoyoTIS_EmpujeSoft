@@ -44,7 +44,7 @@ class RegisterGEController extends Controller
         }
 
         $user_rep_legal = User::where('email','=',$request->miembros[0])->first();
-        $rep_legal = $user_rep_legal->estudiante->first();
+        $rep_legal = Estudiante::where('estudiantes.user_id','=',$user_rep_legal->id)->first();
         $grupo = $rep_legal->grupo;
 
         $grupoempresa = new Grupoempresa;
