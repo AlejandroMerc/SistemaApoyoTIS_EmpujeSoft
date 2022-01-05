@@ -105,17 +105,18 @@
 
               </a>
             </li>
-                @if ($title !== "Sin grupoempresa")
-                <li class="nav-item">
-                <a class="nav-link" href={{ route('calendarioGE') }}>
-                    <h5>
-                    <i class="fas fa-calendar-day"></i>
-                    <span class="nav-link-text">Planificacion</span>
-                    </h5>
 
-                </a>
-                </li>
-                @endif
+            @if ($title !== "Sin grupoempresa")
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioGE') }}>
+                <h5>
+                  <i class="fas fa-calendar-day"></i>
+                  <span class="nav-link-text">Planificacion</span>
+                </h5>
+
+              </a>
+            </li>
+            @endif
             <li class="nav-item">
               <a class="nav-link" href={{ route('calendarioTis') }}>
                 <h5>

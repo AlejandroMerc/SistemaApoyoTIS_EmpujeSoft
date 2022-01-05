@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card border border-dark rounded-lg">
-                <div class="card-header bg-primary text-white"><strong><h5>Actividad de corrección</h5></div>
+                <div class="card-header bg-primary text-white"><strong><h5 class="text-white"> Orden de Cambio</h5></div>
 
                 <div class="card-body ">
                     <form method="POST" action="{{ route('verRespuesta.correccion', ['id_grupoempresa' => $id_grupoempresa, 'id_activity'=>$id_activity]) }}" enctype="multipart/form-data">
@@ -46,14 +46,14 @@
                                 <div class="input-group hdtuto control-group lst increment" >
                                     <input type="file" name="filenames[]" class="myfrm form-control">
                                     <div class="input-group-btn">
-                                      <button class="btn btn-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Add</button>
+                                      <button class="btn btn-outline-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Agregar</button>
                                     </div>
                                   </div>
                                   <div class="clone hide">
                                     <div class="hdtuto control-group lst input-group" style="margin-top:10px">
                                       <input type="file" name="filenames[]" class="myfrm form-control">
                                       <div class="input-group-btn">
-                                        <button class="btn btn-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Remove</button>
+                                        <button class="btn btn-outline-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Quitar</button>
                                       </div>
                                     </div>
                                   </div>
@@ -233,11 +233,11 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function() {
-      $(".btn-success").click(function(){
+      $(".btn-outline-success").click(function(){
           var lsthmtl = $(".clone").html();
           $(".increment").after(lsthmtl);
       });
-      $("body").on("click",".btn-danger",function(){
+      $("body").on("click",".btn-outline-danger",function(){
           $(this).parents(".hdtuto").remove();
       });
     });

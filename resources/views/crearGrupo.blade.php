@@ -19,7 +19,7 @@
                     @csrf
                     <div class="form-row">
                       <div class="col-sm-4">
-                        <label for="sigla" class="form-label">Sigla del grupo:</label>
+                        <label for="sigla" class="form-label col-form-label">Sigla del grupo:</label>
                       </div>
                       <div class="col-sm-8">
                         <input id="sigla" type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" placeholder="Sigla de grupo" required>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <label for="docente" class="form-label">Docente:</label>
+                            <label for="docente" class="form-label col-form-label">Docente:</label>
                         </div>
                         <div class="col-sm-8">
                             <div class="input-group mt-3 mb-3">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <label for="codigoInscricion" class="form-label">Codigo inscripcion:</label>
+                            <label for="codigoInscricion" class="form-label col-form-label">Codigo inscripcion:</label>
                         </div>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="codigoInscripcion" placeholder="Codigo de inscripcion" name="codigoInscripcion" value="{{ old('codigoInscripcion') }}" required>
