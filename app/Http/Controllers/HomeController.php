@@ -220,4 +220,32 @@ class HomeController extends Controller
         return $semestre;
     }
 
+    
+    public function destroy ( Request $request){
+        $publication=Publicacion::where('id','=',$request->idPublication);
+        
+        $publication->delete();
+        
+        $user_type = Session::get('type');
+        $id = Session::get('id');
+        $title = $this->title($id);
+       
+        $publications=$this->publicaciones($id);
+        if(!empty($publications))
+        {
+            foreach($publications as $pub ){
+                Log::info($pub);
+                $pub_id = $pub->id;
+                $activities = Actividad::where('publicacion_id','=',$pub_id)->first();
+                if(!empty($activities)){
+                    $pub->tipo="Actividad";  
+                    $pub->fechaDeEntrega=$activities->fecha_fin_actividad;
+                }else{
+                    $pub->tipo="Publicación"; 
+                } 
+            }
+        }
+        $semestre = $this->semestreActual();
+        return redirect()->route('home');
+    }
 }

@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
   <title>Sistema de Apoyo a la empresa TIS - SATIS</title>
   <!-- Favicon -->
   <link rel="icon" href="/assets/img/brand/favicon.png" type="image/png">
@@ -18,15 +20,19 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="/assets/css/argon.css?v=1.2.0" type="text/css">
   <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  
+  
 </head>
 
 <body>
+  
+
   <!-- Sidenav -->
   <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
@@ -213,36 +219,32 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item d-sm-none">
-              <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                <i class="ni ni-zoom-split-in"></i>
-              </a>
-            </li>
+            
 
 
           </ul>
           <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-            <li class="nav-item dropdown">
-              <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="media align-items-center">
-                    <span class="avatar avatar-sm rounded-circle">
-                        <i class="far fa-user"></i>
-                      </span>
-                  <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
-                  </div>
-                </div>
-              </a>
-              <div class="dropdown-menu  dropdown-menu-right ">
-
-                <div class="dropdown-divider"></div>
+            <li class="nav-item">
+            <div class="dropdown dropleft">
+              
+                <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <i class="far fa-user"></i>
+                  </span>
+              
+                  <span class="mb-0 text-sm text-white font-weight-bold">{{Auth::user()->name}}</span>
+              
+                </a>
+              <div class="dropdown-menu">
                 <a href="{{ url('/logout') }}" method="get" class="dropdown-item">
                   <i class="ni ni-user-run"></i>
                   <span>Cerrar Sesión</span>
                 </a>
               </div>
-            </li>
+            </div>
+          </li>
           </ul>
+          
         </div>
       </div>
     </nav>
@@ -279,6 +281,7 @@
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
+  
   <script src="/assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/vendor/js-cookie/js.cookie.js"></script>
@@ -289,6 +292,16 @@
   <script src="/assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="/assets/js/argon.js?v=1.2.0"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+
   @yield('scripts')
 </body>
 
