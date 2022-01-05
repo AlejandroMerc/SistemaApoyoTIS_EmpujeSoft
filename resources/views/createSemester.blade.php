@@ -1,6 +1,4 @@
-@extends('layouts.listGEmpresa')
-
-
+@extends('layouts.app')
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -9,14 +7,14 @@
     <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
     <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    @endsection
+@endsection
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Crear Semestre') }}</div>
+                <div class="card-header"><h1>Crear Semestre</h1></div>
                    <div class="card-body">
                     <form method="POST" action="{{ route('store-data') }}">
                         @csrf
@@ -83,6 +81,13 @@
         </div>
     </div>
 </div>
+<script> 
+     var msg = '{{Session::get('alert')}}';
+        var exist = '{{Session::has('alert')}}';
+        if(exist){
+            alert(msg);
+        }
+</script>
 @endsection
 
 @section('js')
@@ -98,4 +103,5 @@
         flatpickr('#published_at')
         flatpickr('#published_at2')
     </script>
+  
 @endsection

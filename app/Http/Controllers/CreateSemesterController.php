@@ -7,7 +7,7 @@ use App\Models\Calendario;
 use App\Models\Calendario_semestre;
 use App\Models\Semestre;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class CreateSemesterController extends Controller
 {
     public function __construct()
@@ -24,10 +24,23 @@ class CreateSemesterController extends Controller
             'deathline'=>['required','date'],
             'deathline2'=>['required','date']
         ]);
-        $correcto = strtotime($request -> deathline2) > strtotime($request -> deathline);
-        if(!$correcto){
-            return Redirect::back()->with('message','Fechas Incorrectas');
+        //$request -> deathline = Carbon::createFromFormat('Y-m-d H:i',$request -> deathline)->format('Y-m-d');
+        $format = "Y-m-d"; //or something else that date() accepts as a format
+        $fechaIni = $request->deathline;
+        $fechaFin = $request->deathline2;
+       
+        $fechaIni = date_format(date_create($fechaIni), $format);
+        $fechaFin = date_format(date_create($fechaFin), $format);
+        
+        $fecha_ini = strtotime($fechaIni);
+        $fecha_fin = strtotime($fechaFin);
+       
+        
+        if($fecha_fin < $fecha_ini){
+            //return "Fechas Incorrectas";
+            return redirect()->back()->with('alert','Fechas Incorrectas');
         }
+               
         $semest=new Semestre;
         $semest->year=$request->anio;
         $semest->periodo=$request->periodo;
@@ -40,9 +53,14 @@ class CreateSemesterController extends Controller
             $calendario_semestre->calendario_id = $calendario->id;
             $calendario_semestre->semestre_id = $semest->id;
             $save3 = $calendario_semestre->save();
-            return Redirect::back()->with('message','Se guardo correctamente !');
+            if($save3){
+                return redirect(route('home'))->with('alert','Semestre Creado !');
+            }else{
+                return redirect()->back()->with('alert','Error al Crear Semestre !');
+            }
+            
         }else{
-            return "no se guardo";
+            return redirect()->back()->with('alert','Error al Crear Semestre !');
         }
 
     }

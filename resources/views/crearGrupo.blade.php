@@ -1,41 +1,39 @@
 @extends('layouts.home_layout')
 
+@section('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
+    <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endsection
+
 @section('content')
-
-
-    <div class="container-sm border mt-3">
-        <div class="row">
-            <div class="col-sm-11 mt-3 mb-3">
-                <div class="text-center">
-                    <h3>Crear grupo de materia</h3>
-                </div>
-            </div>
-
-        </div>
-        <div class="row mx-auto">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6 border">
-                <form  method="POST" class="needs-validation" novalidate >
-                    @csrf
-                    <div class="form-row">
-                      <div class="col-sm-4">
-                        <label for="sigla" class="form-label col-form-label">Sigla del grupo:</label>
-                      </div>
-                      <div class="col-sm-8">
-                        <input id="sigla" type="text" name="sigla" class="form-control" value="{{ old('sigla') }}" placeholder="Sigla de grupo" required>
-                        <div class="valid-feedback">
-
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header"><h1>Crear Grupo</h1></div>
+                   <div class="card-body">
+                    <form method="POST" >
+                        @csrf
+                        <div class="form-group row">
+                         <label for="sigla" class="col-md-4 col-form-label text-md-right">{{ __('Sigla del Grupo ') }}</label>
+                            <div class="col-md-6">
+                                    <input id="sigla" type="text" class="form-control @error('sigla') is-invalid @enderror" name = "sigla" value="{{ old('sigla') }}" required autocomplete="sigla">
+                                    @error('sigla')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                            </div>
                         </div>
-                        <p style="color:#ff0000">{{ $errors->first('sigla') }}</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="docente" class="form-label col-form-label">Docente:</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="input-group mt-3 mb-3">
-                                <select id="docente" name="docente" class="form-select" value="{{ old('docente') }}" required>
+
+                        <div class="form-group row">
+                         <label for="docente" class="col-md-4 col-form-label text-md-right">{{ __('Docente') }}</label>
+                             <div class="col-md-6">
+                                    <select id="docente"  class="form-control @error('docente') is-invalid @enderror" name = "docente" value="{{ old('docente') }}" required autocomplete="docente">
                                     <option selected disabled value="">Docente...</option>
                                     @foreach($docentesArray as $docente)
                                     @if (old('docente') == $docente->id)
@@ -46,59 +44,65 @@
 
                                     @endforeach
                                 </select>
-                                <br>
-                                <p style="color:#ff0000">{{ $errors->first('docente') }}</p>
-
+                                    @error('docente')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="codigoInscricion" class="form-label col-form-label">Codigo inscripcion:</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="codigoInscripcion" placeholder="Codigo de inscripcion" name="codigoInscripcion" value="{{ old('codigoInscripcion') }}" required>
 
-                            <p style="color:#ff0000">{{ $errors->first('codigoInscripcion') }}</p>
+                        <div class="form-group row">
+                          <label for="codigoInscripcion" class="col-md-4 col-form-label text-md-right">{{ __('Codigo inscripcion') }}</label>
+                            <div class="col-md-6">
+                                <input type="text" id="codigoInscripcion" class="form-control @error('codigoInscripcion') is-invalid @enderror" name="codigoInscripcion" value="{{ old('codigoInscripcion') }}"required>
+                                @error('codigoInscripcion')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <label for="semestre" class="col-md-4 col-form-label text-md-right">Semestre</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <div class="input-group mt-3 mb-3">
-                                <select id="semestre" name="semestre" class="form-select" value="{{ old('semestre') }}" required>
+
+                        <div class="form-group row">
+                          <label for="semestre" class="col-md-4 col-form-label text-md-right">{{ __('Semestre') }}</label>
+                            <div class="col-md-6">
+                                <select  id="semestre" class="form-control @error('semestre') is-invalid @enderror" name="semestre" value="{{ old('semestre') }}" required>
                                     <option selected disabled value="">Semestre...</option>
-                                    @foreach($semestreArray as $semestre)
-                                    @if (old('semestre') == $semestre ->id)
-                                        <option value="{{ $semestre ->id }}" selected>{{ $semestre->periodo }}-{{ $semestre->year }}</option>
-                                    @else
-                                        <option value="{{ $semestre ->id }}">{{ $semestre->periodo }}-{{ $semestre->year }}</option>
-                                    @endif
+                                        @foreach($semestreArray as $semestre)
+                                        @if (old('semestre') == $semestre ->id)
+                                            <option value="{{ $semestre ->id }}" selected>{{ $semestre->periodo }}-{{ $semestre->year }}</option>
+                                        @else
+                                            <option value="{{ $semestre ->id }}">{{ $semestre->periodo }}-{{ $semestre->year }}</option>
+                                        @endif
 
-                                    @endforeach
+                                        @endforeach
                                 </select>
-
-                                <p style="color:#ff0000">{{ $errors->first('semestre') }}</p>
-
+                                @error('semestre')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-3"></div>
-                        <div class="col-sm-6">
-                            <button type="submit" id="crear" class="btn btn-primary">{{ __('Crear Grupo') }}</button>
-                        </div>
-                    </div>
 
-                </form>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" id="crear" class="btn btn-primary">
+                                    {{ __('Crear Grupo') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                   </div>
+                </div>
             </div>
-            <div class="col-sm-3"></div>
         </div>
     </div>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</div>
+
+
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
     <script>
         var msg = '{{Session::get('alert')}}';
         var exist = '{{Session::has('alert')}}';
