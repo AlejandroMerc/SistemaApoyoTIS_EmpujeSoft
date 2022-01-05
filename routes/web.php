@@ -21,6 +21,7 @@ use App\Http\Controllers\ControllerEvent;
 use App\Http\Controllers\ControllerCalendar;
 use App\Http\Controllers\CalendarioEventoController;
 use App\Http\Controllers\CalendarioGEController;
+use App\Http\Controllers\PostHandlerController;
 use App\Http\Controllers\VerRespuestasDosController;
 /*
 |--------------------------------------------------------------------------
@@ -115,7 +116,7 @@ Route::get('/perfilGE/{grupoE}', [perfilGEController::class, 'index'])->name('pe
 #Route::get('/link', function () {   
 Route::get('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'index'])->name('verRespuesta.revision');
 Route::post('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'response'])->name('verRespuesta.revision');
-
+Route::post('/postDestroy',[HomeController::class,'destroy'])->name('postDestroy');
 Route::get('/link', function () {
     Artisan::call('storage:link');
     });
