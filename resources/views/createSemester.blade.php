@@ -21,7 +21,7 @@
                         <div class="form-group row">
                          <label for="telefono_ge" class="col-md-4 col-form-label text-md-right">{{ __('Año ') }}</label>
                             <div class="col-md-6">
-                                    <input id="anio" type="number" class="form-control @error('anio') is-invalid @enderror" max='3000' min='1900' name = "anio" value="{{ old('anio') }}" required autocomplete="anio">
+                                    <input id="anio" type="number" class="form-control @error('anio') is-invalid @enderror" name = "anio" value="{{ old('anio', $current_year) }}" required autocomplete="anio">
                                     @error('anio')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -33,7 +33,7 @@
                         <div class="form-group row">
                          <label for="periodo" class="col-md-4 col-form-label text-md-right">{{ __('Periodo') }}</label>
                              <div class="col-md-6">
-                                    <input id="periodo" type="number" class="form-control @error('periodo') is-invalid @enderror" min="1" max="3" name = "periodo" value="{{ old('periodo') }}" required autocomplete="periodo">
+                                    <input id="periodo" type="number" class="form-control @error('periodo') is-invalid @enderror" name = "periodo" value="{{ old('periodo', 1) }}" required autocomplete="periodo">
                                     @error('periodo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -45,7 +45,7 @@
                         <div class="form-group row">
                           <label for="FechaInicio" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Inicial') }}</label>
                             <div class="col-md-6">
-                                <input type="datetime-local" id="FechaInicio" class="form-control @error('FechaInicio') is-invalid @enderror" name="FechaInicio"  required>
+                                <input type="datetime-local" id="FechaInicio" class="form-control @error('FechaInicio') is-invalid @enderror" name="FechaInicio" min="{{$current_year}}-01-01T00:00" max="{{$current_year+1}}-12-31T23:59" value="{{ old('FechaInicio', $current_year.'-01-01T00:00') }}" required>
                                 @error('FechaInicio')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -58,7 +58,7 @@
                           <label for="FechaFin" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Final') }}</label>
                             <div class="col-md-6">
 
-                                <input type="datetime-local" id="FechaFin" class="form-control @error('FechaFin') is-invalid @enderror" name="FechaFin" required>
+                                <input type="datetime-local" id="FechaFin" class="form-control @error('FechaFin') is-invalid @enderror" name="FechaFin" min="{{$current_year}}-01-01T00:00" max="{{$current_year+1}}-12-31T23:59" value="{{ old('FechaFin',$current_year.'-01-01T23:59') }}" required>
                                 @error('FechaFin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

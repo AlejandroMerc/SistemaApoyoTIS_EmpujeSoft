@@ -65,12 +65,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="codigo_inscripcion" class="col-md-4 col-form-label text-md-right">{{ __('Código de Inscripcion') }}</label>
+                            <label for="grupo" class="col-md-4 col-form-label text-md-right">{{ __('Grupo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="codigo_inscripcion" type="text" class="form-control @error('codigo_inscripcion') is-invalid @enderror" name="codigo_inscripcion" value="{{ old('codigo_inscripcion') }}" required autocomplete="codigo_inscripcion" autofocus>
-
-                                @error('codigo_inscripcion')
+                                <select id="grupo"  class="form-control @error('grupo') is-invalid @enderror" name="grupo" value="{{ old('grupo') }}" required autocomplete="grupo">
+                                    @foreach ($grupos as $grupo)
+                                        <option value={{$grupo->id}}>{{$grupo->sigla_grupo}} - {{ $asesores[$grupo->asesor_id] }}</option>
+                                    @endforeach
+                                </select>
+                                @error('required')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -78,15 +81,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="grupo" class="col-md-4 col-form-label text-md-right">{{ __('Grupo') }}</label>
+                            <label for="codigo_inscripcion" class="col-md-4 col-form-label text-md-right">{{ __('Código de Inscripcion') }}</label>
 
                             <div class="col-md-6">
-                                <select id="grupo"  class="form-control @error('grupo') is-invalid @enderror" name="grupo" value="{{ old('grupo') }}" required autocomplete="grupo">
-                                    @foreach ($grupos as $grupo)
-                                        <option value={{$grupo->id}}>{{$grupo->sigla_grupo}}</option>
-                                    @endforeach
-                                </select>
-                                @error('required')
+                                <input id="codigo_inscripcion" type="text" class="form-control @error('codigo_inscripcion') is-invalid @enderror" name="codigo_inscripcion" value="{{ old('codigo_inscripcion') }}" required autocomplete="codigo_inscripcion" autofocus>
+
+                                @error('codigo_inscripcion')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

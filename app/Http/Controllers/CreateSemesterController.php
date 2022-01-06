@@ -23,15 +23,25 @@ class CreateSemesterController extends Controller
         $id = Session::get('id');
         $title = $this->title($id, $user_type);
 
-        return view('createSemester', ['user_type' => $user_type, 'title' => $title]);
+        $current = date('Y');
+
+        return view('createSemester', ['user_type' => $user_type, 'title' => $title, 'current_year' => $current]);
     }
     public function store(Request $request){
-        $request->validate([
-            'anio' => ['required', 'numeric','min:1900','max:3000'],
-            'periodo'=>['required','numeric','min:1','max:3'],
+        $current = date('Y');
+        $rules = [
+            'anio' => ['required', 'numeric','min:'.$current, 'max:'.($current+1)],
+            'periodo'=>['required','numeric','min:1','max:4'],
             'FechaInicio'=>['required','date','before_or_equal:FechaFin'],
             'FechaFin'=>['required','date','after_or_equal:FechaInicio']
-        ]);
+        ];
+
+        $err_msg = [
+            'anio.min' => 'No se puede crear semestres para años pasados',
+            'anio.max' => 'No se puede crear semestres muy lejanos',
+            'periodo.max' => 'Periodo no debe ser mayor que 4'
+        ];
+        $this->validate($request, $rules, $err_msg);
 
         $semest=new Semestre;
         $semest->year=$request->anio;

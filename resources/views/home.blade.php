@@ -33,7 +33,7 @@
                             <div class="card border border-secondary border-1 rounded-lg"  value={{$publication->id}}>
                                 <div class="card-header border border-1 bg-opacity-10 bg-secondary text-white" style="opacity: .8;">
                                     <div class="row">
-                                        <div class="col-11">
+                                        <div class="col-10">
                                             <i class="fas fa-bullhorn text-white-30"></i>
                                             {{$publication->titulo_publicacion}}
                                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asesor;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Estudiante;
@@ -26,9 +27,17 @@ class RegisterStudentController extends Controller
         if(!empty($semestre))
         {
             $grupos = $semestre->grupos()
-            ->select('id','sigla_grupo')->get();
+            ->select('id','sigla_grupo','asesor_id')->get();
         }
-        return view('auth.registerStudent', compact('grupos'));
+        $asesores = [];
+        foreach ( $grupos as $grupo )
+        {
+            $asesor_id = $grupo->asesor_id;
+            $asesor_name = Asesor::where('asesores.id',$asesor_id)
+            ->join('users','asesores.user_id','=','users.id')->first()->name;
+            $asesores[$asesor_id] = $asesor_name;
+        }
+        return view('auth.registerStudent', ['asesores'=>$asesores], compact('grupos'));
     }
 
     public function registerData(Request $request)
