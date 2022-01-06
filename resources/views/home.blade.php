@@ -39,6 +39,10 @@
                                         </div>
                                         @if ($user_type == 'asesor_tis')
                                             <div class="col-1">
+                                                <a type="button" class="btn btn-warning" href="{{route('editPost',['publicacion_id' => $publication->id])}}">Editar</a>
+                                            </div>
+
+                                            <div class="col-1">
                                                 <button type="button" class="btn bg-light" onclick="deleting( {{ $publication->id }} , 'Publicación', ' {{ $publication->titulo_publicacion }}')">
                                                     <i class="fa fa-trash text-dark fa-lg"></i>
                                                 </button>
