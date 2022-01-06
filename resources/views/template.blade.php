@@ -12,9 +12,9 @@
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="media align-items-center">
                         <h5>
-                            Crear  <i class="far fa-plus-square text-primary ml-2" style="font-size:24px;color:black;"></i> 
+                            Crear  <i class="far fa-plus-square text-primary ml-2" style="font-size:24px;color:black;"></i>
                         </h5>
-                       
+
                     </div>
                 </a>
                 <div class="dropdown-menu  dropdown-menu-right ">
@@ -62,7 +62,7 @@
                         <div class="ml-auto d-inline-flex">
                             <button class="btn" onclick="deleteTemplate( {{ $template->id }} )">
                                <h3><i class="far fa-times-circle text-danger"></i>
-                                   </h3> 
+                                   </h3>
                             </button>
                         </div>
                     </div>
@@ -71,13 +71,8 @@
     @endif
 
     {{-- fin lista --}}
-    <script>
-        var msg = '{{Session::get('alert')}}';
-        var exist = '{{Session::has('alert')}}';
-        if(exist){
-            alert(msg);
-        }
 
+    <script>
         async function deleteTemplate(templateId) {
             try{
                 var hostname = window.location.host;

@@ -110,7 +110,7 @@ class TemplateListController extends Controller
                 }
             }
         }
-        return redirect()->back()->with('alert', $errorMessage);
+        return redirect()->back()->with('alert-error', $errorMessage);
     }
 
     private function uniqueName($name)

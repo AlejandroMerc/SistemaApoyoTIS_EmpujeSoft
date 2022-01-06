@@ -309,6 +309,14 @@
 
 <main class="p-2">
     @yield('content')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script>
+        if ( '{{Session::has('alert-success')}}'){
+            swal('Bien','{{Session::get('alert-success')}}','success', {button: 'cerrar'});
+        } else if ('{{Session::has('alert-error')}}') {
+            swal('Oops...','{{Session::get('alert-error')}}','error', {button: 'cerrar'});
+        }
+    </script>
 </main>
 
   <script src="{{ asset('js/calendario.js') }}" ></script>
