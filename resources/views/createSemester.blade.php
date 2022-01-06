@@ -43,10 +43,10 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="deathline" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Inicial') }}</label>
+                          <label for="FechaInicio" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Inicial') }}</label>
                             <div class="col-md-6">
-                                <input type="datetime-local" id="deathline" class="form-control @error('deathline') is-invalid @enderror" name="deathline" required>
-                                @error('deathline')
+                                <input type="datetime-local" id="FechaInicio" class="form-control @error('FechaInicio') is-invalid @enderror" name="FechaInicio"  required>
+                                @error('FechaInicio')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -55,11 +55,11 @@
                         </div>
 
                         <div class="form-group row">
-                          <label for="deathline2" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Final') }}</label>
+                          <label for="FechaFin" class="col-md-4 col-form-label text-md-right">{{ __('Fecha Final') }}</label>
                             <div class="col-md-6">
 
-                                <input type="datetime-local" id="deathline2" class="form-control @error('deathline2') is-invalid @enderror" name="deathline2" required>
-                                @error('deathline2')
+                                <input type="datetime-local" id="FechaFin" class="form-control @error('FechaFin') is-invalid @enderror" name="FechaFin" required>
+                                @error('FechaFin')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

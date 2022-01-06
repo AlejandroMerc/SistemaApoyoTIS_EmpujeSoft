@@ -29,13 +29,13 @@ class CreateSemesterController extends Controller
         $request->validate([
             'anio' => ['required', 'numeric','min:1900','max:3000'],
             'periodo'=>['required','numeric','min:1','max:3'],
-            'deathline'=>['required','date'],
-            'deathline2'=>['required','date']
+            'FechaInicio'=>['required','date','before_or_equal:FechaFin'],
+            'FechaFin'=>['required','date','after_or_equal:FechaInicio']
         ]);
         //$request -> deathline = Carbon::createFromFormat('Y-m-d H:i',$request -> deathline)->format('Y-m-d');
         $format = "Y-m-d"; //or something else that date() accepts as a format
-        $fechaIni = $request->deathline;
-        $fechaFin = $request->deathline2;
+        $fechaIni = $request->FechaInicio;
+        $fechaFin = $request->FechaFin;
 
         $fechaIni = date_format(date_create($fechaIni), $format);
         $fechaFin = date_format(date_create($fechaFin), $format);
@@ -52,8 +52,8 @@ class CreateSemesterController extends Controller
         $semest=new Semestre;
         $semest->year=$request->anio;
         $semest->periodo=$request->periodo;
-        $semest->fecha_inicio=$request->deathline;
-        $semest->fecha_fin=$request->deathline2;
+        $semest ->fecha_inicio=$request->FechaInicio;
+        $semest->fecha_fin=$request->FechaFin;
         if($semest->save()){
             $calendario = new Calendario;
             $save2 = $calendario->save();
