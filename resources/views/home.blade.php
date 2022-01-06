@@ -26,11 +26,14 @@
                     @if ($publication->tipo=="Publicación")
                         <div class="card-header border border-1 bg-opacity-10 bg-secondary text-white" style="opacity: .8;">
                             <div class="row">
-                                <div class="col-11">
+                                <div class="col-10">
                                     <i class="fas fa-bullhorn text-white-30"></i>
                                     {{$publication->titulo_publicacion}}
                                 </div>
                                @if ($user_type == 'asesor_tis')
+                               <div class="col-1">
+                                 <a type="button" class="btn btn-warning" href="{{route('editPost',['publicacion_id' => $publication->id])}}">Editar</a>
+                               </div>
                                     <div class="col-1">
                                         <button type="button" class="btn bg-light" data-toggle="modal" data-target="#exampleModal">
                                             <i class="fa fa-trash text-dark fa-lg"></i>
