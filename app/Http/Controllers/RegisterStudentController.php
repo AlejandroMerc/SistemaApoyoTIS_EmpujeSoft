@@ -34,7 +34,7 @@ class RegisterStudentController extends Controller
     public function registerData(Request $request)
     {
         $codigo = Grupo::find($request->grupo)
-        ->value('codigo_inscripcion');                            
+        ->value('codigo_inscripcion');
 
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:50','regex:/^[\pL\s\-]+$/u'],
@@ -49,7 +49,7 @@ class RegisterStudentController extends Controller
         {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-        
+
         $user = new User;
         $user->name = $request->name;
         $user->lastname = $request->lastname;
@@ -64,13 +64,13 @@ class RegisterStudentController extends Controller
         $estudiante->carrera = $request->carrera;
         $estudiante->grupo_id = $request->grupo;
         $query2 = $estudiante->save();
-        
+
         if($query1 && $query2){
-            return redirect('login')->withSuccess('Usuario Registrado');
+            return redirect('login')->with('alert-success','Usuario Registrado');
         }
         else{
-            return redirect('login')->withFailure('Usuario no registrado');
+            return redirect('login')->with('alert-error','Hubo un error al guardar los datos');
         }
-        
+
     }
 }

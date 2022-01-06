@@ -32,22 +32,6 @@ class CreateSemesterController extends Controller
             'FechaInicio'=>['required','date','before_or_equal:FechaFin'],
             'FechaFin'=>['required','date','after_or_equal:FechaInicio']
         ]);
-        //$request -> deathline = Carbon::createFromFormat('Y-m-d H:i',$request -> deathline)->format('Y-m-d');
-        $format = "Y-m-d"; //or something else that date() accepts as a format
-        $fechaIni = $request->FechaInicio;
-        $fechaFin = $request->FechaFin;
-
-        $fechaIni = date_format(date_create($fechaIni), $format);
-        $fechaFin = date_format(date_create($fechaFin), $format);
-
-        $fecha_ini = strtotime($fechaIni);
-        $fecha_fin = strtotime($fechaFin);
-
-
-        if($fecha_fin < $fecha_ini){
-            //return "Fechas Incorrectas";
-            return redirect()->back()->with('alert','Fechas Incorrectas');
-        }
 
         $semest=new Semestre;
         $semest->year=$request->anio;
@@ -62,13 +46,13 @@ class CreateSemesterController extends Controller
             $calendario_semestre->semestre_id = $semest->id;
             $save3 = $calendario_semestre->save();
             if($save3){
-                return redirect(route('home'))->with('alert','Semestre Creado !');
+                return redirect(route('home'))->with('alert-success','Semestre Creado !');
             }else{
-                return redirect()->back()->with('alert','Error al Crear Semestre !');
+                return redirect()->back()->with('alert-error','Error al Crear Semestre !');
             }
 
         }else{
-            return redirect()->back()->with('alert','Error al Crear Semestre !');
+            return redirect()->back()->with('alert-error','Error al Crear Semestre !');
         }
 
     }

@@ -42,7 +42,7 @@ class HomeController extends Controller
         $user_type = Session::get('type');
         $id = Session::get('id');
         $title = $this->title($id);
-       
+
         $publications=$this->publicaciones($id);
         if(!empty($publications))
         {
@@ -51,11 +51,11 @@ class HomeController extends Controller
                 $pub_id = $pub->id;
                 $activities = Actividad::where('publicacion_id','=',$pub_id)->first();
                 if(!empty($activities)){
-                    $pub->tipo="Actividad";  
+                    $pub->tipo="Actividad";
                     $pub->fechaDeEntrega=$activities->fecha_fin_actividad;
                 }else{
-                    $pub->tipo="Publicación"; 
-                } 
+                    $pub->tipo="Publicación";
+                }
             }
         }
         $semestre = $this->semestreActual();
@@ -64,7 +64,6 @@ class HomeController extends Controller
 
     public function title($id){
         $rol = User::find($id)->rol;
-        $title;
         switch($rol)
         {
             case 'admin':
@@ -191,7 +190,7 @@ class HomeController extends Controller
     {
         $semestre = $this->semestreActual();
         $publicaciones = $this->getPublicacionesSemestre($semestre->id);
-        
+
         $estudiante = $user->estudiante()->first();
         $grupo = $estudiante->grupo()->first();
         $publicaciones_grupo = $this->getPublicacionesGrupo($grupo->id);
@@ -220,16 +219,16 @@ class HomeController extends Controller
         return $semestre;
     }
 
-    
+
     public function destroy ( Request $request){
         $publication=Publicacion::where('id','=',$request->idPublication);
-        
+
         $publication->delete();
-        
+
         $user_type = Session::get('type');
         $id = Session::get('id');
         $title = $this->title($id);
-       
+
         $publications=$this->publicaciones($id);
         if(!empty($publications))
         {
@@ -238,11 +237,11 @@ class HomeController extends Controller
                 $pub_id = $pub->id;
                 $activities = Actividad::where('publicacion_id','=',$pub_id)->first();
                 if(!empty($activities)){
-                    $pub->tipo="Actividad";  
+                    $pub->tipo="Actividad";
                     $pub->fechaDeEntrega=$activities->fecha_fin_actividad;
                 }else{
-                    $pub->tipo="Publicación"; 
-                } 
+                    $pub->tipo="Publicación";
+                }
             }
         }
         $semestre = $this->semestreActual();

@@ -126,7 +126,7 @@ class ActivitySendCorrectionController extends Controller
             $revision->fecha_revision = $currentTime->toDateTimeString();
             $revision->estado = "Revisado con observaciones";
             $query = $revision->save();
-            return redirect('home');
+            return redirect('home')->with('alert-success', 'Se creó la actividad correctamente');
         }
 
     }

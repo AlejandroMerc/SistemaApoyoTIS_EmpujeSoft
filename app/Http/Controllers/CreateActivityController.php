@@ -151,7 +151,7 @@ class CreateActivityController extends Controller
         $added3=$activity->save();
 
         if($added && $added3){
-            return redirect('home');
+            return redirect('home')->with('alert-success', 'Se creó la actividad correctamente');
         }
     }
 

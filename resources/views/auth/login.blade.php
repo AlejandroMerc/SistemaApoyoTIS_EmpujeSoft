@@ -8,20 +8,9 @@
                 <div class="card-header bg-primary text-white"><h5><b><i class="fas fa-user"></i> {{ __('Inicio de Sesion') }}</b></h5></div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">                        
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <div class="results">
-                            @if (Session::get('success'))
-                                <div class="alert alert-sucess">
-                                    {{ Session::get('success') }}
-                                </div>
-                            @endif
-                            @if (Session::get('failure'))
-                                <div class="alert alert-failure">
-                                    {{ Session::get('failure') }}
-                                </div>
-                            @endif
-                        </div>
+
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Correo') }}</label>
 
@@ -47,6 +36,15 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
+                                @if (Session::get('success'))
+                                    <p class="text-danger">
+                                        <b>
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            {{ Session::get('success') }}
+                                        </b>
+                                    </p>
+                                @endif
                             </div>
                         </div>
 

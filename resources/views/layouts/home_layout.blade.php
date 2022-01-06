@@ -167,7 +167,7 @@
             <li class="nav-item">
               <a class="nav-link" href={{ route('template') }}>
                 <h5>
-                  <i class="far fa-file-text text-yellow"></i>
+                  <i class="far fa-file-alt text-yellow"></i>
                   <span class="nav-link-text">Plantillas</span>
                 </h5>
 
