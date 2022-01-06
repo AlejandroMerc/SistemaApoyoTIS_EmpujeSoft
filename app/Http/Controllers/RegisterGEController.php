@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Rules\CheckMiembrosGE;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class RegisterGEController extends Controller
 {
@@ -21,7 +22,10 @@ class RegisterGEController extends Controller
     }
     public function registerGE()
     {
-        return view('registerGE');
+        $user_type = Session::get('type');
+        $id = Session::get('id');
+        $title = $this->title($id, $user_type);
+        return view('registerGE',['user_type' => $user_type, 'title' => $title]);
     }
 
     public function registrarGE(Request $request)
@@ -82,5 +86,34 @@ class RegisterGEController extends Controller
           return redirect('listarGrupoEmpresa')->withFailure('Grupoempresa no Registrada');
         }
 
+    }
+
+    private function title($id, $rol){
+        if ($rol === 'admin')
+        {
+            return 'Administrador';
+        }
+        else if ($rol === 'asesor_tis')
+        {
+            return 'Asesor TIS';
+        }
+        else if ($rol === 'estudiante')
+        {
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+            if ($ge_id === null)
+            {
+                return 'Sin grupoempresa';
+            }
+            else
+            {
+                $ge = Grupoempresa::where('id',$ge_id)->first();
+                return $ge->nombre_largo;
+            }
+        }
+        else
+        {
+            return 'Invitado';
+        }
     }
 }

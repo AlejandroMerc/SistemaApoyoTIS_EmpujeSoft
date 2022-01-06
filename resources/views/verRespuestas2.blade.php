@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home_layout')
 
 
 
@@ -24,7 +24,7 @@
                                 @if ($asignado->estado=="Aceptado")
                                     <h6 class="text-success">{{$asignado->estado}}</h6>
                                 @elseif ($asignado->estado=="Revisado con observaciones")
-                                    <h6 class="text-primary">{{$asignado->estado}}</h6> 
+                                    <h6 class="text-primary">{{$asignado->estado}}</h6>
                                 @else
                                     <h6 class="text-danger">{{$asignado->estado}}</h6>
                                 @endif

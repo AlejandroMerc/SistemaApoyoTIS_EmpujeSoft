@@ -52,7 +52,7 @@ class TemplateEditorController extends Controller
             $ge_id = $estudiante->grupoempresa_id;
             if ($ge_id === null)
             {
-                return '[Sin grupo empresa]';
+                return 'Sin grupoempresa';
             }
             else
             {

@@ -1,17 +1,17 @@
-@extends('layouts.app')
+@extends('layouts.home_layout')
 
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registrar Grupo Empresa') }}</div>
+                <div class="card-header"><h3>{{ __('Registrar Grupo Empresa') }}</h3></div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register-ge-data') }}">
                         @csrf
                         <div class="form-group row ">
                         <label for="nombre_corto" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Corto') }}</label>
-                            <div class="col-md-6">                                 
+                            <div class="col-md-6">
                                     <input id="nombre_corto" type="text" class="form-control @error('nombre_corto') is-invalid @enderror" name="nombre_corto" value="{{ old('nombre_corto') }}" required autocomplete="nombre_corto" autofocus>
                                     @error('nombre_corto')
                                         <span class="invalid-feedback" role="alert">
@@ -23,7 +23,7 @@
 
                         <div class="form-group row">
                         <label for="nombre_largo" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Largo') }}</label>
-                            <div class="col-md-6">                               
+                            <div class="col-md-6">
                                     <input id="nombre_largo" type="text" class="form-control @error('nombre_largo') is-invalid @enderror" name="nombre_largo" value="{{ old('nombre_largo') }}" required autocomplete="nombre_largo" autofocus>
                                         @error('nombre_largo')
                                             <span class="invalid-feedback" role="alert">
@@ -33,9 +33,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">    
+                        <div class="form-group row">
                         <label for="telefono_ge" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
-                            <div class="col-md-6">                               
+                            <div class="col-md-6">
                                     <input id="telefono_ge" type="number" class="form-control @error('telefono_ge') is-invalid @enderror" min="1000000" max="99999999" name = "telefono_ge" value="{{ old('telefono_ge') }}" required autocomplete="telefono_ge">
                                     @error('telefono_ge')
                                         <span class="invalid-feedback" role="alert">
@@ -46,8 +46,8 @@
                         </div>
 
                         <div class="form-group row">
-                        <label for="tipo_sociedad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Sociedad') }}</label> 
-                            <div class="col-md-6 ">                                       
+                        <label for="tipo_sociedad" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Sociedad') }}</label>
+                            <div class="col-md-6 ">
                                 <select id="tipo_sociedad"  class="form-control @error('tipo_sociedad') is-invalid @enderror" name="tipo_sociedad" value="{{ old('tipo_sociedad') }}" required autocomplete="tipo_sociedad">
                                     <option value="S.A.">S.A</option>
                                     <option value="S.R.L.">S.R.L.</option>
@@ -60,8 +60,8 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Correo') }}</label> 
-                            <div class="col-md-6">                   
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Correo') }}</label>
+                            <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                         @error('email')
                                          <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
 
                         <div class="form-group row">
                             <label for="direccion_ge" class="col-md-4 col-form-label text-md-right">{{ __('Direccion') }}</label>
-                            <div class="col-md-6">            
+                            <div class="col-md-6">
                                     <input id="direccion_ge" type="text" class="form-control @error('name') is-invalid @enderror" name="direccion_ge" value="{{ old('direccion_ge') }}" required autocomplete="direccion_ge" autofocus>
                                         @error('direccion_ge')
                                             <span class="invalid-feedback" role="alert">
@@ -89,7 +89,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <div>                   
+                                    <div>
                                         <input id="miembros[0]" type="email" class="form-control @error('miembros[0]') is-invalid @enderror" name="miembros[0]" placeholder="Correo Representante Legal" value="{{ old('miembros[0]') }}" required autocomplete="miembros[0]">
                                             @error('miembros[0]')
                                              <span class="invalid-feedback" role="alert">

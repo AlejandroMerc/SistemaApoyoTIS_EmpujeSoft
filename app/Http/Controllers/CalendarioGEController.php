@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
 use App\Models\Calendario;
+use App\Models\Evento;
 use App\Models\Grupoempresa;
 use Illuminate\Support\Facades\Session;
 
 class CalendarioGEController extends Controller
 {
     public function index(){
+        $user_id = Session::get('id');
         $user_type = Session::get('type');
+        $title = $this->title($user_id, $user_type);
+
         $grupoEmpresas= Grupoempresa::join('estudiantes','estudiantes.id','grupoempresas.rep_legal_id')
         ->join('grupos','grupos.id','estudiantes.grupo_id')
         ->join('semestres','semestres.id','grupos.semestre_id')
@@ -23,7 +27,7 @@ class CalendarioGEController extends Controller
             $grupoempresa['calendario_id'] = $calendario->id;
         }
         if($user_type == 'asesor_tis'){
-            return view('evento.calendarioGE', ['user_type' => $user_type], compact('grupoEmpresas'));
+            return view('evento.calendarioGE', ['user_type' => $user_type, 'title' => $title], compact('grupoEmpresas'));
         }
         else
         {
@@ -31,7 +35,8 @@ class CalendarioGEController extends Controller
             $estudiante = Estudiante::where('user_id',$id)->first();
             $ge_id = $estudiante->grupoempresa_id;
             $calendario = Grupoempresa::find($ge_id)->calendario_ge->calendario;
-            return view('evento.calendarioEstudiante', ['user_type' => $user_type, 'calendario_id' => $calendario->id, 'grupoempresa_id' => $ge_id], compact('grupoEmpresas'));
+
+            return view('evento.calendarioEstudiante', ['user_type' => $user_type, 'title' => $title, 'calendario_id' => $calendario->id, 'grupoempresa_id' => $ge_id], compact('grupoEmpresas'));
         }
     }
 
@@ -60,5 +65,34 @@ class CalendarioGEController extends Controller
             return response()->json();
         }
     }
-    
+
+
+    private function title($id, $rol){
+        if ($rol === 'admin')
+        {
+            return 'Administrador';
+        }
+        else if ($rol === 'asesor_tis')
+        {
+            return 'Asesor TIS';
+        }
+        else if ($rol === 'estudiante')
+        {
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+            if ($ge_id === null)
+            {
+                return 'Sin grupoempresa';
+            }
+            else
+            {
+                $ge = Grupoempresa::where('id',$ge_id)->first();
+                return $ge->nombre_largo;
+            }
+        }
+        else
+        {
+            return 'Invitado';
+        }
+    }
 }

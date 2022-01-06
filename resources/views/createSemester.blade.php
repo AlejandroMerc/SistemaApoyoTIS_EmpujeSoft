@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home_layout')
 
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -81,7 +81,7 @@
         </div>
     </div>
 </div>
-<script> 
+<script>
      var msg = '{{Session::get('alert')}}';
         var exist = '{{Session::has('alert')}}';
         if(exist){
@@ -103,5 +103,5 @@
         flatpickr('#published_at')
         flatpickr('#published_at2')
     </script>
-  
+
 @endsection
