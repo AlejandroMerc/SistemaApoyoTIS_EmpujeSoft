@@ -53,7 +53,7 @@
 
                                     </div>
                                   </div>
-                                  <div class="clone hide">
+                                  <div class="clone hide" hidden>
                                     <div class="hdtuto control-group lst input-group" style="margin-top:10px">
                                       <input type="file" name="filenames[]" class="myfrm form-control">
 
@@ -253,6 +253,7 @@
       $(".btn-outline-success").click(function(){
           var lsthmtl = $(".clone").html();
           $(".increment").after(lsthmtl);
+          lsthmtl.hidden =false;
       });
       $("body").on("click",".btn-outline-danger",function(){
           $(this).parents(".hdtuto").remove();
