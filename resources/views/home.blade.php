@@ -33,18 +33,18 @@
                             <div class="card border border-secondary border-1 rounded-lg"  value={{$publication->id}}>
                                 <div class="card-header border border-1 bg-opacity-10 bg-secondary text-white" style="opacity: .8;">
                                     <div class="row">
-                                        <div class="col-10">
+                                        <div class="col-8">
                                             <i class="fas fa-bullhorn text-white-30"></i>
                                             {{$publication->titulo_publicacion}}
                                         </div>
                                         @if ($user_type == 'asesor_tis')
-                                            <div class="col-1">
-                                                <a type="button" class="btn btn-warning" href="{{route('editPost',['publicacion_id' => $publication->id])}}">Editar</a>
+                                            <div class="col-auto">
+                                                <a type="button" class="btn btn-warning" href="{{route('editPost',['publicacion_id' => $publication->id])}}">Editar <i class="far fa-edit"></i></a>
                                             </div>
 
-                                            <div class="col-1">
-                                                <button type="button" class="btn bg-light" onclick="deleting( {{ $publication->id }} , 'Publicación', ' {{ $publication->titulo_publicacion }}')">
-                                                    <i class="fa fa-trash text-dark fa-lg"></i>
+                                            <div class="col-auto">
+                                                <button type="button" class="btn bg-danger text-white" onclick="deleting( {{ $publication->id }} , 'Publicación', ' {{ $publication->titulo_publicacion }}')">
+                                                    Eliminar <i class="fa fa-trash text-white fa-lg"></i>
                                                 </button>
                                             </div>
                                         @endif
@@ -69,19 +69,24 @@
                     @foreach ($publications as $publication)
                         @if ($publication->tipo !=="Publicación")
                             <div class="card border border-secondary border-1 rounded-lg"  value={{$publication->id}}>
-                                <div class="card-header border border-1 text-white bg-info">
+                                <div class="card-header border border-1 text-white bg-info"style="opacity: .8;">
                                     <div class="row">
-                                        <div class="col-11">
+                                        <div class="col-8">
                                             <i class="fas fa-tasks text-white-30"></i>
                                             {{$publication->titulo_publicacion}}
                                         </div>
-                                        <div class="col-1">
+                                       
                                             @if ($user_type == 'asesor_tis')
-                                                <button type="button" class="btn bg-light"  onclick="deleting( {{ $publication->id }} , 'Actividad', '{{ $publication->titulo_publicacion }}')">
-                                                    <i class="fa fa-trash text-dark fa-lg"></i>
+                                            <div class="col-auto">
+                                                <a type="button" class="btn btn-warning" href="{{route('editPost',['publicacion_id' => $publication->id])}}">Editar <i class="far fa-edit"></i></a>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="button" class="btn bg-danger text-white"  onclick="deleting( {{ $publication->id }} , 'Actividad', '{{ $publication->titulo_publicacion }}')">
+                                                   Eliminar <i class="fa fa-trash text-white fa-lg"></i>
                                                 </button>
+                                            </div>
                                             @endif
-                                        </div>
+                                        
                                     </div>
                                 </div>
 
