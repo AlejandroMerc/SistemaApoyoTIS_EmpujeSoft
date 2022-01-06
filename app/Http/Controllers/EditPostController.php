@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adjunto;
 use App\Models\Adjunto_publicacion;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
@@ -13,6 +14,7 @@ use App\Models\Semestre;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 
 class EditPostController extends Controller
@@ -58,6 +60,20 @@ class EditPostController extends Controller
         $publication->asesor_id=$idAdviser;
         $publication->save();
 
+        //Borramos los existentes
+        $publicacionSemestre=Publicacion_semestre::where('publicacion_id',$request->idPost)->first();
+        if($publicacionSemestre!=null){
+            $publicacionSemestre->delete();
+        }
+        $publicacionGrupo=Publicacion_grupo::where('publicacion_id',$request->idPost)->first();
+        if($publicacionGrupo!=null){
+            $publicacionGrupo->delete();
+        }
+        $publicacionesGE=Publicacion_grupoempresa::where('publicacion_id',$request->idPost)->first();
+        if($publicacionesGE!=null){
+            $publicacionesGE->delete();
+        }
+//Agregamos
         if($request->toWhom=="everybody"){
             $currentDate = date('Y-m-d');
             $semestre = Semestre::where('fecha_inicio','<=',$currentDate)
@@ -89,6 +105,37 @@ class EditPostController extends Controller
                 $added2=$publiGroup->save();
             }
         }
+        Log::info(gettype($request->adjuntos));
+        //Borramos los adjuntos editados
+        
+        if(!empty($request->adjuntos)){
+           
+            $idAdjuntos=[];
+            foreach($request->adjuntos as $adj){
+                $adjuntoEdit=Adjunto::where('id',$adj)->first();
+                $idAdjuntos[]=$adjuntoEdit->id;
+            }
+            $adjuntosExistentes=Adjunto_publicacion::where('publicacion_id',$request->idPost)->get();
+            foreach($adjuntosExistentes as $adjuntoEx){
+                if(!in_array($adjuntoEx->adjunto_id,$idAdjuntos)){
+                    $adjuntoOr=Adjunto::where('id','=',$adjuntoEx->adjunto_id)->first();
+                    Log::info('llegue');
+                    Log::info($adjuntoOr);
+                    $adjuntoOr->delete();
+                    $adjuntoEx->delete();
+                    
+                }
+            }
+        }else{
+            $adjuntosExistentes=Adjunto_publicacion::where('publicacion_id',$request->idPost)->get();
+            foreach($adjuntosExistentes as $adjuntoEx){
+                     $adjuntoOr=Adjunto::where('id','=',$adjuntoEx->adjunto_id)->first();
+                     $adjuntoOr->delete();
+                    $adjuntoEx->delete();
+                
+            }
+        }
+        
         $files = [];
         if($request->hasfile('filenames'))
          {
@@ -114,7 +161,13 @@ class EditPostController extends Controller
         ->join('adjuntos','adjuntos.id','=','adjunto_publicaciones.adjunto_id');
         return $adjuntos->get();
     }
-
+    public function saveFiles($uploadFiles)
+    {
+        $adjunto = new Adjunto;
+        $adjunto->name = $uploadFiles->getClientOriginalName();
+        $adjunto->path = $uploadFiles->store('files');
+        return $adjunto;
+    }
     public function getAsesor(){
         $idAdviser = Session::get('id');
         $user = User::find($idAdviser);
