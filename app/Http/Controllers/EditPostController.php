@@ -37,6 +37,7 @@ class EditPostController extends Controller
     }
 
     public function updatePost (Request $request){
+        
         return $request;
     }
 

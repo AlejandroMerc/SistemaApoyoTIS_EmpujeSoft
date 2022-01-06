@@ -59,15 +59,15 @@
 
                             </div>
                         </div>
-                        <div class="form-group row bg-info">
+                        <div class="form-group row">
                             <label for="msg" class="col-md-4 col-form-label text-md-right">{{ __('Archivos Existentes') }}</label>
                             
                                
-                                    <h6 id="msg" class="align-bottom" hidden>  No existen archivos</h6> 
+                                  
                         
                              
                             
-                            <ul class="list-group">
+                            <ul class="list-group pl-3">
                                 
                             @foreach($publication->adjuntos as $adjunto)   
                             
@@ -78,9 +78,10 @@
                             </div>
                             @endforeach
                              </ul>
+                             <h6 id="msg" class="text-primary pt-2 pl-3" hidden> <b> No existen archivos</b> </h6>
                         </div>
 
-
+                        
 
                         <div class="form-group row">
  
