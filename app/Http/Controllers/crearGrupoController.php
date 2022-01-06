@@ -14,7 +14,7 @@ use App\Models\Estudiante;
 use App\Models\Grupoempresa;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -78,12 +78,26 @@ class crearGrupoController extends Controller
                     }
                 }
                 if ($existe) {
-                    $fail('la '.$siglaIn.' ya esta en uso en este semestre.');
+                    $fail('la sigla ya esta en uso en este semestre.');
                 }
             }],
 
             'docente'=>'bail|required',
-            'codigoInscripcion'=>'bail|required|min:5|max:199',
+            'codigoInscripcion'=>['bail','required','min:5','max:199',
+            function ($codInscripcion, $value, $fail) {
+                $grupoArray = grupo::where('semestre_id','=',request('semestre'))->select('codigo_inscripcion')->get();
+                $existe=false;
+                foreach ($grupoArray as $grup) {
+
+                    # code...
+                    if($value==$grup->codigo_inscripcion){
+                        $existe=true;
+                    }
+                }
+                if ($existe) {
+                    $fail('el codigo de inscripcion ya esta en uso en este semestre.');
+                }
+            }],
             'semestre'=>'bail|required'
         ];
         $errores = [
@@ -100,9 +114,15 @@ class crearGrupoController extends Controller
         $grupo->semestre_id=request('semestre');
         $asesor = User::find(request('docente'))->asesor()->first();
         $grupo->asesor_id=$asesor->id;
-
-
+        $user = User::findOrFail($asesor->id);
+        $semestre =Semestre::findOrFail($request->semestre);
         if ($grupo->save()) {
+            Mail::send('emails.mailCrearGrupo', ['request' => $request,'user'=>$user,'semestre'=>$semestre], function ($m) use ($user) {
+                $m->from('hello@app.com', 'Sistema de apoyo TIS');
+    
+                $m->to($user->email, $user->name)->subject('Se a creado grupo de materia!');
+                
+            });
             # code...
             //Alert::success('Grupo Creado', 'Completado');
             return redirect()->back()->with('alert','Grupo Creado !');
