@@ -14,7 +14,7 @@
                         <div class="form-group row">
                             
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('*Título') }}</label>
-
+                            <input type="number" name="idPost" value="{{$publication->id}}" hidden>
                             <div class="col-md-6">
                                 <input id="title" type="text" value="{{$publication->titulo_publicacion}}" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus placeholder="Título Publicación">
 
@@ -78,6 +78,9 @@
                             </div>
                             @endforeach
                              </ul>
+                             @if ($publication->adjuntos->isEmpty())
+                             <h6 id="msg" class="text-primary pt-2 pl-3"> <b> No existen archivos</b> </h6>
+                             @endif
                              <h6 id="msg" class="text-primary pt-2 pl-3" hidden> <b> No existen archivos</b> </h6>
                         </div>
 
@@ -138,11 +141,16 @@
 
 
 
-                        <div class="form-group row mb-0 justify-content-center">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group row justify-content-center">
+                            <div class="col-auto">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Publicar') }}
+                                    {{ __('Guardar') }}
                                 </button>
+                            </div>
+                            <div class="col-auto">
+                                <a type="button" class="btn btn-secondary text-white" href="{{route('home')}}">
+                                    {{ __('Cancelar') }}
+                                </a>
                             </div>
                         </div>
                     </form>
