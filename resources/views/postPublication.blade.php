@@ -127,5 +127,17 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".btn-outline-success").click(function(){
+          var lsthmtl = $(".clone").html();
+          $(".increment").after(lsthmtl);
+      });
+      $("body").on("click",".btn-outline-danger",function(){
+          $(this).parents(".hdtuto").remove();
+      });
+    });
+</script>
+
 @endsection
 
