@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home_layout')
 
 
 @section('content')
@@ -6,20 +6,24 @@
     <div class="row justify-content-center">
         <div class="col-sm-3">
             <div class="card">
-                <div class="card-header">{{ __('Grupo Empresas') }}</div>
+                <div class="card-header">
+                    <h4>{{ __('Grupo Empresas') }}</div></h4>
                     <div class="card w-30">
-                        @foreach ($grupoEmpresas as $grupoempresa)    
+                        @foreach ($grupoEmpresas as $grupoempresa)
                             <div class="card-body">
                                     <button id='ge_button{{$grupoempresa->id}}' onclick='showCalendar({{$grupoempresa->id}},{{$grupoempresa->calendario_id}},"{{$grupoempresa->nombre_corto}}")' class="btn btn-primary" name="{{$grupoempresa->id}}" value="{{$grupoempresa->id}}">{{$grupoempresa->nombre_corto}}</button>
                             </div>
-                        @endforeach 
+                        @endforeach
                     </div>
-                    
+
                 </div>
             </div>
             <div class="col-sm-9">
                 <div class="card">
-                    <div id="titulo" class="card-header">{{ __('Calendario de Grupo Empresas') }}
+                    <div id="titulo" class="card-header">
+                        <h4>
+                            {{ __('Calendario de Grupo Empresas') }}
+                        </h4>
                     </div>
                         <div class="card w-20">
                             <div class="card-body">
@@ -27,7 +31,7 @@
                                         <div class="form-group row">
                                           <div class="container">
                                             <div id="calendario2">
-                                          </div> 
+                                          </div>
                                         </div>
                                 </div>
                             </div>
@@ -54,7 +58,7 @@
                 <div class="form-group">
                     <label for="title" class="col-md-8 col-form-label">{{ __('*Nombre de Evento') }}</label>
                     <input type="text" class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="Nombre Evento">
-                </div>            
+                </div>
                 <div class="form-group">
                     <label for="description" class="col-md-1 col-form-label">{{ __('*Descripción') }}</label>
                     <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="3" id="description" required autofocus></textarea>
@@ -69,14 +73,14 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="calendario_id" name="calendario_id" value="" onload="load()">
-                </div>      
+                </div>
             </form>
           </div>
           <div class="modal-footer">
             <button @if($user_type == "asesor_tis") hidden @endif type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
             <button @if($user_type == "asesor_tis") hidden @endif type="button" class="btn btn-warning" id="btn_modificar">Modificar</button>
             <button @if($user_type == "asesor_tis") hidden @endif type="button" class="btn btn-danger" id="btn_eliminar">Eliminar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>            
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           </div>
         </div>
       </div>

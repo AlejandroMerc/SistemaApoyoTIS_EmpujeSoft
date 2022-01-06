@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home_layout')
 
 @section('content')
 
@@ -29,7 +29,7 @@
 
                             <div class="col-md-6">
 
-                        
+
                                 <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="5" id="description" required autofocus placeholder="Descripción Actividad"></textarea>
 
                                 @error('description')
@@ -48,16 +48,16 @@
                                 <div class="input-group hdtuto control-group lst increment" >
                                     <input type="file" name="filenames[]" class="myfrm form-control">
 
-                                    <div class="input-group-btn"> 
+                                    <div class="input-group-btn">
                                       <button class="btn btn-outline-success" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>Agregar</button>
 
                                     </div>
                                   </div>
-                                  <div class="clone hide">
+                                  <div class="clone hide" hidden>
                                     <div class="hdtuto control-group lst input-group" style="margin-top:10px">
                                       <input type="file" name="filenames[]" class="myfrm form-control">
 
-                                      <div class="input-group-btn"> 
+                                      <div class="input-group-btn">
                                         <button class="btn btn-outline-danger" type="button"><i class="fldemo glyphicon glyphicon-remove"></i> Quitar</button>
 
                                       </div>
@@ -248,5 +248,16 @@
             }
         }
 </script>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+      $(".btn-outline-success").click(function(){
+          var lsthmtl = $(".clone").html();
+          $(".increment").after(lsthmtl);
+          lsthmtl.hidden =false;
+      });
+      $("body").on("click",".btn-outline-danger",function(){
+          $(this).parents(".hdtuto").remove();
+      });
+    });
+</script>
 @endsection

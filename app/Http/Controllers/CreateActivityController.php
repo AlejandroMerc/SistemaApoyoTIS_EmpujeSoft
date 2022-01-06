@@ -7,8 +7,10 @@ use App\Models\Adjunto;
 use App\Models\Adjunto_publicacion;
 use App\Models\Adjunto_entrega;
 use App\Models\Asesor;
+use App\Models\Estudiante;
 use App\Models\Publicacion;
 use App\Models\Grupo;
+use App\Models\Grupoempresa;
 use App\Models\Plantilla;
 use App\Models\Publicacion_grupo;
 use App\Models\Publicacion_grupoempresa;
@@ -30,6 +32,10 @@ class CreateActivityController extends Controller
     }
 
     public function showCreateActivity (){
+        $user_type = Session::get('type');
+        $user_id = Session::get('id');
+        $title = $this->title($user_id, $user_type);
+
         $asesor = $this->getAsesor();
         $grupos=$asesor->grupos()->select('id','sigla_grupo')->get();
         $grupoEmpresas = $asesor->grupos()->join('grupoempresas','grupos.id','=','grupoempresas.grupo_id')
@@ -37,7 +43,7 @@ class CreateActivityController extends Controller
                        ->get();
         $template_content = $this->arrayTemplate();
 
-        return view ('createActivity',['template_content'=>$template_content])
+        return view ('createActivity',['user_type' => $user_type, 'title' => $title,'template_content'=>$template_content])
             -> with(compact('grupos'))
             -> with(compact('grupoEmpresas'));
     }
@@ -188,5 +194,34 @@ class CreateActivityController extends Controller
 
         $content = $pdf->download()->getOriginalContent();
         Storage::put($path, $content);
+    }
+
+    private function title($id, $rol){
+        if ($rol === 'admin')
+        {
+            return 'Administrador';
+        }
+        else if ($rol === 'asesor_tis')
+        {
+            return 'Asesor TIS';
+        }
+        else if ($rol === 'estudiante')
+        {
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+            if ($ge_id === null)
+            {
+                return 'Sin grupoempresa';
+            }
+            else
+            {
+                $ge = Grupoempresa::where('id',$ge_id)->first();
+                return $ge->nombre_largo;
+            }
+        }
+        else
+        {
+            return 'Invitado';
+        }
     }
 }

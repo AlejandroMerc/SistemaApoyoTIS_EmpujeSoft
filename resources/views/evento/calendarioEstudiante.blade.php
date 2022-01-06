@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.home_layout')
 
 
 @section('content')
@@ -6,7 +6,8 @@
     <div class="row justify-content-center">
             <div class="col-sm-12">
                 <div class="card">
-                    <div id="titulo" class="card-header">{{ __('Calendario') }}
+                    <div id="titulo" class="card-header">
+                        <h3>{{ __('Calendario') }}</h3>
                     </div>
                         <div class="card w-20">
                             <div class="card-body">
@@ -42,7 +43,7 @@
                 <div class="form-group">
                     <label for="title" class="col-md-8 col-form-label">{{ __('*Nombre de Evento') }}</label>
                     <input type="text" class="form-control" name="title" id="title" aria-describedby="helpId" placeholder="Nombre Evento">
-                </div>            
+                </div>
                 <div class="form-group">
                     <label for="description" class="col-md-1 col-form-label">{{ __('*Descripción') }}</label>
                     <textarea style="resize: none;" class="form-control @error('description') is-invalid @enderror" name="description" rows="3" id="description" required autofocus></textarea>
@@ -57,14 +58,14 @@
                 </div>
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="calendario_id" name="calendario_id" value="{{$calendario_id}}" onload="load()">
-                </div>      
+                </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-success" id="btn_guardar" data-dismiss="modal">Guardar</button>
             <button @if($user_type == "estudiante") hidden @endif type="button" class="btn btn-warning" id="btn_modificar">Modificar</button>
             <button @if($user_type == "estudiante") hidden @endif type="button" class="btn btn-danger" id="btn_eliminar">Eliminar</button>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>            
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           </div>
         </div>
       </div>
@@ -72,7 +73,7 @@
 
     <script src="{{ asset('js/calendarioEstudiante.js') }}" ></script>
     <script>
-        
+
     </script>
 @endsection
 

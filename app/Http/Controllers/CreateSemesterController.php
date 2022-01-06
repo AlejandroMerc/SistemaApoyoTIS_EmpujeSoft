@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Calendario;
 use App\Models\Calendario_semestre;
+use App\Models\Estudiante;
+use App\Models\Grupoempresa;
 use App\Models\Semestre;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
+
 class CreateSemesterController extends Controller
 {
     public function __construct()
@@ -15,7 +19,11 @@ class CreateSemesterController extends Controller
         $this->middleware('auth');
     }
     public function createSemester(){
-        return view('createSemester');
+        $user_type = Session::get('type');
+        $id = Session::get('id');
+        $title = $this->title($id, $user_type);
+
+        return view('createSemester', ['user_type' => $user_type, 'title' => $title]);
     }
     public function store(Request $request){
         $request->validate([
@@ -28,19 +36,19 @@ class CreateSemesterController extends Controller
         $format = "Y-m-d"; //or something else that date() accepts as a format
         $fechaIni = $request->deathline;
         $fechaFin = $request->deathline2;
-       
+
         $fechaIni = date_format(date_create($fechaIni), $format);
         $fechaFin = date_format(date_create($fechaFin), $format);
-        
+
         $fecha_ini = strtotime($fechaIni);
         $fecha_fin = strtotime($fechaFin);
-       
-        
+
+
         if($fecha_fin < $fecha_ini){
             //return "Fechas Incorrectas";
             return redirect()->back()->with('alert','Fechas Incorrectas');
         }
-               
+
         $semest=new Semestre;
         $semest->year=$request->anio;
         $semest->periodo=$request->periodo;
@@ -58,10 +66,39 @@ class CreateSemesterController extends Controller
             }else{
                 return redirect()->back()->with('alert','Error al Crear Semestre !');
             }
-            
+
         }else{
             return redirect()->back()->with('alert','Error al Crear Semestre !');
         }
 
+    }
+
+    private function title($id, $rol){
+        if ($rol === 'admin')
+        {
+            return 'Administrador';
+        }
+        else if ($rol === 'asesor_tis')
+        {
+            return 'Asesor TIS';
+        }
+        else if ($rol === 'estudiante')
+        {
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+            if ($ge_id === null)
+            {
+                return 'Sin grupoempresa';
+            }
+            else
+            {
+                $ge = Grupoempresa::where('id',$ge_id)->first();
+                return $ge->nombre_largo;
+            }
+        }
+        else
+        {
+            return 'Invitado';
+        }
     }
 }

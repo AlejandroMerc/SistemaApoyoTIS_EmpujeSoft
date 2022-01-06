@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Evento;
 use App\Models\Calendario;
 use App\Models\Calendario_semestre;
+use App\Models\Estudiante;
+use App\Models\Grupoempresa;
 use App\Models\Semestre;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -16,12 +18,15 @@ class CalendarioEventoController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index(){
         $user_type = Session::get('type');
+        $user_id = Session::get('id');
+        $title = $this->title($user_id, $user_type);
+
         $semestre = $this->semestreActual();
         $calendario = $semestre->calendario_semestre->calendario;
-        return view('evento.index', ['calendario_id' => $calendario->id, 'user_type' => $user_type]);
+        return view('evento.index', ['calendario_id' => $calendario->id, 'user_type' => $user_type,  'title' => $title]);
     }
 
     public function store(Request $request){
@@ -53,7 +58,7 @@ class CalendarioEventoController extends Controller
         $evento = Evento::find($id)->first();
         $evento->delete();
         return response()->json($evento);
-        
+
     }
     public function semestreActual()
     {
@@ -70,5 +75,34 @@ class CalendarioEventoController extends Controller
         ->select('calendario.id')
         ->first();
         return $calendario_id;
+    }
+
+    private function title($id, $rol){
+        if ($rol === 'admin')
+        {
+            return 'Administrador';
+        }
+        else if ($rol === 'asesor_tis')
+        {
+            return 'Asesor TIS';
+        }
+        else if ($rol === 'estudiante')
+        {
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+            if ($ge_id === null)
+            {
+                return 'Sin grupoempresa';
+            }
+            else
+            {
+                $ge = Grupoempresa::where('id',$ge_id)->first();
+                return $ge->nombre_largo;
+            }
+        }
+        else
+        {
+            return 'Invitado';
+        }
     }
 }

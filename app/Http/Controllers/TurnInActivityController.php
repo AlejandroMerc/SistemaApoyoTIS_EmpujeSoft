@@ -11,6 +11,7 @@ use App\Models\Adjunto;
 use App\Models\Adjunto_entrega;
 use App\Models\Entrega;
 use App\Models\Estudiante;
+use App\Models\Grupoempresa;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
@@ -18,13 +19,17 @@ use App\Models\User;
 class TurnInActivityController extends Controller
 {
     //
-   
+
     public function __construct()
     {
         $this->middleware('auth');
     }
     public function showTurnIn($publicacion_id){
+        $user_type = Session::get('type');
         $idUser=Session::get('id');
+        $title = $this->title($idUser, $user_type);
+
+
         $user = User::find($idUser);
         $estudiante=$user->estudiante()->first();
         if($estudiante->grupoempresa_id == null)
@@ -57,21 +62,23 @@ class TurnInActivityController extends Controller
                         Log::info("entre");
                         $actividad->tipo_archivos_perm="Cualquiera";
                     }
-                   
+
                 }
             }
         }
-            
+
         $publicacion_a_Responder=Publicacion::where('id','=',$publicacion_id)->first();
         $adjuntos = $this->getAdjuntos($publicacion_a_Responder);
             $publicacion_a_Responder['adjuntos'] = $adjuntos;
-        
-        return view('TurnInActivity', compact('actividad'),compact ('publicacion_a_Responder','hayEntregado'));
+
+        return view('TurnInActivity',['user_type' => $user_type, 'title' => $title])
+        ->with( compact('actividad'))
+        ->with(compact ('publicacion_a_Responder','hayEntregado'));
     }
 
     public function validateFiles(Request $request){
         $file = $request->file('file');
-       
+
         $fileName = time().'.'.$file->extension();
 
         Log::info(gettype($file));
@@ -81,9 +88,9 @@ class TurnInActivityController extends Controller
         $idUser=Session::get('id');
         $user = User::find($idUser);
         $estudiante=$user->estudiante()->first();
-         
-        
-        
+
+
+
         $entrega=new Entrega;
         $currentTime=Carbon::now();
         $entrega->fecha_entrega=$currentTime->toDateTimeString();
@@ -96,10 +103,10 @@ class TurnInActivityController extends Controller
         $adjunto_entrega->adjunto_id = $adjunto->id;
         $addedAdjuntoEntrega = $adjunto_entrega->save();
 
-        
+
         return response()->json(['success'=>$fileName]);
     }
-    
+
     public function getAdjuntos($publicacion)
     {
         $adjuntos = Adjunto_publicacion::where('publicacion_id','=',$publicacion->id)
@@ -113,5 +120,34 @@ class TurnInActivityController extends Controller
         $adjunto->name = $uploadFile->getClientOriginalName();
         $adjunto->path = $uploadFile->store('files');
         return $adjunto;
+    }
+
+    private function title($id, $rol){
+        if ($rol === 'admin')
+        {
+            return 'Administrador';
+        }
+        else if ($rol === 'asesor_tis')
+        {
+            return 'Asesor TIS';
+        }
+        else if ($rol === 'estudiante')
+        {
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+            if ($ge_id === null)
+            {
+                return 'Sin grupoempresa';
+            }
+            else
+            {
+                $ge = Grupoempresa::where('id',$ge_id)->first();
+                return $ge->nombre_largo;
+            }
+        }
+        else
+        {
+            return 'Invitado';
+        }
     }
 }
