@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card border border-dark rounded-lg">
-                <div class="card-header bg-primary text-white"><strong><h5>{{ __('Nueva Actividad') }}</h5></div>
+                <div class="card-header bg-primary text-white"><strong><h5 class="text-white">{{ __('Nueva Actividad') }}</h5></div>
 
                 <div class="card-body ">
                     <form method="POST" action="{{ route('registir-activity-data') }}" enctype="multipart/form-data">

@@ -34,8 +34,11 @@
                                 <div class="card-header border border-1 bg-opacity-10 bg-secondary text-white" style="opacity: .8;">
                                     <div class="row">
                                         <div class="col-8">
-                                            <i class="fas fa-bullhorn text-white-30"></i>
-                                            {{$publication->titulo_publicacion}}
+                                            <h5 class="text-white">
+                                                <i class="fas fa-bullhorn text-white-30"></i>
+                                                {{$publication->titulo_publicacion}}
+                                            </h5>
+                                           
                                         </div>
                                         @if ($user_type == 'asesor_tis')
                                             <div class="col-auto">
@@ -72,8 +75,11 @@
                                 <div class="card-header border border-1 text-white bg-info"style="opacity: .8;">
                                     <div class="row">
                                         <div class="col-8">
-                                            <i class="fas fa-tasks text-white-30"></i>
-                                            {{$publication->titulo_publicacion}}
+                                            <h5 class="text-white">
+                                                <i class="fas fa-tasks text-white-30"></i>
+                                                {{$publication->titulo_publicacion}}
+                                            </h5>
+                                           
                                         </div>
                                        
                                             @if ($user_type == 'asesor_tis')
