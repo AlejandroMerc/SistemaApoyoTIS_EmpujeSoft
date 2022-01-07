@@ -26,7 +26,15 @@ class RegisterGEController extends Controller
     {
         $user_type = Session::get('type');
         $id = Session::get('id');
-        $title = $this->title($id, $user_type);
+
+        $estudiante=Estudiante::where('user_id',$id)->first();
+        if($estudiante!=null){
+            if($estudiante->grupoempresa_id!=null){
+                return redirect()->back()->with('alert-error','Ya pertenece a una Grupo Empresa');
+            }
+        }
+        return redirect(route('home'))->with('alert-success','Semestre Creado !');
+       $title = $this->title($id, $user_type);
         return view('registerGE',['user_type' => $user_type, 'title' => $title]);
     }
 
