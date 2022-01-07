@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\GroupsController;
 use App\Http\Controllers\EntregaController;
-use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\Api\TemplateController;
 use App\Http\Controllers\CalendarioGEController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +27,6 @@ Route::get('/template/delete/{id}', [TemplateController::class, 'deleteTemplate'
 
 Route::get('/adjunto/entrega/{activity_id}/{grupoempresa_id}', [EntregaController::class, 'getFiles'])->name('getAdjuntoFiles');
 Route::get('/calendarioGE/{grupoempresa_id}', [CalendarioGEController::class, 'showCalendarGE']);
+
+Route::get('/grupos/{group_id}', [GroupsController::class, 'getGroup']);
+Route::get('/grupos/delete/{group_id}', [GroupsController::class, 'deleteGroup']);

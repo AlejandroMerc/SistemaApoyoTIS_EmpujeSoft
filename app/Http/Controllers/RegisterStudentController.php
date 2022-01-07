@@ -42,8 +42,9 @@ class RegisterStudentController extends Controller
 
     public function registerData(Request $request)
     {
-        $codigo = Grupo::find($request->grupo)
-        ->value('codigo_inscripcion');
+        $codigo = Grupo::where('id',$request->grupo)
+        ->first()
+        ->codigo_inscripcion;
 
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:50','regex:/^[\pL\s\-]+$/u'],
