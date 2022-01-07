@@ -179,6 +179,9 @@ a:not([href]):not([class]):hover {
     padding-left: 0;
   }
 }
+#footer{
+  background-color: #0082C3;
+}
 pre,
 code,
 kbd,

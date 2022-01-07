@@ -157,7 +157,7 @@
 </body>
 
     <!-- Footer -->
-        <footer class="container-fluid bg-dark pt-5 pb-4 mt-5">
+        <footer  id ="footer"class="container-fluid  pt-5 pb-4 mt-5">
 
         <!-- Footer Links -->
         <div class="container text-center text-md-left">
@@ -169,7 +169,7 @@
             <div class="col-md-4 col-lg-4 mr-auto my-md-4 my-0 mt-4 mb-1">
 
                 <!-- Content -->
-                <h5 class="font-weight-bold text-uppercase mb-4 text-white">Acerca de Nosotros</h5>
+                <h5 class="font-weight-bold text-uppercase mb-4 text-white">Acerca de Nosotros - Empuje Soft</h5>
                 <p style="color: white ; aling:justify">Somos un grupo de estudiantes de la universidad Mayor de San Simon
                                         de la carrera de Taller de Ingenieria de Software   
                 </p>
@@ -206,10 +206,6 @@
                     <p>
                     <i class="fas fa-phone mr-3"></i> +591 79723780</p>
                 </li>
-                <li>
-                    <p>
-                    <i class="fas fa-phone mr-3"></i> +591 79742123</p>
-                </li>
                 </ul>
 
             </div>
@@ -225,18 +221,18 @@
 
                 <ul class="list-unstyled list-inline ">
                 <li class="list-inline-item">
-                <a href="#!" id="iconos"class="btn-floating mr-md-3 mr-2 fa-2x">
+                <a href="https://www.facebook.com/EmpujeSoft-107188271849741" id="iconos"class="btn-floating mr-md-3 mr-2 fa-2x">
                     <i class="fab fa-facebook-f"></i>
                 </a>
                 </li>
                 <li class="list-inline-item">
-                <a href="https://github.com/AlejandroMerc/SistemaApoyoTIS_EmpujeSoft"id="iconos"class="btn-floating mr-md-3 mr-2 fa-2x">
+                <a href="https://github.com/"id="iconos"class="btn-floating mr-md-3 mr-2 fa-2x">
                     <i class="fab fa-github"></i>
                 </a>
                 </li>
                 <li class="list-inline-item">
                 <a href = "#linkIn" id="iconos" class="btn-floating mr-md-3 mr-2 fa-2x">
-                    <i class="fab fa-linkedin-in"></i>
+                    <i class="fas fa-book"></i>
                 </a>
                 </li>
             </ul>
