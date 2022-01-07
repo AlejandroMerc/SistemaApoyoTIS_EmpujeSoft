@@ -220,13 +220,17 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0 justify-content-center"">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="form-group row justify-content-center">
+                            <div class="col-auto">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Publicar') }}
+                                    {{ __('Guardar') }}
                                 </button>
                             </div>
-                        </div>
+                            <div class="col-auto">
+                                <a type="button" class="btn btn-secondary text-white" href="{{route('home')}}">
+                                    {{ __('Cancelar') }}
+                                </a>
+                            </div>
                     </form>
                 </div>
             </div>
