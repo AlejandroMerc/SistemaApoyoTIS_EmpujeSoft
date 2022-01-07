@@ -25,7 +25,26 @@ class CreateSemesterController extends Controller
 
         $current = date('Y');
 
-        return view('createSemester', ['user_type' => $user_type, 'title' => $title, 'current_year' => $current]);
+        $current_date = date('Y-m-d');
+
+        $semester = Semestre::whereDate('fecha_fin','>=',$current_date)->get();
+
+        if ( $semester->isEmpty() ) {
+            return view('createSemester', ['user_type' => $user_type, 'title' => $title, 'current_year' => $current]);
+        } else {
+            $current_semester = $semester->first();
+            $started = $current_date > $current_semester->fecha_inicio;
+            return view('modifySemester', [
+                'user_type' => $user_type,
+                'title' => $title,
+                'current_year' => $current,
+                'today' => $current_date,
+                'started' => $started,
+                'semester' => $current_semester
+            ]);
+        }
+
+
     }
     public function store(Request $request){
         $current = date('Y');
@@ -65,6 +84,57 @@ class CreateSemesterController extends Controller
             return redirect()->back()->with('alert-error','Error al Crear Semestre !');
         }
 
+    }
+
+    public function modify(Request $request) {
+        $current = date('Y');
+        $rules = [
+            'anio' => ['required', 'numeric','min:'.$current, 'max:'.($current+1)],
+            'periodo'=>['required','numeric','min:1','max:4'],
+            'FechaInicio'=>['required','date','before_or_equal:FechaFin'],
+            'FechaFin'=>['required','date','after_or_equal:FechaInicio']
+        ];
+
+        $err_msg = [
+            'anio.min' => 'No se puede crear semestres para años pasados',
+            'anio.max' => 'No se puede crear semestres muy lejanos',
+            'periodo.max' => 'Periodo no debe ser mayor que 4'
+        ];
+        $this->validate($request, $rules, $err_msg);
+
+        $semest = Semestre::find($request->semester_id);
+        $semest->year = $request->anio;
+        $semest->periodo = $request->periodo;
+        $semest ->fecha_inicio = $request->FechaInicio;
+        $semest->fecha_fin = $request->FechaFin;
+        if($semest->save()){
+            return redirect(route('home'))->with('alert-success','Semestre Creado !');
+        }else{
+            return redirect()->back()->with('alert-error','Error al Crear Semestre !');
+        }
+    }
+
+    public function modifyStarted(Request $request) {
+
+        $rules = [
+            'FechaFin'=>['required','date']
+        ];
+
+        $err_msg = [
+        ];
+        $this->validate($request, $rules, $err_msg);
+
+        $semester = Semestre::find($request->semester_id);
+        $semester->fecha_fin = $request->FechaFin;
+        $save = $semester->save();
+        if ($save)
+        {
+            return redirect(route('home'))->with('alert-success','Semestre modificado exitosamente !');
+        }
+        else
+        {
+            return redirect()->back()->with('alert-error','Error al modificar semestre. Intente de nuevo mas tarde');
+        }
     }
 
     private function title($id, $rol){
