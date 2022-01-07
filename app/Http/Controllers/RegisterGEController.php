@@ -33,7 +33,7 @@ class RegisterGEController extends Controller
                 return redirect()->back()->with('alert-error','Ya pertenece a una Grupo Empresa');
             }
         }
-        return redirect(route('home'))->with('alert-success','Semestre Creado !');
+        
        $title = $this->title($id, $user_type);
         return view('registerGE',['user_type' => $user_type, 'title' => $title]);
     }
