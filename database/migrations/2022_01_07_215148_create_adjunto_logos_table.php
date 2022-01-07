@@ -15,11 +15,11 @@ class CreateAdjuntoLogosTable extends Migration
     {
         Schema::create('adjunto_logos', function (Blueprint $table) {
             $table->id();
-            $table->foreignKey('grupoempresa_id')
+            $table->foreignId('grupoempresa_id')
             ->references('id')->on('grupoempresas')
             ->onUpdate('cascade')
             ->onDelete('cascade');
-            $table->foreignKey('adjunto_id')
+            $table->foreignId('adjunto_id')
             ->references('id')->on('adjuntos')
             ->onUpdate('cascade')
             ->onDelete('cascade');
