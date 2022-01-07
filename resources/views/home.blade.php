@@ -84,7 +84,7 @@
                                        
                                             @if ($user_type == 'asesor_tis')
                                             <div class="col-auto">
-                                                <a type="button" class="btn btn-warning" href="{{route('editPost',['publicacion_id' => $publication->id])}}">Editar <i class="far fa-edit"></i></a>
+                                                <a type="button" class="btn btn-warning" href="{{route('editActivity',['publicacion_id' => $publication->id])}}">Editar <i class="far fa-edit"></i></a>
                                             </div>
                                             <div class="col-auto">
                                                 <button type="button" class="btn bg-danger text-white"  onclick="deleting( {{ $publication->id }} , 'Actividad', '{{ $publication->titulo_publicacion }}')">
