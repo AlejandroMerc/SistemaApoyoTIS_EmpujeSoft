@@ -163,7 +163,9 @@ a:hover {
   color: #1d68a7;
   text-decoration: underline;
 }
-
+#iconos{
+  color: white;
+}
 a:not([href]):not([class]) {
   color: inherit;
   text-decoration: none;
@@ -172,7 +174,11 @@ a:not([href]):not([class]):hover {
   color: inherit;
   text-decoration: none;
 }
-
+@media (max-width: 1439px){
+#mdb-footer {
+    padding-left: 0;
+  }
+}
 pre,
 code,
 kbd,
