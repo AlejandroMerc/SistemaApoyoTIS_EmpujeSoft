@@ -87,16 +87,34 @@
 
     <script>
         async function deleteTemplate(templateId) {
-            try{
-                var hostname = window.location.host;
-                var response = await fetch("http://" + hostname + "/api/template/delete/" +templateId);
-                if (response) {
-                    location.reload();
-                }
-            } catch (error) {
-                error;
-                console.log(error);
-            }
+            swal({
+                    text: "¿Está seguro de Eliminar la Plantilla?",
+                    icon: "warning",
+                    buttons: ["Cancelar","Aceptar"],
+                    dangerMode: true,
+                })
+                .then( async (willDelete) => {
+                    if (willDelete) {
+                        swal('Cargando','Espere por favor','info',{});
+                        var hostname = window.location.host;
+                        var response = await fetch("http://" + hostname + "/api/template/delete/" +templateId);
+                        var json = await response.json();
+
+                        if (json.value) {
+                            swal.close();
+                            location.reload();
+                        } else {
+                            swal.close();
+                            swal("Hubo un error. No se pudo borrar la plantilla.\nIntentelo de nuevo mas tarde.", {
+                                icon: "error",
+                            });
+                        }
+                    } else {
+                        swal("La plantilla no se eliminó", {
+                            icon: "info",
+                        });
+                    }
+                });
         }
 
         function uploadingFile(oInput) {
@@ -134,7 +152,8 @@
             "¿Que son las plantillas?\n"+
             "Una plantilla es un tipo de documento que crea una copia de sí mismo cuando se usa, para evitar "+
             "estar escribiendo la estructura del documento desde cero."+
-            " Se desea recalcar que las plantillas se usan como BASE PARA NO ESTAR CREANDO DOCUMENTOS DESDE CERO y NO SON DOCUMENTOS LISTOS para enviar.\n"+
+            " Se desea recalcar que las plantillas se usan como base para no estar creando documentos desde cero "+
+            " y no son documentos listos para enviar.\n"+
             "El apartado para usar plantillas es al momento de crear una actividad usando el editor "+
             "que viene integrado. Una vez seleccionado la plantilla, usted puede modificar como guste "+
             "sin preocuparse de que la plantilla se vaya a modificar.\n"+

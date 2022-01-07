@@ -20,7 +20,7 @@ class ListGEController extends Controller
 
     public function showListGE()
     {
-        
+
         $user_type = Session::get('type');
         $user_id = Session::get('id');
         $title = $this->title($user_id, $user_type);
@@ -53,7 +53,7 @@ class ListGEController extends Controller
             $ge_id = $estudiante->grupoempresa_id;
             if ($ge_id === null)
             {
-                return '[Sin grupo empresa]';
+                return 'Sin grupoempresa';
             }
             else
             {

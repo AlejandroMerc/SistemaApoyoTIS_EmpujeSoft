@@ -19,6 +19,8 @@ class TemplateController extends Controller
     {
         $template = Plantilla::find($id);
         $template->delete();
-        return response(true, 200);
+        $array = [];
+        $array['value'] = true;
+        return response()->json($array, 200);
     }
 }

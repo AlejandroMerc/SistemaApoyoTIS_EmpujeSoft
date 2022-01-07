@@ -39,7 +39,7 @@
                                 <a id='{{$grupo->id}}' role="button" class="list-group-item list-group-item-action" onclick="loadData({{$grupo->id}})">{{$grupo->sigla_grupo}} - {{ $asesores[$grupo->asesor_id] }}</a>
                             </div>
                             <div class="ml-auto d-inline-flex">
-                                <button class="btn" onclick="deleteGroup({{$grupo->id}})">
+                                <button class="btn" onclick="deleteGroupAlert({{$grupo->id}})">
                                    <h3><i class="far fa-times-circle text-danger"></i>
                                        </h3>
                                 </button>
@@ -146,6 +146,24 @@
 @endsection('content')
 @section('script-body')
 <script>
+    async function deleteGroupAlert(idGroup){
+        swal({
+                text: "¿Está seguro de Eliminar el Archivo?",
+                icon: "warning",
+                buttons: ["Cancelar","Aceptar"],
+                dangerMode: true,
+            })
+            .then( async (willDelete) => {
+                if (willDelete) {
+                    await deleteGroup(idGroup);
+                } else {
+                    swal("El archivo no se eliminó", {
+                        icon: "info",
+                    });
+                }
+            });
+    }
+
     async function loadData(selected) {
 
         var groupSelected = document.getElementById('selected_id');
