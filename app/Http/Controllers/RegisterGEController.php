@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adjunto;
+use App\Models\Adjunto_logo;
 use Illuminate\Http\Request;
 use App\Models\Asesor;
 use App\Models\Calendario;
@@ -53,6 +55,7 @@ class RegisterGEController extends Controller
             'correoMiembro3'=>['required','email',new IsEstudent(),new CheckMember()],
             'correoMiembro4'=>[new IsEstudent(),new CheckMember()],
             'correoMiembro5'=>[new IsEstudent(),new CheckMember()],
+            'logo'=>['required','mimes:jpg,png,jpeg,gif,svg','max:2048','dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000']
         ]);
         $correos[]= $request->correoRepresentanteLegal;
         $correos[]=$request->correoMiembro2;
@@ -113,7 +116,16 @@ class RegisterGEController extends Controller
           $calendario_ge->calendario_id = $calendario->id;
           $calendario_ge->grupoempresa_id = $grupoempresa->id;
           $query3 = $calendario_ge->save();
-          
+        
+        $adjunto = new Adjunto;
+        $adjunto->name = $request->logo->getClientOriginalName();
+        $adjunto->path = $request->logo->store('files');
+        $adjunto->save();
+        $adjunto_logo=new Adjunto_logo;
+        $adjunto_logo->grupoempresa_id=$grupoempresa->id;
+        $adjunto_logo->adjunto_id=$adjunto->id;
+        $adjunto_logo->save();
+
           return redirect('listarGrupoEmpresa')->with('alert-success','Grupo Empresa Registrada!');
         }
         else

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Adjunto;
+use App\Models\Adjunto_logo;
 use Illuminate\Support\Facades\Session;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
@@ -31,6 +33,11 @@ class perfilGEController extends Controller
         ->where('estudiantes.grupoempresa_id','=',$id)
         ->where('estudiantes.id','!=',$rep_legal_id)
         ->select('users.name','users.lastname')->get();
+
+        $adjunto_logo=Adjunto_logo::where('grupoempresa_id',$id)->first();
+        $logo=Adjunto::where('id',$adjunto_logo->adjunto_id)->first();
+
+        $GrupoE['logo']=$logo;
         /*$aux=0;
         foreach($integrantesArray as $integrante){
             $aux++;
