@@ -64,6 +64,8 @@ Route::post('/postPublication',[PostPublicationController::class,'registerPublic
 
 Route::get('/createSemester', [App\Http\Controllers\CreateSemesterController::class, 'createSemester'])->name('createSemester');
 Route::post('/createSemester',[App\Http\Controllers\CreateSemesterController::class, 'store'])->name('store-data');
+Route::post('/createSemester/modifStarted',[App\Http\Controllers\CreateSemesterController::class, 'modifyStarted'])->name('semestre.modif-start-data');
+Route::post('/createSemester/modif',[App\Http\Controllers\CreateSemesterController::class, 'modify'])->name('semestre.modif-data');
 
 Route::get('/verRespuestasDos/{publicacion_id}', [App\Http\Controllers\VerRespuestasDosController::class, 'verRespuestasDos'])->name('verRespuestasDos');
 Route::get('/responderActividad/{publicacion_id}',[TurnInActivityController::class, 'showTurnIn'])->name('responderActividad');
@@ -115,7 +117,7 @@ Route::post('aceptarEntrega', [VerRespuestasDosController::class, 'aceptar'])->n
 Route::get('/perfilGE/{grupoE}', [perfilGEController::class, 'index'])->name('perfilGE');
 //Route::get('/perfilGE', [ListGEController::class, 'showPerfilGE'])->name('perfilGE');
 
-#Route::get('/link', function () {   
+#Route::get('/link', function () {
 Route::get('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'index'])->name('verRespuesta.revision');
 Route::post('verRespuestasDos/revision/{grupoempresa}', [ActivityResponseController::class, 'response'])->name('verRespuesta.revision');
 Route::post('/postDestroy',[HomeController::class,'destroy'])->name('postDestroy');

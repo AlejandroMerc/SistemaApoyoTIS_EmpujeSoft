@@ -317,6 +317,7 @@
             swal('Oops...','{{Session::get('alert-error')}}','error', {button: 'cerrar'});
         }
     </script>
+    @yield('script-body')
 </main>
 
   <script src="{{ asset('js/calendario.js') }}" ></script>
