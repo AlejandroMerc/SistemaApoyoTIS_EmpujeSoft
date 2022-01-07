@@ -7,7 +7,7 @@
             <div class="card border border-dark rounded-lg">
                 <div class="card-header bg-primary text-white"><h5 class="text-white">{{ __('Registrar Grupo Empresa') }}</h5></div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register-ge-data') }}">
+                    <form method="POST" action="{{ route('register-ge-data') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row ">
                         <label for="nombre_corto" class="col-md-4 col-form-label text-md-right">{{ __('*Nombre Corto') }}</label>
@@ -135,29 +135,19 @@
                             </div>
                            
                         </div>
-                        
-                        {{-- <table class="table table-bordered" id="dynamicAddRemove">
-                            <tr>
-                                <th>Correos electrónicos de los miembros</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div>
-                                        <input id="miembros[0]" type="email" class="form-control @error('miembros[0]') is-invalid @enderror" name="miembros[0]" placeholder="Correo Representante Legal" value="{{ old('miembros[0]') }}" required autocomplete="miembros[0]">
-                                            @error('miembros[0]')
-                                             <span class="invalid-feedback" role="alert">
+
+                        <div class="form-group row">
+                            <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('*Logo') }}</label>
+                            <div class="col-md-6">
+                                    <input id="logo" type="file" class="form-control @error('logo') is-invalid @enderror" name="logo" required autofocus accept="image/*">
+                                        @error('logo')
+                                            <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                            @enderror
-                                    </div>
-                                </td>
-                                <td><button type="button" name="add" id="dynamic-ar" class="btn btn-outline-primary">Agregar Miembro</button></td>
-                            </tr>
-                        </table> --}}
-                        @foreach ($errors->get('miembros') as $error)
-                        <li>{{$error}}</li>
-                        @endforeach
+                                        @enderror
+                            </div>
+                        </div>
+                       
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
