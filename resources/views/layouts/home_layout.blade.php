@@ -369,8 +369,8 @@
           "infoFiltered": "(filtrado de _MAX_ registros totales)",
           "search": "Buscar",
           "paginate":{
-              "next":"Siguiente",
-              "previous":"Anterior"
+              "next":">",
+              "previous":"<"
           }
       }
       });

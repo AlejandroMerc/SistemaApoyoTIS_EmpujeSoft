@@ -153,5 +153,109 @@
   <script src="/assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="/assets/js/argon.js?v=1.2.0"></script>
+
 </body>
+
+    <!-- Footer -->
+        <footer class="container-fluid bg-dark pt-5 pb-4 mt-5">
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-4 mr-auto my-md-4 my-0 mt-4 mb-1">
+
+                <!-- Content -->
+                <h5 class="font-weight-bold text-uppercase mb-4 text-white">Acerca de Nosotros</h5>
+                <p style="color: white ; aling:justify">Somos un grupo de estudiantes de la universidad Mayor de San Simon
+                                        de la carrera de Taller de Ingenieria de Software   
+                </p>
+                <h5 class="font-weight-bold"style="color: white">SATIS</h5> 
+                <p style="color: white">   
+                SATIS es el acronimo de Sistema de Apoyo para Taller de Ingenieria de Software, este sistema ayudara
+                a llevar un mejor control de las actividades, trabajos, de la materia de Taller de Ingenieria de Software.</p>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-200 d-md-none">
+
+            <!-- Grid column -->
+
+            <hr class="clearfix w-200 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1 text-white">
+
+                <!-- Contact details -->
+                <h5 class="font-weight-bold text-uppercase mb-4 text-white">Contactos</h5>
+
+                <ul class="list-unstyled">
+                <li>
+                    <p>
+                    <i class="fas fa-home mr-3"></i> Cochabamba - Bolivia </p>
+                </li>
+                <li>
+                    <p>
+                    <i class="fas fa-envelope mr-3"></i> empujesoft.tis@gmail.com</p>
+                </li>
+                <li>
+                    <p>
+                    <i class="fas fa-phone mr-3"></i> +591 79723780</p>
+                </li>
+                <li>
+                    <p>
+                    <i class="fas fa-phone mr-3"></i> +591 79742123</p>
+                </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-200 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-3 text-center mx-auto my-4">
+
+                <!-- Social buttons -->
+                <h5 class="font-weight-bold text-uppercase mb-4 text-white">Redes Sociales</h5>
+
+                <ul class="list-unstyled list-inline ">
+                <li class="list-inline-item">
+                <a href="#!" id="iconos"class="btn-floating mr-md-3 mr-2 fa-2x">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a href="https://github.com/AlejandroMerc/SistemaApoyoTIS_EmpujeSoft"id="iconos"class="btn-floating mr-md-3 mr-2 fa-2x">
+                    <i class="fab fa-github"></i>
+                </a>
+                </li>
+                <li class="list-inline-item">
+                <a href = "#linkIn" id="iconos" class="btn-floating mr-md-3 mr-2 fa-2x">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                </li>
+            </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3 text-white">© 2021 Copyright:
+            <a style="color:white"href="https://mdbootstrap.com/"> EmpujeSoft</a>
+        </div>
+        <!-- Copyright -->
+
+        </footer>
+        <!-- Footer -->
 </html>
