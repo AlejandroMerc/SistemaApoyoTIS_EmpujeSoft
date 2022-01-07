@@ -9,7 +9,9 @@ use App\Models\Calendario_grupoempresa;
 use App\Models\Estudiante;
 use App\Models\Grupoempresa;
 use App\Models\User;
+use App\Rules\CheckMember;
 use App\Rules\CheckMiembrosGE;
+use App\Rules\IsEstudent;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -30,25 +32,41 @@ class RegisterGEController extends Controller
 
     public function registrarGE(Request $request)
     {
-        $rules = array(
+        
+        $request->validate([
             'nombre_corto' => ['required','unique:grupoempresas'],
             'nombre_largo' => ['required','unique:grupoempresas'],
             'telefono_ge' => ['required'],
             'tipo_sociedad' => ['required'],
             'email' => ['required','unique:grupoempresas','unique:users'],
             'direccion_ge' => ['required'],
-            'miembros.*' => ['required','distinct', 'exists:users,email'],
-            'miembros' => [new CheckMiembrosGE()]
-        );
-
-        $validator = Validator::make($request->all(), $rules);
-        if($validator->fails())
-        {
-            return redirect()->back()->withErrors($validator)->withInput();
+            'correoRepresentanteLegal'=>['required','email',new IsEstudent(), new CheckMember()],
+            'correoMiembro2'=>['required','email',new IsEstudent(),new CheckMember()],
+            'correoMiembro3'=>['required','email',new IsEstudent(),new CheckMember()],
+            'correoMiembro4'=>[new IsEstudent(),new CheckMember()],
+            'correoMiembro5'=>[new IsEstudent(),new CheckMember()],
+        ]);
+        $correos[]= $request->correoRepresentanteLegal;
+        $correos[]=$request->correoMiembro2;
+        $correos[]=$request->correoMiembro3;
+        if($request->correoMiembro4!=null){
+            $correos[]=$request->correoMiembro4;
         }
+        if($request->correoMiembro5!=null){
+            $correos[]=$request->correoMiembro5;
 
-        $user_rep_legal = User::where('email','=',$request->miembros[0])->first();
+        }
+      
+      
+        $hayRepetidos=count($correos) !== count(array_unique($correos));
+        if($hayRepetidos){
+            return redirect()->back()->with('alert-error','Error al Crear Grupo Empresa. Existen correos repetidos');
+        }
+            
+
+        $user_rep_legal = User::where('email','=',$request->correoRepresentanteLegal)->first();
         $rep_legal = Estudiante::where('estudiantes.user_id','=',$user_rep_legal->id)->first();
+        
         $grupo = $rep_legal->grupo;
 
         $grupoempresa = new Grupoempresa;
@@ -62,12 +80,22 @@ class RegisterGEController extends Controller
         $grupoempresa->grupo_id = $grupo->id;
         $query = $grupoempresa->save();
 
-        foreach($request->miembros as $miembro)
-        {
-          $user = User::where('email','=',$miembro)->first();
-          $estudiante = $user->estudiante()->update(['grupoempresa_id' => $grupoempresa->id]);
-        }
+        $rep_legal->update(['grupoempresa_id' => $grupoempresa->id]);
 
+          $user2 = User::where('email','=',$request->correoMiembro2)->first();
+           $user2->estudiante()->update(['grupoempresa_id' => $grupoempresa->id]);
+
+          $user3 = User::where('email','=',$request->correoMiembro3)->first();
+          $user3->estudiante()->update(['grupoempresa_id' => $grupoempresa->id]);
+        
+            if($request->correoMiembro4!=null){
+                $user4 = User::where('email','=',$request->correoMiembro4)->first();
+                $user4->estudiante()->update(['grupoempresa_id' => $grupoempresa->id]);
+            }
+            if($request->correoMiembro5!=null){
+                $user5 = User::where('email','=',$request->correoMiembro5)->first();
+                $user5->estudiante()->update(['grupoempresa_id' => $grupoempresa->id]);
+            }
         if($query)
         {
           $calendario = new Calendario;
@@ -77,8 +105,8 @@ class RegisterGEController extends Controller
           $calendario_ge->calendario_id = $calendario->id;
           $calendario_ge->grupoempresa_id = $grupoempresa->id;
           $query3 = $calendario_ge->save();
-          session()->flash('success','GrupoEmpresa registrada');
-          return redirect('listarGrupoEmpresa');
+          
+          return redirect('listarGrupoEmpresa')->with('alert-success','Grupo Empresa Registrada!');
         }
         else
         {

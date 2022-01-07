@@ -30,6 +30,7 @@ class CheckMiembrosGE implements Rule
     {
         $validado = true;
         $estudiante1 = $this->getEstudiante($value[0]);
+        if(count($value)>=3) {
         if(empty($estudiante1))
         {
             $this->mensaje[] = $value[0] . ': El correo de representante legal no pertenece a un estudiante registrado';
@@ -57,6 +58,11 @@ class CheckMiembrosGE implements Rule
                 }
             }
         }
+    }else{
+        $this->mensaje[] =  ': Para conformar una grupo empresa se necesitan 3 miembros como mínimo';
+
+        $validado=false;
+    }
         return $validado;
     }
     
