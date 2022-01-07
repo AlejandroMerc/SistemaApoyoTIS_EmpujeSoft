@@ -45,7 +45,7 @@ class RegisterAdviserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'code'=>['required','string', new checkCodigoAsesor()],
         ]);
-        
+
         $user = new User;
         $user->name = $request->name;
         $user->lastname = $request->lastname;
@@ -57,12 +57,12 @@ class RegisterAdviserController extends Controller
         $asesor = new Asesor;
         $asesor->user_id = $user->id;
         $query2 = $asesor->save();
-        
+
         if($query1 && $query2){
-            return redirect('login')->withSuccess('Usuario Registrado');
+            return redirect('login')->with('alert-success','Usuario Registrado');
         }
         else{
-            return redirect('login')->withFailure('Usuario no registrado');
+            return redirect('login')->withSuccess('Usuario no registrado');
         }
     }
 }

@@ -16,6 +16,7 @@ use App\Http\Controllers\perfilGEController;
 use App\Http\Controllers\TurnInActivityController;
 use App\Http\Controllers\ActivityResponseController;
 use App\Http\Controllers\ActivitySendCorrectionController;
+use App\Http\Controllers\PlanPagosController;
 
 use App\Http\Controllers\ControllerEvent;
 use App\Http\Controllers\ControllerCalendar;
@@ -126,6 +127,9 @@ Route::post('/update-publication', [EditPostController::class, 'updatePost'])->n
 
 Route::get('editActivity/{publicacion_id}', [EditActivityController::class, 'index'])->name('editActivity');
 Route::post('/update-activity', [EditActivityController::class, 'updateActivity'])->name('update-activity');
+
+
+Route::get('/planPagos', [PlanPagosController::class, 'index'])->name('planPagos');
 
 Route::get('/link', function () {
     Artisan::call('storage:link');
