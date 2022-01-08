@@ -17,6 +17,7 @@ use App\Http\Controllers\TurnInActivityController;
 use App\Http\Controllers\ActivityResponseController;
 use App\Http\Controllers\ActivitySendCorrectionController;
 use App\Http\Controllers\PlanPagosController;
+use App\Http\Controllers\PlanPagosAsesorController;
 
 use App\Http\Controllers\ControllerEvent;
 use App\Http\Controllers\ControllerCalendar;
@@ -131,6 +132,7 @@ Route::post('/update-activity', [EditActivityController::class, 'updateActivity'
 
 Route::get('/planPagos', [PlanPagosController::class, 'index'])->name('planPagos');
 Route::post('/subirPlanPagos', [PlanPagosController::class, 'subirPlanPagos'])->name('subirPlanPagos');
+Route::get('/planPagosGE', [PlanPagosAsesorController::class, 'index'])->name('planPagosAsesor');
 
 Route::get('/link', function () {
     Artisan::call('storage:link');

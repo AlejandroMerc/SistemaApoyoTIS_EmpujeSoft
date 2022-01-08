@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Adjunto;
 use App\Models\Adjunto_plan_pago;
 use App\Models\Estudiante;
-use App\Models\Calendario;
-use App\Models\Evento;
 use App\Models\Grupoempresa;
 use Illuminate\Support\Facades\Session;
 
