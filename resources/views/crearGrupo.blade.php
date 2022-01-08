@@ -54,8 +54,8 @@
     @endif
         <div class="col-8">
             <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <span id='title' class="h1">Crear Grupo</span>
+                <div class="card-header bg-primary d-flex justify-content-between"><strong>
+                    <span id='title' style="color:white"class="h4">Crear Grupo</span>
                     @if ( !$haySemestre )
                         <a class="rounded-circle p-2 bg-red" type="button" onclick="showalert()">
                             <span class="h2">
@@ -69,7 +69,7 @@
                         @csrf
                         <input hidden type="number" id="selected_id" name="group_id" value="0">
                         <div class="form-group row">
-                            <label for="sigla" class="col-md-4 col-form-label text-md-right">{{ __('Sigla del Grupo ') }}</label>
+                            <label for="sigla" class="col-md-4 col-form-label text-md-right">{{ __('*Sigla del Grupo ') }}</label>
                             <div class="col-md-6">
                                     <input id="sigla" type="text" class="form-control @error('sigla') is-invalid @enderror" name = "sigla" value="{{ old('sigla') }}" required autocomplete="sigla">
                                     @error('sigla')
@@ -81,7 +81,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="docente" class="col-md-4 col-form-label text-md-right">{{ __('Docente') }}</label>
+                            <label for="docente" class="col-md-4 col-form-label text-md-right">{{ __('*Docente') }}</label>
                                 <div class="col-md-6">
                                     <select id="docente"  class="form-control @error('docente') is-invalid @enderror" name = "docente" value="{{ old('docente') }}" required autocomplete="docente">
                                     <option selected disabled value="default">Docente...</option>
@@ -103,7 +103,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="codigoInscripcion" class="col-md-4 col-form-label text-md-right">{{ __('Codigo inscripcion') }}</label>
+                            <label for="codigoInscripcion" class="col-md-4 col-form-label text-md-right">{{ __('*Codigo inscripcion') }}</label>
                             <div class="col-md-6">
                                 <input type="text" id="codigoInscripcion" class="form-control @error('codigoInscripcion') is-invalid @enderror" name="codigoInscripcion" value="{{ old('codigoInscripcion') }}"required>
                                 @error('codigoInscripcion')
@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="semestre" class="col-md-4 col-form-label text-md-right">{{ __('Semestre') }}</label>
+                            <label for="semestre" class="col-md-4 col-form-label text-md-right">{{ __('*Semestre') }}</label>
                             <div class="col-md-6">
                                 @if ( $haySemestre)
                                 <input type="number" id="semestre" name="semestre" value="{{$semestre->id}}" hidden>
