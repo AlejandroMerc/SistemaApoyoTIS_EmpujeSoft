@@ -42,7 +42,7 @@ class RegisterStudentController extends Controller
 
     public function registerData(Request $request)
     {
-        $codigo = Grupo::where('id',$request->grupo)
+        $codigo = Grupo::where('id','=',$request->grupo)
         ->first()
         ->codigo_inscripcion;
 
