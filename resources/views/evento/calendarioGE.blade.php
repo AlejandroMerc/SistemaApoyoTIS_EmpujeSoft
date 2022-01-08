@@ -65,11 +65,11 @@
                 </div>
                 <div class="form-group">
                     <label for="start" class="col-md-1 col-form-label">{{ __('*Start') }}</label>
-                    <input type="date" class="form-control" name="start" id="start" aria-describedby="helpId" placeholder="Fecha de Inicio">
+                    <input type="datetime-local" class="form-control" name="start" id="start" aria-describedby="helpId" placeholder="Fecha de Inicio">
                 </div>
                 <div class="form-group">
                     <label for="end" class="col-md-1 col-form-label">{{ __('*End') }}</label>
-                    <input type="date" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de Fin">
+                    <input type="datetime-local" class="form-control" name="end" id="end" aria-describedby="helpId" placeholder="Fecha de Fin">
                 </div>
                 <div class="form-group">
                     <input type="hidden" class="form-control" id="calendario_id" name="calendario_id" value="" onload="load()">

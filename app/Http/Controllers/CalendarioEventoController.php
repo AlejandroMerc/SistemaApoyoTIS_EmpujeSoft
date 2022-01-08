@@ -11,6 +11,7 @@ use App\Models\Grupoempresa;
 use App\Models\Semestre;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
 
 class CalendarioEventoController extends Controller
 {
@@ -50,8 +51,10 @@ class CalendarioEventoController extends Controller
     }
     public function edit($id){
         $evento = Evento::find($id);
-        $evento -> start = Carbon::createFromFormat('Y-m-d H:i:s',$evento -> start)->format('Y-m-d');
-        $evento -> end = Carbon::createFromFormat('Y-m-d H:i:s',$evento -> end)->format('Y-m-d');
+        $evento -> start = Carbon::createFromFormat('Y-m-d H:i:s',$evento -> start)->format('Y-m-d\TH:i');
+        $evento -> end = Carbon::createFromFormat('Y-m-d H:i:s',$evento -> end)->format('Y-m-d\TH:i');
+        $log = response()->json($evento);
+        Log::info($log);
         return response()->json($evento);
     }
     public function destroy($id){

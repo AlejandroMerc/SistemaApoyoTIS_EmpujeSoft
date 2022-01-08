@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
   },
   eventClick:function(info){
     var evento = info.event;
+    console.log(evento);
     axios.post(baseURL+"/evento/editar/"+info.event.id).
     then(
         (respuesta)=>{

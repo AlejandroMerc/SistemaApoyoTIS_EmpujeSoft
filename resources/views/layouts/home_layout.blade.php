@@ -76,37 +76,38 @@
         <div class="collapse navbar-collapse" id="sidenav-collapse-main">
           <!-- Nav items -->
           <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('postPublication') }}">
+                <h5>
+                  <i class="fas fa-home text-dark"></i>
+                  <span class="nav-link-text">Inicio</span>
+                </h5>
+              </a>
+            </li>
             @if ($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href="{{ route('postPublication') }}">
                 <h5>
                   <i class="fas fa-bullhorn text-dark"></i>
-
                   <span class="nav-link-text">Nueva Publicación</span>
                 </h5>
-
               </a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href="{{ route('createActivity') }}">
                 <h5>
                   <i class="fas fa-tasks text-primary"></i>
-
                   <span class="nav-link-text">Crear Actividad</span>
                 </h5>
-
               </a>
             </li>
             @endif
-
             <li class="nav-item">
               <a class="nav-link" href={{ route('listGE') }}>
                 <h5>
                   <i class="ni ni-bullet-list-67 text-green"></i>
-                  <span class="nav-link-text">Listar GE</span>
+                  <span class="nav-link-text">Listado GE</span>
                 </h5>
-
               </a>
             </li>
             @if($user_type == 'admin')
@@ -116,7 +117,6 @@
                   <i class="fa fa-users text-blue" aria-hidden="true"></i>
                   <span class="nav-link-text">Crear Grupo</span>
                 </h5>
-
               </a>
             </li>
             <li class="nav-item">
@@ -125,7 +125,6 @@
                   <i class="fa fa-users text-blue" aria-hidden="true"></i>
                   <span class="nav-link-text">Crear Semestre</span>
                 </h5>
-
               </a>
             </li>
             @endif
@@ -137,15 +136,21 @@
                   <i class="fa fa-users text-blue" aria-hidden="true"></i>
                   <span class="nav-link-text">Registrar GE</span>
                 </h5>
-
               </a>
             </li>
-
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('calendarioTis') }}>
+                <h5>
+                  <i class="far fa-calendar-alt"></i>
+                  <span class="nav-link-text">Calendario TIS</span>
+                  </h5>
+              </a>
+            </li>
             @if ($title !== "Sin grupoempresa")
             <li class="nav-item">
               <a class="nav-link" href={{ route('calendarioGE') }}>
                 <h5>
-                  <i class="fas fa-calendar-day"></i>
+                  <i class="far fa-calendar-alt"></i>
                   <span class="nav-link-text">Planificacion</span>
                 </h5>
               </a>
@@ -159,17 +164,7 @@
               </a>
             </li>
             @endif
-            <li class="nav-item">
-              <a class="nav-link" href={{ route('calendarioTis') }}>
-                <h5>
-                  <i class="far fa-calendar-alt"></i>
-                  <span class="nav-link-text">Calendario TIS</span>
-                  </h5>
-
-              </a>
-            </li>
             @endif
-
             @if($user_type == 'asesor_tis')
             <li class="nav-item">
               <a class="nav-link" href={{ route('template') }}>
@@ -177,7 +172,6 @@
                   <i class="far fa-file-alt text-yellow"></i>
                   <span class="nav-link-text">Plantillas</span>
                 </h5>
-
               </a>
             </li>
 
@@ -187,7 +181,6 @@
                   <i class="far fa-calendar-alt"></i>
                   <span class="nav-link-text">Calendario TIS</span>
                   </h5>
-
               </a>
             </li>
             <li class="nav-item">
