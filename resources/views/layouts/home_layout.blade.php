@@ -68,7 +68,7 @@
       <!-- Brand -->
       <div class="sidenav-header  align-items-center">
         <a class="navbar-brand" href=" {{ route('home') }} ">
-          <h1><i class="fab fa-centercode"></i> SATIS</h1>
+          <h1><i class="fas fa-home"></i> SATIS</h1>
         </a>
       </div>
       <div class="navbar-inner">

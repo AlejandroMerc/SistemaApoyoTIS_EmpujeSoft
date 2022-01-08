@@ -78,7 +78,7 @@ class PlanPagosController extends Controller
                 ['adjunto_id' => $adjunto->id]
             );
         }
-        return $this->index();
+        return redirect('planPagos')->with('alert-success','Plan de pagos registrado');
     }
 
     public function saveFiles($uploadFiles)

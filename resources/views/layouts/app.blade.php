@@ -66,7 +66,9 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesion') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">
+                                        <h6 class="text-white"><b>{{ __('Iniciar Sesion') }}</b></h6>
+                                    </a>
                                 </li>
                             @endif
 
@@ -76,19 +78,16 @@
                                 </li>
                             @endif --}}
 
-                            @if (Route::currentRouteName() == 'register-adviser-view')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register-student-view') }}">{{ __('Registrar Estudiante') }}</a>
-                                </li>
-                            @elseif (Route::currentRouteName() == 'register-student-view')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register-adviser-view') }}">{{ __('Registrar Asesor') }}</a>
-                                </li>
-                            @else
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register-student-view') }}">{{ __('Registrarse') }}</a>
-                                </li>
-                            @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register-student-view') }}">
+                                    <h6 class="text-white"><b>{{ __('Registrar Estudiante') }}</b></h6>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register-adviser-view') }}">
+                                    <h6 class="text-white"><b>{{ __('Registrar Asesor') }}</b></h6>
+                                </a>
+                            </li>
                         @else
                             <li class="nav-item dropdown">
 

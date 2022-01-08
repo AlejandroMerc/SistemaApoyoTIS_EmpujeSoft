@@ -6,8 +6,8 @@
   <div class="row justify-content-center">
     <div class="col-sm-12">
       <div class="card">
-        <div id="titulo" class="card-header">
-          <h3>
+        <div id="titulo" class="card-header bg-primary">
+          <h3 class=text-white>
             {{ __('Plan de Pagos') }}
           </h3>
         </div>
@@ -53,9 +53,15 @@
     </div>
   </div>
 </div>
-
+<script>
+  var msg = '{{Session::get('alert')}}';
+  Console.log(msg);
+     var exist = '{{Session::has('alert')}}';
+     if(exist){
+         alert(msg);
+     }
+</script>
 @endsection
-
 @section('js')
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
