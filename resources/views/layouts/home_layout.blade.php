@@ -174,7 +174,6 @@
                 </h5>
               </a>
             </li>
-
             <li class="nav-item">
               <a class="nav-link" href={{ route('calendarioTis') }}>
                 <h5>
@@ -191,7 +190,14 @@
                  </h5>
               </a>
             </li>
-
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('planPagosAsesor') }}>
+                <h5>
+                  <i class="fas fa-calendar-day"></i>
+                  <span class="nav-link-text">Planes de pagos</span>
+                </h5>
+              </a>
+            </li>
             @endif
           </ul>
           <!-- Divider -->
