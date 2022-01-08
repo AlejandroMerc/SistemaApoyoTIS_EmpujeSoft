@@ -130,6 +130,7 @@ Route::post('/update-activity', [EditActivityController::class, 'updateActivity'
 
 
 Route::get('/planPagos', [PlanPagosController::class, 'index'])->name('planPagos');
+Route::post('/subirPlanPagos', [PlanPagosController::class, 'subirPlanPagos'])->name('subirPlanPagos');
 
 Route::get('/link', function () {
     Artisan::call('storage:link');

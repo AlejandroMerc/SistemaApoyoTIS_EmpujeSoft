@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Adjunto;
+use App\Models\Adjunto_plan_pago;
 use App\Models\Estudiante;
 use App\Models\Calendario;
 use App\Models\Evento;
@@ -15,35 +17,9 @@ class PlanPagosController extends Controller
         $user_id = Session::get('id');
         $user_type = Session::get('type');
         $title = $this->title($user_id, $user_type);
-        return view('pagos.planPagosEstudiante', ['user_type' => $user_type, 'title' => $title]);
+        $plan_pagos = $this->getPlanPagos();
+        return view('pagos.planPagosEstudiante', ['user_type' => $user_type, 'title' => $title, 'plan_pagos' => $plan_pagos]);
     }
-
-    public function store(Request $request){
-        request()->validate(Evento::$rules);
-        $evento = Evento::create($request->all());
-    }
-    public function showCalendar($calendar_id)
-    {
-        $eventos = Calendario::find($calendar_id)->eventos;
-        return response()->json($eventos, 200);
-    }
-    public function showCalendarGE($grupoempresa_id){
-        if($grupoempresa_id != null)
-        {
-            $eventos = Grupoempresa::where('grupoempresas.id','=',$grupoempresa_id)
-            ->join('calendario_grupoempresas','grupoempresas.id','=','calendario_grupoempresas.grupoempresa_id')
-            ->join('calendarios','calendarios.id','=','calendario_grupoempresas.calendario_id')
-            ->join('eventos','calendarios.id','=','eventos.calendario_id')
-            ->get();
-            return($eventos);
-            return response()->json($eventos);
-        }
-        else
-        {
-            return response()->json();
-        }
-    }
-
 
     private function title($id, $rol){
         if ($rol === 'admin')
@@ -72,5 +48,44 @@ class PlanPagosController extends Controller
         {
             return 'Invitado';
         }
+    }
+
+    private function getPlanPagos()
+    {
+        $id = Session::get('id');
+        $estudiante = Estudiante::where('user_id',$id)->first();
+        $ge_id = $estudiante->grupoempresa_id;
+        $plan_pagos = Adjunto_plan_pago::where('grupoempresa_id','=',$ge_id)
+        ->join('adjuntos','adjuntos.id','=','adjunto_plan_pagos.adjunto_id');
+        return $plan_pagos->first();
+    }
+
+    public function subirPlanPagos(Request $request) 
+    {
+        if($request->plan_pago != null)
+        {
+            $adjunto = new Adjunto;
+            $adjunto->name = $request->plan_pago->getClientOriginalName();
+            $adjunto->path = $request->plan_pago->store('files');
+            $adjunto->save();
+
+            $id = Session::get('id');
+            $estudiante = Estudiante::where('user_id',$id)->first();
+            $ge_id = $estudiante->grupoempresa_id;
+
+            Adjunto_plan_pago::updateOrInsert(
+                ['grupoempresa_id' => $ge_id],
+                ['adjunto_id' => $adjunto->id]
+            );
+        }
+        return $this->index();
+    }
+
+    public function saveFiles($uploadFiles)
+    {
+        $adjunto = new Adjunto;
+        $adjunto->name = $uploadFiles->getClientOriginalName();
+        $adjunto->path = $uploadFiles->store('files');
+        return $adjunto;
     }
 }

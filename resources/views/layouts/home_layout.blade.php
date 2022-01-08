@@ -148,7 +148,14 @@
                   <i class="fas fa-calendar-day"></i>
                   <span class="nav-link-text">Planificacion</span>
                 </h5>
-
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href={{ route('planPagos') }}>
+                <h5>
+                  <i class="fas fa-calendar-day"></i>
+                  <span class="nav-link-text">Plan de pagos</span>
+                </h5>
               </a>
             </li>
             @endif
